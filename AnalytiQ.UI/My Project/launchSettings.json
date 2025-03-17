@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AnalytiQ.UI": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SQL_CONNECTION_STRING": "Server=tcp:analytiq-sql-299.database.windows.net,1433;Initial Catalog=AnalytiQDB;Persist Security Info=False;User ID=victorbash;Password=Director48@;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=90;"
+      }
+    }
+  }
+}

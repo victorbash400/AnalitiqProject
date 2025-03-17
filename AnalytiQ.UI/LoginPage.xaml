@@ -1,0 +1,232 @@
+﻿<Page x:Class="AnalytiQ.UI.LoginPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AnalytiQ.UI"
+      mc:Ignorable="d" 
+      Title="Login - AnalytiQ"
+      HorizontalAlignment="Stretch"
+      VerticalAlignment="Stretch"
+      Background="#121212">
+
+    <Page.Resources>
+        <!-- Modern TextBox Style -->
+        <Style x:Key="ModernTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#1A1A1A"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#2D2D2D"/>
+            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="IsTabStop" Value="True"/>
+            <Setter Property="TabIndex" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#A2B29F"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Modern PasswordBox Style -->
+        <Style x:Key="ModernPasswordBox" TargetType="PasswordBox">
+            <Setter Property="Background" Value="#1A1A1A"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="#2D2D2D"/>
+            <Setter Property="CaretBrush" Value="White"/>
+            <Setter Property="IsTabStop" Value="True"/>
+            <Setter Property="TabIndex" Value="0"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="PasswordBox">
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#A2B29F"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Label Style -->
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#A0A0A0"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0,0,0,6"/>
+        </Style>
+
+        <!-- Primary Button Style -->
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#A2B29F"/>
+            <Setter Property="Foreground" Value="#121212"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="10,12"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="4"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#B2C2AF"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#92A28F"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Secondary Button Style -->
+        <Style x:Key="SecondaryButton" TargetType="Button">
+            <Setter Property="Background" Value="#EEEEEE"/>
+            <Setter Property="Foreground" Value="#757575"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="22">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#DDDDDD" TargetName="border"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#CCCCCC" TargetName="border"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Link Button Style -->
+        <Style x:Key="LinkButton" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#A2B29F"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="TextDecorations" Value="None"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="TextDecorations" Value="Underline"/>
+                    <Setter Property="Foreground" Value="#B2C2AF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="#121212">
+        <Border CornerRadius="12" Background="#121212" Margin="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="450"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Side - Decorative with Image Placeholder -->
+                <Border Grid.Column="0" CornerRadius="12,0,0,12">
+                    <Grid>
+                        <Image Source="C:\Users\Victo\Documents\AnalytiQ\frontend\AnalytiQ.UI\assets\image_bloc.jpeg" Stretch="UniformToFill">
+                            <Image.Effect>
+                                <BlurEffect Radius="0.5"/>
+                            </Image.Effect>
+                        </Image>
+                        <Rectangle>
+                            <Rectangle.Fill>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#AA000000" Offset="0.0"/>
+                                    <GradientStop Color="#CC000000" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <StackPanel VerticalAlignment="Bottom" Margin="30,0,20,40">
+                            <TextBlock Text="Welcome to" Foreground="White" FontSize="24" FontWeight="Light" Margin="0,0,0,5"/>
+                            <TextBlock Text="AnalytiQ" Foreground="White" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,15"/>
+                            <TextBlock Text="Business Intelligence Platform" Foreground="#E0E0E0" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,15" LineHeight="20"/>
+                            <TextBlock Text="Powerful analytics at your fingertips." Foreground="#A2B29F" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,20"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Right Side - Login Form -->
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30,20" Width="350">
+                    <TextBlock Text="Welcome Back" FontSize="24" FontWeight="SemiBold" Foreground="#E0E0E0" HorizontalAlignment="Left" Margin="0,0,0,8"/>
+                    <TextBlock Text="Sign in to your account" FontSize="14" Foreground="#A0A0A0" Margin="0,0,0,40" TextWrapping="Wrap"/>
+
+                    <!-- Email field -->
+                    <TextBlock Text="Email Address" Style="{StaticResource FieldLabel}"/>
+                    <TextBox x:Name="txtEmail" Style="{StaticResource ModernTextBox}" Margin="0,0,0,25" TabIndex="1" AutomationProperties.Name="Email Address"/>
+
+                    <!-- Password field -->
+                    <TextBlock Text="Password" Style="{StaticResource FieldLabel}"/>
+                    <PasswordBox x:Name="txtPassword" Style="{StaticResource ModernPasswordBox}" Margin="0,0,0,15" TabIndex="2" AutomationProperties.Name="Password"/>
+
+                    <!-- Forgot Password Link -->
+                    <TextBlock x:Name="txtForgotPassword" Text="Forgot your password?" Style="{StaticResource LinkButton}" HorizontalAlignment="Right" Margin="0,0,0,30" MouseLeftButtonUp="ForgotPassword_Click"/>
+
+                    <!-- Loading indicator -->
+                    <ProgressBar x:Name="loadingIndicator" IsIndeterminate="True" Height="4" Foreground="#A2B29F" Visibility="Collapsed" Margin="0,0,0,20"/>
+
+                    <!-- Error message -->
+                    <Border x:Name="errorContainer" Background="#FFEBEE" CornerRadius="6" Padding="15,10" Margin="0,0,0,25" Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="⚠️" FontSize="16" Margin="0,0,10,0"/>
+                            <TextBlock x:Name="txtErrorMessage" Foreground="#D32F2F" FontSize="13" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Login Buttons -->
+                    <Button x:Name="btnSignIn" Content="Sign In" Width="350" Style="{StaticResource PrimaryButton}" Margin="0,0,0,20" Click="SignIn_Click" IsEnabled="True" IsDefault="True" TabIndex="3" AutomationProperties.Name="Sign In"/>
+
+                    <!-- Skip Login Button (Development Only) -->
+                    <Button x:Name="btnSkipLogin" Content="Skip Login" Width="200" Style="{StaticResource SecondaryButton}" Margin="0,0,0,0" Click="SkipLogin_Click" Visibility="Collapsed" TabIndex="4" AutomationProperties.Name="Skip Login"/>
+
+                    <!-- No account text and link -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,25,0,0">
+                        <TextBlock Text="Don't have an account? " FontSize="12" Foreground="#A0A0A0"/>
+                        <TextBlock x:Name="txtContactSupport" Text="Contact support" Style="{StaticResource LinkButton}" MouseLeftButtonUp="ContactSupport_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

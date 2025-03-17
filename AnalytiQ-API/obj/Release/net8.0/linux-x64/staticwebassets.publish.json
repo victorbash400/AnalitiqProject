@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "mMql5RHekByKsVIq3m2FdHZivdWRdmijrZEBz849cwI=",
+  "Source": "AnalytiQ-API",
+  "BasePath": "_content/AnalytiQ-API",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

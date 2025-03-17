@@ -1,0 +1,61 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<RootNamespace>AnalytiQ.UI</RootNamespace>
+		<UseWPF>true</UseWPF>
+		<UseWindowsForms>true</UseWindowsForms>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="assets\green_logo_test.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Import Include="System.Windows" />
+		<Import Include="System.Windows.Controls" />
+		<Import Include="System.Windows.Data" />
+		<Import Include="System.Windows.Documents" />
+		<Import Include="System.Windows.Input" />
+		<Import Include="System.Windows.Media" />
+		<Import Include="System.Windows.Media.Imaging" />
+		<Import Include="System.Windows.Navigation" />
+		<Import Include="System.Windows.Shapes" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Storage.Blobs" Version="12.23.0" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
+		<PackageReference Include="Microsoft.PowerBI.Api" Version="4.22.0" />
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3065.39" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3065.39" />
+		<Reference Include="Microsoft.Web.WebView2.Wpf">
+			<HintPath>..\..\..\..\.nuget\packages\microsoft.web.webview2\1.0.3065.39\lib\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Resource Include="assets\green_logo_test.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="My Project\Resources.Designer.vb">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="My Project\Resources.resx">
+	    <CustomToolNamespace>My.Resources</CustomToolNamespace>
+	    <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+</Project>

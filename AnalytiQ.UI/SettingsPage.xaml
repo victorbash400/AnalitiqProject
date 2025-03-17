@@ -1,0 +1,295 @@
+﻿<Page x:Class="AnalytiQ.UI.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AnalytiQ.UI"
+      mc:Ignorable="d" 
+      d:DesignHeight="650" d:DesignWidth="800"
+      Title="Settings">
+
+    <Page.Resources>
+        <!-- Simplified Color Scheme -->
+        <Color x:Key="DarkBackgroundValue">#121212</Color>
+        <Color x:Key="CardBackgroundValue">#1A1A1A</Color>
+        <Color x:Key="ContentBackgroundValue">#242424</Color>
+        <Color x:Key="BorderValue">#333333</Color>
+        <Color x:Key="TextPrimaryValue">#FFFFFF</Color>
+        <Color x:Key="TextMutedValue">#9E9E9E</Color>
+        <Color x:Key="AccentValue">#2C9E4B</Color>
+        <Color x:Key="AccentHoverValue">#3ABF5E</Color>
+        <Color x:Key="WarningValue">#FF5252</Color>
+
+        <!-- Brushes -->
+        <SolidColorBrush x:Key="DarkBackground" Color="{StaticResource DarkBackgroundValue}"/>
+        <SolidColorBrush x:Key="CardBackground" Color="{StaticResource CardBackgroundValue}"/>
+        <SolidColorBrush x:Key="ContentBackground" Color="{StaticResource ContentBackgroundValue}"/>
+        <SolidColorBrush x:Key="Border" Color="{StaticResource BorderValue}"/>
+        <SolidColorBrush x:Key="TextPrimary" Color="{StaticResource TextPrimaryValue}"/>
+        <SolidColorBrush x:Key="TextMuted" Color="{StaticResource TextMutedValue}"/>
+        <SolidColorBrush x:Key="Accent" Color="{StaticResource AccentValue}"/>
+        <SolidColorBrush x:Key="AccentHover" Color="{StaticResource AccentHoverValue}"/>
+        <SolidColorBrush x:Key="Warning" Color="{StaticResource WarningValue}"/>
+
+        <!-- Simplified Gradients -->
+        <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#121212" Offset="0"/>
+            <GradientStop Color="#1A1A1A" Offset="1"/>
+        </LinearGradientBrush>
+
+        <!-- Button Styles -->
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource Accent}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Padding" Value="16,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" 
+                                CornerRadius="6" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentHover}" TargetName="border"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#226E38" TargetName="border"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#444444" TargetName="border"/>
+                                <Setter Property="Foreground" Value="#777777"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="IconButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" 
+                                CornerRadius="4" Padding="4">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#333333" TargetName="border"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#222222" TargetName="border"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Card Style -->
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource CardBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Border}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Margin" Value="0,0,0,16"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="8" ShadowDepth="1" Opacity="0.2" Direction="315"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Text Styles -->
+        <Style x:Key="SectionHeader" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource Accent}"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+
+        <Style x:Key="FormLabel" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{StaticResource TextMuted}"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,0,12,0"/>
+        </Style>
+
+        <!-- Text Box Style -->
+        <Style x:Key="TextInput" TargetType="TextBox">
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Border}"/>
+            <Setter Property="Background" Value="{StaticResource ContentBackground}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <ScrollViewer x:Name="PART_ContentHost" Padding="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource Accent}"/>
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource Accent}"/>
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1.5"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- List Box Style -->
+        <Style x:Key="ProductList" TargetType="ListBox">
+            <Setter Property="Background" Value="{StaticResource ContentBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Border}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="False">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ProductListItem" TargetType="ListBoxItem">
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Border}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="ItemBorder" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter Grid.Column="0" VerticalAlignment="Center"/>
+                                <Button x:Name="RemoveButton" Grid.Column="1" 
+                                        Style="{StaticResource IconButton}"
+                                        Visibility="Collapsed"
+                                        Tag="{Binding}"
+                                        Click="RemoveProduct_Click">
+                                    <TextBlock Text="×" FontSize="16" VerticalAlignment="Center"/>
+                                </Button>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#2A2A2A" TargetName="ItemBorder"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="RemoveButton"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#333333" TargetName="ItemBorder"/>
+                                <Setter Property="Visibility" Value="Visible" TargetName="RemoveButton"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
+
+    <Border Background="{StaticResource BackgroundGradient}" CornerRadius="12" Margin="10">
+        <Grid>
+            <TextBlock x:Name="lblAuthWarning" 
+                       Text="Authentication required. Please sign in to access settings." 
+                       Foreground="{StaticResource Warning}" 
+                       FontWeight="SemiBold" 
+                       FontSize="13"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Top" 
+                       Margin="0,12,0,0" 
+                       Visibility="Collapsed"/>
+
+            <ScrollViewer x:Name="MainScrollViewer" VerticalScrollBarVisibility="Auto" Padding="24,16,24,32">
+                <StackPanel>
+                    <!-- Tenant Info Section -->
+                    <TextBlock Text="Tenant Information" Style="{StaticResource SectionHeader}"/>
+                    <Border Style="{StaticResource Card}">
+                        <Grid x:Name="pnlTenantSettings">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Tenant ID:" Style="{StaticResource FormLabel}"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtTenantId" Style="{StaticResource TextInput}" 
+                                     IsReadOnly="True" Margin="0,0,0,8"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Company Name:" Style="{StaticResource FormLabel}"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtTenantName" Style="{StaticResource TextInput}" 
+                                     IsReadOnly="True" Margin="0,0,0,8"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Admin Email:" Style="{StaticResource FormLabel}"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtAdminEmail" Style="{StaticResource TextInput}" 
+                                     IsReadOnly="True" Margin="0,0,0,8"/>
+                            <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" 
+                                    Content="Refresh" Style="{StaticResource PrimaryButton}" 
+                                    x:Name="btnRefreshTenantInfo" VerticalAlignment="Top" Width="80"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- Product Catalog Section -->
+                    <TextBlock Text="Product Catalog" Style="{StaticResource SectionHeader}"/>
+                    <Border Style="{StaticResource Card}">
+                        <StackPanel>
+                            <ListBox x:Name="lstProducts" Style="{StaticResource ProductList}" 
+                                     ItemContainerStyle="{StaticResource ProductListItem}" 
+                                     Height="150" Margin="0,0,0,16"/>
+                            <TextBlock Text="Add New Product" Style="{StaticResource FormLabel}" Margin="0,0,0,4"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0" x:Name="txtNewProduct" Style="{StaticResource TextInput}" 
+                                         Margin="0,0,8,0"/>
+                                <Button Grid.Column="1" Content="Add" Style="{StaticResource PrimaryButton}" 
+                                        x:Name="btnAddProduct" Width="80"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Border>
+</Page>
