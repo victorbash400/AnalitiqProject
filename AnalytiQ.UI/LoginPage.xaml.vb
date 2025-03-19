@@ -11,7 +11,8 @@ Namespace AnalytiQ.UI
         Private Const IsDevelopmentMode As Boolean = True
 
         ' Shared fields for tenant tracking
-        Private Shared _registeredTenants As New List(Of String) From {"TENANT-001"} ' Initial registered tenant
+        ' Modified to have only 3 pre-registered tenants
+        Private Shared _registeredTenants As New List(Of String) From {"TENANT-001", "TENANT-003", "TENANT-005"} ' Pre-registered tenants
         Private Shared _currentTenantId As String = String.Empty
 
         ' Instance field for parent window

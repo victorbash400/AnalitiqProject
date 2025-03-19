@@ -9,7 +9,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="assets\blue_lake.jpeg" />
 		<None Remove="assets\green_logo_test.png" />
+		<None Remove="assets\image_bloc.jpeg" />
+		<None Remove="assets\image_bloc2.jpeg" />
+		<None Remove="assets\orange.jpeg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="assets\orange.jpeg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -39,7 +49,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Resource Include="assets\blue_lake.jpeg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="assets\green_logo_test.png" />
+		<Resource Include="assets\image_bloc.jpeg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="assets\image_bloc2.jpeg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
 	</ItemGroup>
 
 	<ItemGroup>

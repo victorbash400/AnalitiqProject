@@ -227,6 +227,86 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Scrollbar Style -->
+        <Style x:Key="ThinScrollViewer" TargetType="ScrollViewer">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollViewer">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <ScrollContentPresenter Grid.Column="0" Grid.Row="0"/>
+
+                            <ScrollBar x:Name="PART_VerticalScrollBar" 
+                                       Grid.Column="1" Grid.Row="0"
+                                       Value="{TemplateBinding VerticalOffset}"
+                                       Maximum="{TemplateBinding ScrollableHeight}"
+                                       ViewportSize="{TemplateBinding ViewportHeight}"
+                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                       Width="8"/>
+
+                            <ScrollBar x:Name="PART_HorizontalScrollBar" 
+                                       Grid.Column="0" Grid.Row="1"
+                                       Orientation="Horizontal"
+                                       Value="{TemplateBinding HorizontalOffset}"
+                                       Maximum="{TemplateBinding ScrollableWidth}"
+                                       ViewportSize="{TemplateBinding ViewportWidth}"
+                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                       Height="8"/>
+
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Modern thin scrollbar -->
+        <Style x:Key="ModernScrollBar" TargetType="ScrollBar">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid>
+                            <Border x:Name="ThumbTrack" Background="#1A1A1A" CornerRadius="4"/>
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageUpCommand" Opacity="0"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border x:Name="thumbBorder" Background="#3D3D3D" CornerRadius="4"/>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="thumbBorder" Property="Background" Value="#4D4D4D"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsDragging" Value="True">
+                                                        <Setter TargetName="thumbBorder" Property="Background" Value="#5D5D5D"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageDownCommand" Opacity="0"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <Grid Background="#121212">
@@ -241,7 +321,7 @@
                 <Border Grid.Column="0" Margin="0,0,10,0" ClipToBounds="True">
                     <Grid>
                         <Border CornerRadius="0" ClipToBounds="True">
-                            <Image Source="C:\Users\Victo\Documents\AnalytiQ\frontend\AnalytiQ.UI\assets\image_bloc2.jpeg" Stretch="UniformToFill"/>
+                            <Image Source="/assets/blue_lake.jpeg" Stretch="UniformToFill"/>
                         </Border>
                         <Rectangle RadiusX="0" RadiusY="0">
                             <Rectangle.Fill>
@@ -262,68 +342,74 @@
 
                 <!-- Right Side - Form -->
                 <Grid Grid.Column="1" Margin="10,0,0,0">
-                    <Border Background="#1A1A1A" CornerRadius="12" Padding="25,30">
-                        <StackPanel>
-                            <TextBlock Text="Company Registration" FontSize="22" FontWeight="SemiBold" Foreground="#E0E0E0" Margin="0,0,0,6"/>
-                            <TextBlock Text="Complete your organization's details to get started" FontSize="13" Foreground="#A0A0A0" Margin="0,0,0,20"/>
+                    <Border Background="#1A1A1A" CornerRadius="12">
+                        <!-- Added ScrollViewer to make form scrollable -->
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      Padding="0,0,5,0" 
+                                      Style="{StaticResource ThinScrollViewer}">
+                            <StackPanel Margin="25,30">
+                                <TextBlock Text="Company Registration" FontSize="22" FontWeight="SemiBold" Foreground="#E0E0E0" Margin="0,0,0,6"/>
+                                <TextBlock Text="Complete your organization's details to get started" FontSize="13" Foreground="#A0A0A0" Margin="0,0,0,20"/>
 
-                            <TextBlock Text="Company Name" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtCompanyName" Style="{StaticResource ModernTextBox}" 
-                                   Margin="0,0,0,15" TextChanged="ValidateForm" TabIndex="1"/>
+                                <TextBlock Text="Company Name" Style="{StaticResource FieldLabel}"/>
+                                <TextBox x:Name="txtCompanyName" Style="{StaticResource ModernTextBox}" 
+                                       Margin="0,0,0,15" TextChanged="ValidateForm" TabIndex="1"/>
 
-                            <TextBlock Text="Industry" Style="{StaticResource FieldLabel}"/>
-                            <ComboBox x:Name="cboIndustry" Style="{StaticResource ModernComboBox}" 
-                                    Margin="0,0,0,15" SelectionChanged="ValidateForm" TabIndex="2">
-                                <ComboBoxItem Content="Finance"/>
-                                <ComboBoxItem Content="Retail"/>
-                                <ComboBoxItem Content="Manufacturing"/>
-                                <ComboBoxItem Content="Technology"/>
-                                <ComboBoxItem Content="Healthcare"/>
-                                <ComboBoxItem Content="Other"/>
-                            </ComboBox>
+                                <TextBlock Text="Industry" Style="{StaticResource FieldLabel}"/>
+                                <ComboBox x:Name="cboIndustry" Style="{StaticResource ModernComboBox}" 
+                                        Margin="0,0,0,15" SelectionChanged="ValidateForm" TabIndex="2">
+                                    <ComboBoxItem Content="Finance"/>
+                                    <ComboBoxItem Content="Retail"/>
+                                    <ComboBoxItem Content="Manufacturing"/>
+                                    <ComboBoxItem Content="Technology"/>
+                                    <ComboBoxItem Content="Healthcare"/>
+                                    <ComboBoxItem Content="Other"/>
+                                </ComboBox>
 
-                            <TextBlock Text="Tenant ID" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtTenantId" Style="{StaticResource ModernTextBox}" 
-                                   IsReadOnly="True" Background="#2A2A2A" Margin="0,0,0,15" TabIndex="3"/>
+                                <TextBlock Text="Tenant ID" Style="{StaticResource FieldLabel}"/>
+                                <TextBox x:Name="txtTenantId" Style="{StaticResource ModernTextBox}" 
+                                       IsReadOnly="True" Background="#2A2A2A" Margin="0,0,0,15" TabIndex="3"/>
 
-                            <TextBlock Text="Admin Email" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtAdminEmail" Style="{StaticResource ModernTextBox}" 
-                                   IsReadOnly="True" Background="#2A2A2A" Margin="0,0,0,20" TabIndex="4"/>
+                                <TextBlock Text="Admin Email" Style="{StaticResource FieldLabel}"/>
+                                <TextBox x:Name="txtAdminEmail" Style="{StaticResource ModernTextBox}" 
+                                       IsReadOnly="True" Background="#2A2A2A" Margin="0,0,0,20" TabIndex="4"/>
 
-                            <Border BorderBrush="#2D2D2D" BorderThickness="0,1,0,0" Margin="0,0,0,20"/>
+                                <Border BorderBrush="#2D2D2D" BorderThickness="0,1,0,0" Margin="0,0,0,20"/>
 
-                            <CheckBox x:Name="chkConfirm" Margin="0,0,0,20" Checked="ValidateForm" Unchecked="ValidateForm"
-                                      TabIndex="5" Cursor="Hand" Foreground="#E0E0E0">
-                                <TextBlock Text="I confirm I am authorized to register this company." 
-                                         FontSize="13" TextWrapping="Wrap" Foreground="#E0E0E0"/>
-                            </CheckBox>
+                                <CheckBox x:Name="chkConfirm" Margin="0,0,0,20" Checked="ValidateForm" Unchecked="ValidateForm"
+                                          TabIndex="5" Cursor="Hand" Foreground="#E0E0E0">
+                                    <TextBlock Text="I confirm I am authorized to register this company." 
+                                             FontSize="13" TextWrapping="Wrap" Foreground="#E0E0E0"/>
+                                </CheckBox>
 
-                            <Border x:Name="errorContainer" Background="#FFEBEE" CornerRadius="6" 
-                                  Padding="12,8" Margin="0,0,0,20" Visibility="Collapsed">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="⚠️" FontSize="14" Margin="0,0,8,0"/>
-                                    <TextBlock x:Name="txtErrorMessage" Foreground="#D32F2F" FontSize="12" 
-                                             TextWrapping="Wrap"/>
-                                </StackPanel>
-                            </Border>
+                                <Border x:Name="errorContainer" Background="#FFEBEE" CornerRadius="6" 
+                                      Padding="12,8" Margin="0,0,0,20" Visibility="Collapsed">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="⚠️" FontSize="14" Margin="0,0,8,0"/>
+                                        <TextBlock x:Name="txtErrorMessage" Foreground="#D32F2F" FontSize="12" 
+                                                 TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </Border>
 
-                            <Grid Margin="0,0,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
+                                <Grid Margin="0,0,0,20">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <Button x:Name="btnRegister" Content="Register" Grid.Column="0"
-                                      Style="{StaticResource PrimaryButton}" Margin="0,0,8,0" 
-                                      Click="Register_Click" IsEnabled="False" IsDefault="True" TabIndex="6"
-                                      Padding="12,10"/>
+                                    <Button x:Name="btnRegister" Content="Register" Grid.Column="0"
+                                          Style="{StaticResource PrimaryButton}" Margin="0,0,8,0" 
+                                          Click="Register_Click" IsEnabled="False" IsDefault="True" TabIndex="6"
+                                          Padding="12,10"/>
 
-                                <Button x:Name="btnSkipRegistration" Content="Skip" Grid.Column="1"
-                                      Style="{StaticResource SecondaryButton}" Margin="8,0,0,0"
-                                      Click="SkipRegistration_Click" TabIndex="7"
-                                      Padding="12,10"/>
-                            </Grid>
-                        </StackPanel>
+                                    <Button x:Name="btnSkipRegistration" Content="Skip" Grid.Column="1"
+                                          Style="{StaticResource SecondaryButton}" Margin="8,0,0,0"
+                                          Click="SkipRegistration_Click" TabIndex="7"
+                                          Padding="12,10"/>
+                                </Grid>
+                            </StackPanel>
+                        </ScrollViewer>
                     </Border>
                 </Grid>
             </Grid>

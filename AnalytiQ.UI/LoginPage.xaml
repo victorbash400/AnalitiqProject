@@ -165,7 +165,7 @@
                 <!-- Left Side - Decorative with Image Placeholder -->
                 <Border Grid.Column="0" CornerRadius="12,0,0,12">
                     <Grid>
-                        <Image Source="C:\Users\Victo\Documents\AnalytiQ\frontend\AnalytiQ.UI\assets\image_bloc.jpeg" Stretch="UniformToFill">
+                        <Image Source="assets/image_bloc.jpeg" Stretch="UniformToFill">
                             <Image.Effect>
                                 <BlurEffect Radius="0.5"/>
                             </Image.Effect>

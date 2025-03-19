@@ -7,6 +7,8 @@ Imports System.Windows.Controls
 Imports System.Windows.Media
 Imports Microsoft.Win32
 Imports Microsoft.Data.SqlClient
+Imports System.Net.Http
+Imports System.Threading
 
 Namespace AnalytiQ.UI
     Public Class DataUploadPage
@@ -27,6 +29,7 @@ Namespace AnalytiQ.UI
         Private _uploadProgress As Integer = 0
         Private _uploadingFileCount As Integer = 0
         Private _totalFilesToUpload As Integer = 0
+        Private ReadOnly MaxConcurrentUploads As Integer = 5 ' Cap for parallel uploads
 
         ' INotifyPropertyChanged Implementation
         Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
@@ -246,7 +249,7 @@ Namespace AnalytiQ.UI
             End If
         End Sub
 
-        ' Upload Button Click
+        ' Upload Button Click - Parallel Uploads
         Private Async Sub UploadButton_Click(sender As Object, e As RoutedEventArgs)
             If _selectedFiles.Count = 0 Then
                 ShowWarning("Please select at least one file to upload.")
@@ -260,19 +263,35 @@ Namespace AnalytiQ.UI
 
             Try
                 IsLoading = True
-                UploadProgress = 0
+                UploadProgress = 0 ' Reset progress
                 _totalFilesToUpload = _selectedFiles.Count
                 _uploadingFileCount = 0
                 Dim batchId As String = DateTime.Now.ToString("yyyyMMddHHmmss")
 
                 ToggleUploadControls(False)
+                LoadingMessage = "Starting parallel uploads..."
+
+                ' Use a semaphore to limit concurrent uploads
+                Dim semaphore As New SemaphoreSlim(MaxConcurrentUploads)
+                Dim uploadTasks As New List(Of Task)()
 
                 For Each file In _selectedFiles.ToList()
-                    _uploadingFileCount += 1
-                    LoadingMessage = $"Uploading file {_uploadingFileCount} of {_totalFilesToUpload}: {Path.GetFileName(file)}"
-                    Await UploadToAzureAsync(file, _selectedProduct, batchId)
-                    UploadProgress = CInt((_uploadingFileCount / _totalFilesToUpload) * 100)
+                    Dim uploadTask = Task.Run(Async Function()
+                                                  Await semaphore.WaitAsync()
+                                                  Try
+                                                      _uploadingFileCount = Interlocked.Increment(_uploadingFileCount)
+                                                      LoadingMessage = $"Uploading {_uploadingFileCount} of {_totalFilesToUpload} files..."
+                                                      Await UploadToAzureAsync(file, _selectedProduct, batchId)
+                                                      UploadProgress = CInt((_uploadingFileCount / _totalFilesToUpload) * 100)
+                                                  Finally
+                                                      semaphore.Release()
+                                                  End Try
+                                              End Function)
+                    uploadTasks.Add(uploadTask)
                 Next
+
+                ' Wait for all uploads to complete
+                Await Task.WhenAll(uploadTasks)
 
                 LoadingMessage = "Upload complete!"
                 Await Task.Delay(1000)
@@ -293,46 +312,69 @@ Namespace AnalytiQ.UI
             ClearButton.IsEnabled = enabled
         End Sub
 
-        ' Upload to Azure Asynchronously
+        ' Upload to Azure Asynchronously with Retry Logic
         Private Async Function UploadToAzureAsync(filePath As String, productName As String, batchId As String) As Task
-            Try
-                Dim apiUrl As String = "https://analytiq-api.azurewebsites.net/api/FileUpload/upload"
-                Dim tenantId As String = _currentTenantId
-                Dim fileName As String = Path.GetFileName(filePath)
+            Dim maxRetries As Integer = 3
+            Dim retryDelayMs As Integer = 2000
+            Dim fileName As String = Path.GetFileName(filePath)
+            Dim attempt As Integer = 1
+            Dim success As Boolean = False
+            Dim shouldDelay As Boolean = False ' Added variable declaration here
 
-                UpdateFileStatus(fileName, "Uploading", "#FF9800")
+            While attempt <= maxRetries AndAlso Not success
+                Try
+                    Dim apiUrl As String = "https://analytiq-api.azurewebsites.net/api/FileUpload/upload"
+                    Dim tenantId As String = _currentTenantId
 
-                Using fileStream As New FileStream(filePath, FileMode.Open, FileAccess.Read)
-                    Using client As New Net.Http.HttpClient()
-                        Using form As New Net.Http.MultipartFormDataContent()
-                            Dim fileContent As New Net.Http.StreamContent(fileStream)
-                            fileContent.Headers.ContentType = New Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream")
-                            form.Add(fileContent, "file", fileName)
-                            form.Add(New Net.Http.StringContent(tenantId), "tenantId")
-                            form.Add(New Net.Http.StringContent(batchId), "batchId")
-                            form.Add(New Net.Http.StringContent(productName), "productName")
+                    UpdateFileStatus(fileName, "Uploading", "#FF9800")
 
-                            UpdateFileStatus(fileName, "Processing", "#FF9800")
+                    Using fileStream As New FileStream(filePath, FileMode.Open, FileAccess.Read)
+                        Using client As New HttpClient()
+                            Using form As New MultipartFormDataContent()
+                                Dim fileContent As New StreamContent(fileStream)
+                                fileContent.Headers.ContentType = New Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream")
+                                form.Add(fileContent, "file", fileName)
+                                form.Add(New StringContent(tenantId), "tenantId")
+                                form.Add(New StringContent(batchId), "batchId")
+                                form.Add(New StringContent(productName), "productName")
 
-                            Dim response As Net.Http.HttpResponseMessage = Await client.PostAsync(apiUrl, form)
-                            If response.IsSuccessStatusCode Then
-                                Dim responseBody As String = Await response.Content.ReadAsStringAsync()
-                                Console.WriteLine($"Upload successful: {responseBody}")
-                                UpdateFileStatus(fileName, "Processed", "#2C9E4B")
-                            Else
-                                Dim errorResponse As String = Await response.Content.ReadAsStringAsync()
-                                Throw New Exception($"Server responded with {response.StatusCode}: {errorResponse}")
-                            End If
+                                UpdateFileStatus(fileName, "Processing", "#FF9800")
+
+                                Dim response As HttpResponseMessage = Await client.PostAsync(apiUrl, form)
+                                If response.IsSuccessStatusCode Then
+                                    Dim responseBody As String = Await response.Content.ReadAsStringAsync()
+                                    Console.WriteLine($"Upload successful: {responseBody}")
+                                    UpdateFileStatus(fileName, "Processed", "#2C9E4B")
+                                    success = True ' Exit the loop on success
+                                Else
+                                    Dim errorResponse As String = Await response.Content.ReadAsStringAsync()
+                                    Throw New Exception($"Server responded with {response.StatusCode}: {errorResponse}")
+                                End If
+                            End Using
                         End Using
                     End Using
-                End Using
-            Catch ex As Exception
-                Console.WriteLine($"Upload error for {Path.GetFileName(filePath)}: {ex.Message}")
-                UpdateFileStatus(Path.GetFileName(filePath), "Failed", "#FF5252")
-                Application.Current.Dispatcher.Invoke(Sub()
-                                                          MessageBox.Show($"Failed to upload {Path.GetFileName(filePath)}: {ex.Message}", "Upload Error", MessageBoxButton.OK, MessageBoxImage.Error)
-                                                      End Sub)
-            End Try
+                Catch ex As Exception
+                    Console.WriteLine($"Upload error for {fileName}, attempt {attempt}/{maxRetries}: {ex.Message}")
+                    If attempt = maxRetries Then
+                        UpdateFileStatus(fileName, "Failed", "#FF5252")
+                        Application.Current.Dispatcher.Invoke(Sub()
+                                                                  MessageBox.Show($"Failed to upload {fileName} after {maxRetries} attempts: {ex.Message}", "Upload Error", MessageBoxButton.OK, MessageBoxImage.Error)
+                                                              End Sub)
+                    Else
+                        UpdateFileStatus(fileName, $"Retrying ({attempt}/{maxRetries})", "#FF9800")
+                        ' Will handle delay outside of the Catch block
+                        shouldDelay = True
+                    End If
+                End Try
+
+                If shouldDelay AndAlso attempt < maxRetries Then
+                    Await Task.Delay(retryDelayMs)
+                    retryDelayMs *= 2 ' Exponential backoff
+                    shouldDelay = False ' Reset for next iteration
+                End If
+
+                attempt += 1
+            End While
         End Function
 
         ' Update File Status (Thread-Safe)

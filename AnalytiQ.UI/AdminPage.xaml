@@ -5,20 +5,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d" 
       Title="User Management - Admin Control"
-      Background="#121212">
+      Background="#1E1E2E">
 
     <Page.Resources>
         <!-- Colors -->
-        <Color x:Key="PrimaryBackColorValue">#121212</Color>
-        <Color x:Key="SecondaryBackColorValue">#1E1E1E</Color>
-        <Color x:Key="ContentBackColorValue">#242424</Color>
+        <Color x:Key="PrimaryBackColorValue">#1E1E2E</Color>
+        <Color x:Key="SecondaryBackColorValue">#282839</Color>
+        <Color x:Key="ContentBackColorValue">#2E2E42</Color>
         <Color x:Key="PrimaryTextColorValue">#FFFFFF</Color>
-        <Color x:Key="MutedTextColorValue">#9E9E9E</Color>
-        <Color x:Key="AccentColorValue">#2C9E4B</Color>
-        <Color x:Key="SecondaryAccentColorValue">#3ABF5E</Color>
-        <Color x:Key="CardBackgroundValue">#1A1A1A</Color>
-        <Color x:Key="BorderColorValue">#333333</Color>
-        <Color x:Key="WarningColorValue">#FF5252</Color>
+        <Color x:Key="MutedTextColorValue">#A6A6B6</Color>
+        <Color x:Key="AccentColorValue">#7E57C2</Color>
+        <Color x:Key="SecondaryAccentColorValue">#9575CD</Color>
+        <Color x:Key="CardBackgroundValue">#252538</Color>
+        <Color x:Key="BorderColorValue">#3A3A54</Color>
+        <Color x:Key="WarningColorValue">#F06292</Color>
+        <Color x:Key="SuccessColorValue">#66BB6A</Color>
 
         <SolidColorBrush x:Key="PrimaryBackColor" Color="{StaticResource PrimaryBackColorValue}"/>
         <SolidColorBrush x:Key="SecondaryBackColor" Color="{StaticResource SecondaryBackColorValue}"/>
@@ -30,6 +31,7 @@
         <SolidColorBrush x:Key="CardBackground" Color="{StaticResource CardBackgroundValue}"/>
         <SolidColorBrush x:Key="BorderColor" Color="{StaticResource BorderColorValue}"/>
         <SolidColorBrush x:Key="WarningColor" Color="{StaticResource WarningColorValue}"/>
+        <SolidColorBrush x:Key="SuccessColor" Color="{StaticResource SuccessColorValue}"/>
 
         <!-- Gradients -->
         <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,1">
@@ -45,44 +47,59 @@
         <!-- Card Style -->
         <Style x:Key="CardStyle" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource CardBackground}"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="Padding" Value="20"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <Setter Property="Padding" Value="24"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect Color="Black" BlurRadius="10" ShadowDepth="1" Opacity="0.3"/>
+                    <DropShadowEffect Color="Black" BlurRadius="14" ShadowDepth="1" Opacity="0.25"/>
                 </Setter.Value>
             </Setter>
         </Style>
 
         <!-- Action Button Style -->
         <Style x:Key="ActionButtonStyle" TargetType="Button">
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Padding" Value="20,0"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="Padding" Value="24,0"/>
             <Setter Property="Margin" Value="8,0"/>
-            <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="{StaticResource AccentColorValue}" Offset="0.0"/>
+                        <GradientStop Color="{StaticResource SecondaryAccentColorValue}" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" CornerRadius="10">
+                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" CornerRadius="22">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Background" Value="{StaticResource SecondaryAccentColor}"/>
                                 <Setter TargetName="ButtonBorder" Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect ShadowDepth="0" BlurRadius="8" Opacity="0.3" Color="{StaticResource AccentColorValue}"/>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="12" Opacity="0.5" Color="{StaticResource AccentColorValue}"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="ButtonBorder" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="1.03" ScaleY="1.03"/>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Background" Value="#256E3A"/>
+                                <Setter TargetName="ButtonBorder" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -92,29 +109,44 @@
 
         <!-- Remove Button Style -->
         <Style x:Key="RemoveButtonStyle" TargetType="Button" BasedOn="{StaticResource ActionButtonStyle}">
-            <Setter Property="Background" Value="{StaticResource WarningColor}"/>
-            <Setter Property="Width" Value="110"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#F06292" Offset="0.0"/>
+                        <GradientStop Color="#EC407A" Offset="1.0"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Width" Value="120"/>
             <Setter Property="ToolTip" Value="Remove this user"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" CornerRadius="10">
+                        <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" CornerRadius="22">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock Text="🗑️" FontSize="14" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                                <TextBlock Text="🗑️" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
                                 <TextBlock Text="Remove" VerticalAlignment="Center"/>
                             </StackPanel>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Background" Value="#FF3B3B"/>
                                 <Setter TargetName="ButtonBorder" Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect ShadowDepth="0" BlurRadius="8" Opacity="0.3" Color="#FF3B3B"/>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="12" Opacity="0.5" Color="#F06292"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter TargetName="ButtonBorder" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="1.03" ScaleY="1.03"/>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="ButtonBorder" Property="Background" Value="#CC0000"/>
+                                <Setter TargetName="ButtonBorder" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.97" ScaleY="0.97"/>
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -124,43 +156,88 @@
 
         <!-- Role ComboBox Style -->
         <Style x:Key="RoleComboBoxStyle" TargetType="ComboBox">
-            <Setter Property="Height" Value="36"/>
-            <Setter Property="Width" Value="160"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="170"/>
             <Setter Property="Margin" Value="8,0"/>
-            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontFamily" Value="Segoe UI"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-            <Setter Property="Background" Value="#242424"/>
+            <Setter Property="Background" Value="{StaticResource ContentBackColor}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
-            <Setter Property="Padding" Value="10,0"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="BorderBrush" Value="{StaticResource AccentColor}"/>
-                </Trigger>
-                <Trigger Property="IsDropDownOpen" Value="True">
-                    <Setter Property="BorderBrush" Value="{StaticResource AccentColor}"/>
-                    <Setter Property="Effect">
-                        <Setter.Value>
-                            <DropShadowEffect ShadowDepth="0" BlurRadius="8" Opacity="0.3" Color="{StaticResource AccentColorValue}"/>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
+            <Setter Property="Padding" Value="12,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border x:Name="border" CornerRadius="20" 
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                <Grid>
+                                    <ContentPresenter x:Name="contentPresenter"
+                                                    Content="{TemplateBinding SelectionBoxItem}"
+                                                    ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                    Margin="{TemplateBinding Padding}"
+                                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                    <TextBlock x:Name="arrow" Text="▼" FontSize="10"
+                                             HorizontalAlignment="Right" VerticalAlignment="Center"
+                                             Margin="0,0,12,0" Foreground="{StaticResource MutedTextColor}" />
+                                </Grid>
+                            </Border>
+                            <Popup x:Name="PART_Popup" 
+                                 AllowsTransparency="True" 
+                                 IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                 Placement="Bottom"
+                                 PopupAnimation="Fade">
+                                <Border x:Name="dropDownBorder" 
+                                      CornerRadius="10" 
+                                      Background="{StaticResource ContentBackColor}"
+                                      BorderBrush="{StaticResource BorderColor}"
+                                      BorderThickness="1"
+                                      Padding="4"
+                                      Margin="0,6,0,0">
+                                    <ScrollViewer x:Name="DropDownScrollViewer" MaxHeight="200">
+                                        <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsDropDownOpen" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentColor}"/>
+                                <Setter TargetName="arrow" Property="Foreground" Value="{StaticResource AccentColor}"/>
+                                <Setter TargetName="border" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="8" Opacity="0.3" Color="{StaticResource AccentColorValue}"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <!-- User Row Style -->
         <Style x:Key="UserRowStyle" TargetType="Border">
-            <Setter Property="Padding" Value="16,14"/>
-            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="18,16"/>
+            <Setter Property="CornerRadius" Value="12"/>
             <Setter Property="Margin" Value="0,8"/>
             <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
             <Style.Triggers>
                 <EventTrigger RoutedEvent="MouseEnter">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#242424" Duration="0:0:0.2"/>
+                            <ColorAnimation Storyboard.TargetProperty="Background.Color" To="{StaticResource ContentBackColorValue}" Duration="0:0:0.2"/>
+                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="{StaticResource BorderColorValue}" Duration="0:0:0.2"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -168,6 +245,7 @@
                     <BeginStoryboard>
                         <Storyboard>
                             <ColorAnimation Storyboard.TargetProperty="Background.Color" To="Transparent" Duration="0:0:0.2"/>
+                            <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" To="Transparent" Duration="0:0:0.2"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
@@ -178,50 +256,52 @@
         <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
-            <Setter Property="FontSize" Value="13"/>
-            <Setter Property="Margin" Value="12,0,0,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="14,0,0,0"/>
+            <Setter Property="Opacity" Value="0.85"/>
         </Style>
 
         <!-- User Data Text Style -->
         <Style x:Key="UserDataTextStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
-            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
 
         <!-- Search Box Style -->
         <Style x:Key="SearchBoxStyle" TargetType="TextBox">
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="Width" Value="280"/>
-            <Setter Property="Padding" Value="40,0,14,0"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Padding" Value="46,0,16,0"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
-            <Setter Property="Background" Value="#242424"/>
+            <Setter Property="Background" Value="{StaticResource ContentBackColor}"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
-            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}" 
+                        <Border x:Name="border" Background="{TemplateBinding Background}" 
                                 BorderBrush="{TemplateBinding BorderBrush}" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
-                                CornerRadius="10">
+                                CornerRadius="22">
                             <Grid>
-                                <TextBlock Text="🔍" Foreground="{StaticResource AccentColor}" VerticalAlignment="Center" 
-                                         Margin="16,0,0,0" FontSize="16"/>
+                                <TextBlock x:Name="searchIcon" Text="🔍" Foreground="{StaticResource AccentColor}" VerticalAlignment="Center" 
+                                         Margin="18,0,0,0" FontSize="16" Opacity="0.8"/>
                                 <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
                                 <TextBlock x:Name="WatermarkText" Text="Search users..." 
                                          Foreground="{StaticResource MutedTextColor}" VerticalAlignment="Center" 
-                                         Margin="40,0,0,0" Visibility="Collapsed"/>
+                                         Margin="46,0,0,0" Visibility="Collapsed"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter Property="BorderBrush" Value="{StaticResource AccentColor}"/>
-                                <Setter Property="Effect">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentColor}"/>
+                                <Setter TargetName="searchIcon" Property="Opacity" Value="1"/>
+                                <Setter TargetName="border" Property="Effect">
                                     <Setter.Value>
-                                        <DropShadowEffect ShadowDepth="0" BlurRadius="8" Opacity="0.2" Color="{StaticResource AccentColorValue}"/>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="12" Opacity="0.3" Color="{StaticResource AccentColorValue}"/>
                                     </Setter.Value>
                                 </Setter>
                             </Trigger>
@@ -232,27 +312,30 @@
                                 </MultiTrigger.Conditions>
                                 <Setter TargetName="WatermarkText" Property="Visibility" Value="Visible"/>
                             </MultiTrigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource AccentColor}"/>
+                                <Setter TargetName="searchIcon" Property="Opacity" Value="1"/>
+                            </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <!-- Badge Style -->
-        <Style x:Key="RoleBadgeStyle" TargetType="Border">
-            <Setter Property="CornerRadius" Value="16"/>
-            <Setter Property="Padding" Value="10,4"/>
-            <Setter Property="Background" Value="#2C2C2C"/>
-        </Style>
-
         <!-- Avatar Style -->
         <Style x:Key="AvatarStyle" TargetType="Border">
-            <Setter Property="Width" Value="36"/>
-            <Setter Property="Height" Value="36"/>
-            <Setter Property="CornerRadius" Value="8"/>
-            <Setter Property="Margin" Value="0,0,12,0"/>
-            <Setter Property="Background" Value="#2A2A2A"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Margin" Value="0,0,14,0"/>
+            <Setter Property="Background" Value="{StaticResource SecondaryBackColor}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="8" Opacity="0.2" Color="Black"/>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Page.Resources>
 
@@ -264,23 +347,23 @@
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid Grid.Row="0" Margin="0,0,0,24">
+        <Grid Grid.Row="0" Margin="0,0,0,28">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0">
-                <TextBlock Text="Tenant User Management" FontSize="24" FontWeight="SemiBold" Foreground="{StaticResource PrimaryTextColor}">
+                <TextBlock Text="Tenant User Management" FontSize="28" FontWeight="SemiBold" Foreground="{StaticResource PrimaryTextColor}">
                     <TextBlock.Effect>
                         <DropShadowEffect ShadowDepth="1" BlurRadius="5" Opacity="0.2" Color="Black"/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
-                    <Border Background="{StaticResource AccentColor}" CornerRadius="6" Padding="8,3">
-                        <TextBlock Text="Admin" Foreground="White" FontSize="12" FontWeight="SemiBold"/>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <Border Background="{StaticResource AccentGradient}" CornerRadius="8" Padding="10,4">
+                        <TextBlock Text="Admin" Foreground="White" FontSize="13" FontWeight="SemiBold"/>
                     </Border>
-                    <TextBlock x:Name="txtTenantInfo" Text="Tenant: Loading..." Foreground="{StaticResource MutedTextColor}" FontSize="14" Margin="12,0,0,0"/>
+                    <TextBlock x:Name="txtTenantInfo" Text="Tenant: Loading..." Foreground="{StaticResource MutedTextColor}" FontSize="15" Margin="14,0,0,0"/>
                 </StackPanel>
             </StackPanel>
 
@@ -288,7 +371,7 @@
                 <TextBox x:Name="txtSearch" Style="{StaticResource SearchBoxStyle}" Margin="0,0,16,0"/>
                 <Button x:Name="btnInviteEmployee" Style="{StaticResource ActionButtonStyle}" Click="InviteEmployee_Click">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="➕" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="➕" FontSize="16" VerticalAlignment="Center" Margin="0,0,10,0"/>
                         <TextBlock Text="Invite Employee" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Button>
@@ -303,8 +386,8 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Border Grid.Row="0" Margin="0,0,0,16" Background="#242424" CornerRadius="10">
-                    <Grid Margin="16,12">
+                <Border Grid.Row="0" Margin="0,0,0,16" Background="{StaticResource ContentBackColor}" CornerRadius="12" BorderThickness="1" BorderBrush="{StaticResource BorderColor}">
+                    <Grid Margin="16,14">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="2*"/>
                             <ColumnDefinition Width="3*"/>
@@ -318,25 +401,27 @@
                     </Grid>
                 </Border>
 
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="0,0,8,0">
                     <StackPanel x:Name="UsersPanel"/>
                 </ScrollViewer>
             </Grid>
         </Border>
 
         <!-- Footer -->
-        <Border Grid.Row="2" Style="{StaticResource CardStyle}" Margin="0,16,0,0">
+        <Border Grid.Row="2" Style="{StaticResource CardStyle}" Margin="0,20,0,0">
             <Grid>
                 <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="💾" FontSize="14" Foreground="{StaticResource MutedTextColor}" VerticalAlignment="Center" Margin="0,0,8,0"/>
-                        <TextBlock Text="Changes are saved automatically" Foreground="{StaticResource MutedTextColor}" FontSize="13"/>
+                        <Border Background="{StaticResource ContentBackColor}" Width="36" Height="36" CornerRadius="18" VerticalAlignment="Center">
+                            <TextBlock Text="💾" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <TextBlock Text="Changes are saved automatically" Foreground="{StaticResource MutedTextColor}" FontSize="14" VerticalAlignment="Center" Margin="12,0,0,0"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="btnSaveChanges" Style="{StaticResource ActionButtonStyle}" Click="SaveChanges_Click">
+                    <Button x:Name="btnSaveChanges" Style="{StaticResource ActionButtonStyle}" Background="{StaticResource SuccessColor}" Click="SaveChanges_Click">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="✅" FontSize="14" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBlock Text="✅" FontSize="16" VerticalAlignment="Center" Margin="0,0,10,0"/>
                             <TextBlock Text="Save Changes" VerticalAlignment="Center"/>
                         </StackPanel>
                     </Button>

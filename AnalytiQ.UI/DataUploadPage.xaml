@@ -347,9 +347,9 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Document Type:" VerticalAlignment="Center" 
-                                          Style="{StaticResource SubHeaderTextStyle}" Margin="0,0,16,0"/>
+                      Style="{StaticResource SubHeaderTextStyle}" Margin="0,0,16,0"/>
                                 <ComboBox Grid.Column="1" x:Name="DocumentTypeComboBox" Style="{StaticResource ComboBoxStyle}" 
-                                         HorizontalAlignment="Stretch" SelectedIndex="0">
+                     HorizontalAlignment="Stretch" SelectedIndex="0">
                                     <ComboBoxItem Content="Customer Feedback" Foreground="{StaticResource PrimaryTextColor}"/>
                                     <ComboBoxItem Content="Survey Responses" Foreground="{StaticResource PrimaryTextColor}"/>
                                     <ComboBoxItem Content="Support Tickets" Foreground="{StaticResource PrimaryTextColor}"/>
@@ -363,9 +363,32 @@
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Product:" VerticalAlignment="Center" 
-                                          Style="{StaticResource SubHeaderTextStyle}" Margin="0,0,16,0"/>
-                                <ComboBox Grid.Column="1" x:Name="ProductComboBox" Style="{StaticResource ComboBoxStyle}" 
-                                         HorizontalAlignment="Stretch"/>
+                      Style="{StaticResource SubHeaderTextStyle}" Margin="0,0,16,0"/>
+                                <Border Grid.Column="1" Background="{StaticResource ContentBackColor}" 
+                    BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="10">
+                                    <ComboBox x:Name="ProductComboBox" Style="{StaticResource ComboBoxStyle}" 
+                         HorizontalAlignment="Stretch" BorderThickness="0">
+                                        <ComboBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="0,4">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <Border Grid.Column="0" Width="24" Height="24" Background="Transparent" Margin="0,0,12,0">
+                                                        <Path Data="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" 
+                                         Fill="{StaticResource AccentColor}" Width="16" Height="16"/>
+                                                    </Border>
+                                                    <StackPanel Grid.Column="1">
+                                                        <TextBlock Text="{Binding Name}" FontWeight="Medium" Foreground="{StaticResource PrimaryTextColor}"/>
+                                                        <TextBlock Text="{Binding Category}" FontSize="12" Foreground="{StaticResource MutedTextColor}"
+                                              Visibility="{Binding HasCategory, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ComboBox.ItemTemplate>
+                                    </ComboBox>
+                                </Border>
                             </Grid>
                             <Expander Grid.Row="2" Header="Processing Options" IsExpanded="False" Margin="0,0,0,0">
                                 <Grid Margin="0,16,0,0">
@@ -376,11 +399,11 @@
                                     <TextBlock Grid.Row="0" Text="Processing Options:" Style="{StaticResource SubHeaderTextStyle}"/>
                                     <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="0,12,0,0">
                                         <CheckBox x:Name="AutoCategorizeCheckBox" Content="Auto-categorize" IsChecked="True" 
-                                                 Style="{StaticResource CheckBoxStyle}"/>
+                             Style="{StaticResource CheckBoxStyle}"/>
                                         <CheckBox x:Name="ExtractSentimentsCheckBox" Content="Extract sentiments" IsChecked="True" 
-                                                 Style="{StaticResource CheckBoxStyle}"/>
+                             Style="{StaticResource CheckBoxStyle}"/>
                                         <CheckBox x:Name="GenerateSummaryCheckBox" Content="Generate summary report" IsChecked="False" 
-                                                 Style="{StaticResource CheckBoxStyle}" Margin="0,0,0,0"/>
+                             Style="{StaticResource CheckBoxStyle}" Margin="0,0,0,0"/>
                                     </WrapPanel>
                                 </Grid>
                             </Expander>
@@ -447,11 +470,41 @@
         </ScrollViewer>
 
         <!-- Loading Overlay -->
-        <Grid Background="#80000000" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <ProgressBar Value="{Binding UploadProgress}" Maximum="100" Width="200" Height="20" Margin="0,0,0,10"/>
-                <TextBlock Text="{Binding LoadingMessage}" Foreground="White" FontSize="14" TextAlignment="Center"/>
-            </StackPanel>
+        <Grid x:Name="LoadingOverlay" Background="#80121212" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border Background="{StaticResource CardBackground}" Width="300" Height="200" CornerRadius="12" BorderThickness="1" BorderBrush="{StaticResource BorderColor}">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="{StaticResource AccentColorValue}" Opacity="0.4"/>
+                </Border.Effect>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="24">
+                    <Border Width="48" Height="48" Background="Transparent" Margin="0,0,0,16">
+                        <Path Data="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z" Fill="{StaticResource AccentColor}">
+                            <Path.RenderTransform>
+                                <RotateTransform x:Name="SpinnerRotation" CenterX="24" CenterY="24"/>
+                            </Path.RenderTransform>
+                            <Path.Triggers>
+                                <EventTrigger RoutedEvent="Path.Loaded">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="SpinnerRotation" 
+                                                    Storyboard.TargetProperty="Angle"
+                                                    From="0" To="360" Duration="0:0:1.5" 
+                                                    RepeatBehavior="Forever"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Path.Triggers>
+                        </Path>
+                    </Border>
+                    <TextBlock Text="{Binding LoadingMessage}" Foreground="{StaticResource PrimaryTextColor}" 
+                      FontSize="16" FontWeight="SemiBold" TextAlignment="Center" Margin="0,0,0,12"/>
+                    <ProgressBar Value="{Binding UploadProgress}" Maximum="100" Height="6" Margin="0,0,0,8" 
+                        Background="{StaticResource ContentBackColor}" Foreground="{StaticResource AccentColor}"
+                        BorderThickness="0"/>
+                    <TextBlock Text="{Binding UploadProgress, StringFormat={}{0:0}%}" 
+                      Foreground="{StaticResource MutedTextColor}" FontSize="14" 
+                      TextAlignment="Center"/>
+                </StackPanel>
+            </Border>
         </Grid>
     </Grid>
 </Page>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3Y3Ljbpueoc=",
+  "dgSpecHash": "0ts2cu/jNzk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Victo\\Documents\\AnalytiQ\\frontend\\AnalytiQ.UI\\AnalytiQ.UI.vbproj",
+  "projectFilePath": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AnalytiQ.UI.vbproj",
   "expectedPackageFiles": [
     "C:\\Users\\Victo\\.nuget\\packages\\azure.core\\1.44.1\\azure.core.1.44.1.nupkg.sha512",
     "C:\\Users\\Victo\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

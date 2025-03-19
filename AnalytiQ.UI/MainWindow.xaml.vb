@@ -63,7 +63,8 @@ Public Class MainWindow
             Title = $"AnalytiQ - Tenant: {_tenantId}"
         End If
         SyncButtonStates()
-        LoadingProgress.Visibility = Visibility.Visible
+        LoadingContainer.Visibility = Visibility.Visible
+        LoadingContainer.Visibility = Visibility.Collapsed
 
         ' Handle window state changes for maximize/restore icon
         AddHandler Me.StateChanged, AddressOf WindowStateChanged
@@ -120,7 +121,8 @@ Public Class MainWindow
         End If
 
         Try
-            LoadingProgress.Visibility = Visibility.Visible
+            LoadingContainer.Visibility = Visibility.Visible
+            LoadingContainer.Visibility = Visibility.Collapsed
             MainFrame.Visibility = Visibility.Collapsed
             PowerBIWebView.Visibility = Visibility.Visible
 
@@ -319,7 +321,8 @@ Public Class MainWindow
             _isReportLoaded = True
             Dispatcher.Invoke(Async Sub()
                                   PowerBIWebView.Visibility = Visibility.Visible
-                                  LoadingProgress.Visibility = Visibility.Collapsed
+                                  LoadingContainer.Visibility = Visibility.Visible
+                                  LoadingContainer.Visibility = Visibility.Collapsed
                                   Console.WriteLine("Report loaded event received")
 
                                   ' List available pages to help with debugging
@@ -439,7 +442,8 @@ Public Class MainWindow
     End Sub
 
     Private Sub LoadFramePage(page As Page, title As String)
-        LoadingProgress.Visibility = Visibility.Collapsed
+        LoadingContainer.Visibility = Visibility.Visible
+        LoadingContainer.Visibility = Visibility.Collapsed
         PageTitle.Text = title
         MainFrame.Navigate(page)
         MainFrame.Visibility = Visibility.Visible
@@ -475,7 +479,8 @@ Public Class MainWindow
     End Sub
 
     Private Sub ShowErrorPage(errorMessage As String)
-        LoadingProgress.Visibility = Visibility.Collapsed
+        LoadingContainer.Visibility = Visibility.Visible
+        LoadingContainer.Visibility = Visibility.Collapsed
         MainFrame.Visibility = Visibility.Visible
         PowerBIWebView.Visibility = Visibility.Collapsed
         MainFrame.Navigate(New ErrorPage(errorMessage))

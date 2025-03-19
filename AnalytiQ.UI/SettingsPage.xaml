@@ -9,16 +9,19 @@
       Title="Settings">
 
     <Page.Resources>
-        <!-- Simplified Color Scheme -->
-        <Color x:Key="DarkBackgroundValue">#121212</Color>
-        <Color x:Key="CardBackgroundValue">#1A1A1A</Color>
-        <Color x:Key="ContentBackgroundValue">#242424</Color>
-        <Color x:Key="BorderValue">#333333</Color>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+        <!-- Improved Color Scheme (Adjusted to work with #1E1E2E) -->
+        <Color x:Key="DarkBackgroundValue">#1A1A2A</Color>
+        <Color x:Key="CardBackgroundValue">#22222F</Color>
+        <Color x:Key="ContentBackgroundValue">#2A2A38</Color>
+        <Color x:Key="BorderValue">#383850</Color>
         <Color x:Key="TextPrimaryValue">#FFFFFF</Color>
-        <Color x:Key="TextMutedValue">#9E9E9E</Color>
-        <Color x:Key="AccentValue">#2C9E4B</Color>
-        <Color x:Key="AccentHoverValue">#3ABF5E</Color>
-        <Color x:Key="WarningValue">#FF5252</Color>
+        <Color x:Key="TextMutedValue">#BBBBCC</Color>
+        <Color x:Key="AccentValue">#3CBFAE</Color>
+        <Color x:Key="AccentHoverValue">#4FD0BF</Color>
+        <Color x:Key="AccentLightValue">#3CBFAE20</Color>
+        <Color x:Key="WarningValue">#FF5C78</Color>
 
         <!-- Brushes -->
         <SolidColorBrush x:Key="DarkBackground" Color="{StaticResource DarkBackgroundValue}"/>
@@ -29,12 +32,13 @@
         <SolidColorBrush x:Key="TextMuted" Color="{StaticResource TextMutedValue}"/>
         <SolidColorBrush x:Key="Accent" Color="{StaticResource AccentValue}"/>
         <SolidColorBrush x:Key="AccentHover" Color="{StaticResource AccentHoverValue}"/>
+        <SolidColorBrush x:Key="AccentLight" Color="{StaticResource AccentLightValue}"/>
         <SolidColorBrush x:Key="Warning" Color="{StaticResource WarningValue}"/>
 
-        <!-- Simplified Gradients -->
+        <!-- Improved Gradients -->
         <LinearGradientBrush x:Key="BackgroundGradient" StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Color="#121212" Offset="0"/>
-            <GradientStop Color="#1A1A1A" Offset="1"/>
+            <GradientStop Color="#1A1A2A" Offset="0"/>
+            <GradientStop Color="#22222F" Offset="1"/>
         </LinearGradientBrush>
 
         <!-- Button Styles -->
@@ -59,11 +63,43 @@
                                 <Setter Property="Background" Value="{StaticResource AccentHover}" TargetName="border"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#226E38" TargetName="border"/>
+                                <Setter Property="Background" Value="#2D9082" TargetName="border"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Background" Value="#444444" TargetName="border"/>
                                 <Setter Property="Foreground" Value="#777777"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SecondaryButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource Accent}"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Accent}"/>
+            <Setter Property="Height" Value="36"/>
+            <Setter Property="Padding" Value="16,0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{StaticResource AccentLight}" TargetName="border"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#3CBFAE30" TargetName="border"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -87,10 +123,10 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#333333" TargetName="border"/>
+                                <Setter Property="Background" Value="#383850" TargetName="border"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#222222" TargetName="border"/>
+                                <Setter Property="Background" Value="#25253A" TargetName="border"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -108,14 +144,14 @@
             <Setter Property="Padding" Value="20"/>
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect BlurRadius="8" ShadowDepth="1" Opacity="0.2" Direction="315"/>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.25" Direction="315" Color="#121220"/>
                 </Setter.Value>
             </Setter>
         </Style>
 
         <!-- Text Styles -->
         <Style x:Key="SectionHeader" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Foreground" Value="{StaticResource Accent}"/>
             <Setter Property="Margin" Value="0,0,0,12"/>
@@ -130,14 +166,14 @@
 
         <!-- Text Box Style -->
         <Style x:Key="TextInput" TargetType="TextBox">
-            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Padding" Value="12,6"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="BorderBrush" Value="{StaticResource Border}"/>
             <Setter Property="Background" Value="{StaticResource ContentBackground}"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Height" Value="36"/>
+            <Setter Property="Height" Value="38"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -161,7 +197,7 @@
             </Setter>
         </Style>
 
-        <!-- List Box Style -->
+        <!-- Improved Product List Box Style -->
         <Style x:Key="ProductList" TargetType="ListBox">
             <Setter Property="Background" Value="{StaticResource ContentBackground}"/>
             <Setter Property="BorderBrush" Value="{StaticResource Border}"/>
@@ -173,7 +209,7 @@
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="6">
+                                CornerRadius="8">
                             <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="False">
                                 <ItemsPresenter/>
                             </ScrollViewer>
@@ -183,8 +219,9 @@
             </Setter>
         </Style>
 
+        <!-- Improved Product List Item Style -->
         <Style x:Key="ProductListItem" TargetType="ListBoxItem">
-            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="Padding" Value="16,10"/>
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
             <Setter Property="BorderBrush" Value="{StaticResource Border}"/>
@@ -196,32 +233,71 @@
                                 BorderThickness="{TemplateBinding BorderThickness}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <ContentPresenter Grid.Column="0" VerticalAlignment="Center"/>
-                                <Button x:Name="RemoveButton" Grid.Column="1" 
+
+                                <!-- Product Icon -->
+                                <Border Grid.Column="0" Width="28" Height="28" 
+                                        Background="{StaticResource AccentLight}"
+                                        CornerRadius="6" Margin="0,0,12,0">
+                                    <TextBlock Text="📦" FontSize="14" 
+                                               HorizontalAlignment="Center" 
+                                               VerticalAlignment="Center"/>
+                                </Border>
+
+                                <!-- Product Name -->
+                                <TextBlock Grid.Column="1" Text="{Binding}" 
+                                           VerticalAlignment="Center"
+                                           FontSize="13"/>
+
+                                <!-- Remove Button -->
+                                <Button x:Name="RemoveButton" Grid.Column="2" 
                                         Style="{StaticResource IconButton}"
                                         Visibility="Collapsed"
                                         Tag="{Binding}"
-                                        Click="RemoveProduct_Click">
-                                    <TextBlock Text="×" FontSize="16" VerticalAlignment="Center"/>
+                                        Width="26" Height="26"
+                                        Click="RemoveProduct_Click"
+                                        ToolTip="Remove product">
+                                    <Border Background="#FF4C67" CornerRadius="4" Width="18" Height="18">
+                                        <TextBlock Text="×" FontSize="14" FontWeight="Bold" 
+                                                   HorizontalAlignment="Center" 
+                                                   VerticalAlignment="Center"
+                                                   Foreground="White"/>
+                                    </Border>
                                 </Button>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#2A2A2A" TargetName="ItemBorder"/>
+                                <Setter Property="Background" Value="#32324A" TargetName="ItemBorder"/>
                                 <Setter Property="Visibility" Value="Visible" TargetName="RemoveButton"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#333333" TargetName="ItemBorder"/>
+                                <Setter Property="Background" Value="#383857" TargetName="ItemBorder"/>
                                 <Setter Property="Visibility" Value="Visible" TargetName="RemoveButton"/>
                             </Trigger>
+                            <!-- Last item should not have a bottom border -->
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBox}}, Path=Items.Count}" Value="1">
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=PreviousData}}" Value="{x:Null}">
+                                <Setter Property="BorderThickness" Value="0"/>
+                            </DataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
+
+        <!-- Empty State Style -->
+        <Style x:Key="EmptyStateMessage" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextMuted}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="0,16"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
     </Page.Resources>
 
@@ -255,38 +331,110 @@
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="Tenant ID:" Style="{StaticResource FormLabel}"/>
                             <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtTenantId" Style="{StaticResource TextInput}" 
-                                     IsReadOnly="True" Margin="0,0,0,8"/>
+                                     IsReadOnly="True" Margin="0,0,0,12"/>
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="Company Name:" Style="{StaticResource FormLabel}"/>
                             <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtTenantName" Style="{StaticResource TextInput}" 
-                                     IsReadOnly="True" Margin="0,0,0,8"/>
+                                     IsReadOnly="True" Margin="0,0,0,12"/>
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Admin Email:" Style="{StaticResource FormLabel}"/>
                             <TextBox Grid.Row="2" Grid.Column="1" x:Name="txtAdminEmail" Style="{StaticResource TextInput}" 
-                                     IsReadOnly="True" Margin="0,0,0,8"/>
+                                     IsReadOnly="True"/>
                             <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" 
                                     Content="Refresh" Style="{StaticResource PrimaryButton}" 
                                     x:Name="btnRefreshTenantInfo" VerticalAlignment="Top" Width="80"/>
                         </Grid>
                     </Border>
 
-                    <!-- Product Catalog Section -->
-                    <TextBlock Text="Product Catalog" Style="{StaticResource SectionHeader}"/>
+                    <!-- Improved Product Catalog Section -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="Product Catalog" Style="{StaticResource SectionHeader}"/>
+                        <TextBlock Grid.Column="1" x:Name="txtProductCount" Text="0 products" 
+                                  Foreground="{StaticResource TextMuted}" VerticalAlignment="Center"
+                                  FontSize="12" Margin="0,0,0,12"/>
+                    </Grid>
+
                     <Border Style="{StaticResource Card}">
-                        <StackPanel>
-                            <ListBox x:Name="lstProducts" Style="{StaticResource ProductList}" 
-                                     ItemContainerStyle="{StaticResource ProductListItem}" 
-                                     Height="150" Margin="0,0,0,16"/>
-                            <TextBlock Text="Add New Product" Style="{StaticResource FormLabel}" Margin="0,0,0,4"/>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBox Grid.Column="0" x:Name="txtNewProduct" Style="{StaticResource TextInput}" 
-                                         Margin="0,0,8,0"/>
-                                <Button Grid.Column="1" Content="Add" Style="{StaticResource PrimaryButton}" 
-                                        x:Name="btnAddProduct" Width="80"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Product List Header -->
+                            <Border Grid.Row="0" Background="#32324A" 
+                                   BorderThickness="0" CornerRadius="6" 
+                                   Padding="16,8" Margin="0,0,0,8">
+                                <Grid>
+                                    <TextBlock Text="Available Products" 
+                                              Foreground="{StaticResource TextPrimary}" 
+                                              FontWeight="Medium" FontSize="13"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Product List -->
+                            <Grid Grid.Row="1">
+                                <ListBox x:Name="lstProducts" Style="{StaticResource ProductList}" 
+                                         ItemContainerStyle="{StaticResource ProductListItem}" 
+                                         MinHeight="150" MaxHeight="250"/>
+
+                                <!-- Empty state message -->
+                                <TextBlock x:Name="txtEmptyProducts" Style="{StaticResource EmptyStateMessage}"
+                                           Text="No products added yet. Add your first product below."
+                                           Visibility="{Binding ElementName=lstProducts, Path=HasItems, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}"/>
                             </Grid>
-                        </StackPanel>
+
+                            <!-- Add Product Section -->
+                            <Border Grid.Row="2" BorderThickness="0,1,0,0" 
+                                   BorderBrush="{StaticResource Border}" 
+                                   Padding="0,16,0,0" Margin="0,16,0,0">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Text="Add New Product" 
+                                              Foreground="{StaticResource TextMuted}" 
+                                              FontWeight="Medium" Margin="0,0,0,8"/>
+
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBox Grid.Column="0" x:Name="txtNewProduct" Style="{StaticResource TextInput}" 
+             Margin="0,0,12,0">
+                                            <TextBox.Resources>
+                                                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextInput}">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="Text" Value="">
+                                                            <Setter Property="Background">
+                                                                <Setter.Value>
+                                                                    <VisualBrush TileMode="None" Stretch="None" AlignmentX="Left">
+                                                                        <VisualBrush.Visual>
+                                                                            <TextBlock Text="Enter product name" Foreground="#808080" Margin="12,6,0,0"/>
+                                                                        </VisualBrush.Visual>
+                                                                    </VisualBrush>
+                                                                </Setter.Value>
+                                                            </Setter>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBox.Resources>
+                                        </TextBox>
+
+                                        <Button Grid.Column="1" Content="Add Product" Style="{StaticResource PrimaryButton}" 
+            x:Name="btnAddProduct" Width="120"/>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Grid>
                     </Border>
                 </StackPanel>
             </ScrollViewer>
