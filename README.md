@@ -1,192 +1,308 @@
+<div align="center">
+  
+# <img src="https://github.com/user-attachments/assets/0ab385eb-a2bc-498e-81eb-8a6b3cd8a375" width="50" align="center" alt="AnalytiQ Logo"> **AnalytiQ**
 
-# **AnalytiQ** <img src="https://github.com/user-attachments/assets/0ab385eb-a2bc-498e-81eb-8a6b3cd8a375" width="40" align="center" alt="logo">  
+### *Transform the Voice of Your Customers into Your Competitive Edge*
 
-## **AI-Powered Feedback Analytics**  
+[![Made with Azure](https://img.shields.io/badge/Powered_by-Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com)
+[![OpenAI GPT-4](https://img.shields.io/badge/AI_Engine-GPT--4-74aa9c?style=for-the-badge&logo=openai&logoColor=white)](https://azure.microsoft.com/services/openai-service/)
+[![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
+[![Power BI](https://img.shields.io/badge/Analytics-Power_BI-F2C811?style=for-the-badge&logo=power-bi&logoColor=black)](https://powerbi.microsoft.com/)
 
-> **Transform raw customer feedback into actionable insights** with our AI-driven platform, built for the Microsoft Hackathon.  
+**Microsoft Hackathon 2025 Entry** | [Download Now](#-quick-start) | [GitHub Repo](https://github.com/victorbash400/AnalitiqProject)
 
-[![Made with Azure](https://img.shields.io/badge/Made%20with-Azure-0078D4.svg)](https://azure.microsoft.com)  
-[![.NET 8](https://img.shields.io/badge/.NET-8-512BD4)](https://dotnet.microsoft.com/)  
-[![Power BI](https://img.shields.io/badge/Power%20BI-Embedded-F2C811)](https://powerbi.microsoft.com/)  
-[![GPT-4](https://img.shields.io/badge/Azure%20OpenAI-GPT--4-74aa9c)](https://azure.microsoft.com/services/openai-service/)  
-[![GitHub repo](https://img.shields.io/badge/GitHub-victorbash400%2FAnalytiQ-181717?logo=github)](https://github.com/victorbash400/AnalitiqProject)  
-
----
-
-## ⬇️ **Download AnalytiQ Now!**  
-
-🔹 **[🚀 Download v0.1.0-hackathon (ZIP)](https://github.com/victorbash400/AnalitiqProject/releases/download/v0.1.0-hackathon/AnalitiQ.exe.zip)**  
-📌 *(Recommended: Grab this if you just want to use AnalytiQ right away!)*  
-
-🔹 **[📂 Check GitHub Releases](https://github.com/victorbash400/AnalitiqProject/releases)**  
-📌 *(For past versions & changelogs)*  
+</div>
 
 ---
 
-## **🚀 Features**  
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/a17df28e-faea-4d74-a6ba-975f602d7526" width="90%" alt="Dashboard Hero Image">
+</div>
+
+## 🚀 **Overview**
+
+**AnalytiQ** is an AI-powered feedback analytics platform that transforms unstructured customer feedback into actionable business intelligence. Built on Azure's cloud infrastructure and leveraging GPT-4's advanced language capabilities, AnalytiQ helps organizations understand customer sentiment, identify emerging trends, and make data-driven decisions with unprecedented efficiency.
 
 <table>
   <tr>
-    <td width="50%">
-      <h3>🔍 Multi-Format Analysis</h3>
-      <p>Process feedback from PDF, DOCX, CSV, TXT, and XLSX files seamlessly.</p>
+    <td width="33%" align="center">
+      <h3>🔍</h3>
+      <h3>Analyze Any Format</h3>
+      <p>Process customer feedback from PDF, DOCX, CSV, TXT, and XLSX with a simple drag & drop.</p>
     </td>
-    <td width="50%">
-      <h3>🤖 AI-Powered Insights</h3>
-      <p>Leverage Azure OpenAI (GPT-4) for advanced sentiment analysis and feedback categorization.</p>
+    <td width="33%" align="center">
+      <h3>🤖</h3>
+      <h3>AI-Driven Insights</h3>
+      <p>Leverage GPT-4 to extract sentiment, categories, and actionable recommendations automatically.</p>
     </td>
-  </tr>
-  <tr>
-    <td>
-      <h3>📊 Interactive Dashboards</h3>
-      <p>Visualize insights through embedded Power BI reports with tenant-level security.</p>
-    </td>
-    <td>
-      <h3>☁️ Cloud-Native Architecture</h3>
-      <p>Built on Azure services for scalability, reliability, and enterprise-grade security.</p>
+    <td width="33%" align="center">
+      <h3>📊</h3>
+      <h3>Visual Intelligence</h3>
+      <p>Explore interactive Power BI dashboards with drill-down capabilities for deeper analysis.</p>
     </td>
   </tr>
 </table>
 
 ---
 
-## **📂 System Architecture**  
+## ✨ **Key Features**
 
-AnalytiQ is built using a modular approach with AI processing, cloud storage, and Power BI visualization.  
+### 🧠 **Intelligent Analysis**
+- **Multi-dimensional sentiment analysis** beyond positive/negative
+- **Automatic categorization** of feedback into product areas, feature requests, and issue types
+- **Trend identification** across time periods and customer segments
+- **Prioritization engine** that highlights critical issues needing immediate attention
 
-```mermaid
-graph TD
-    A[📂 User Uploads File] --> B[🔗 API: File Upload]
-    B --> C[☁️ Azure Blob Storage]
-    C --> D[⚡ Event Grid Trigger]
-    D --> E[🧠 Azure Function: AI Processing]
-    E --> F[📜 Extract Text]
-    F --> G[🤖 Analyze with GPT-4]
-    G --> H[💾 Save to Azure SQL]
-    H --> I[📊 Generate Power BI Dataset]
-    I --> J[🖥️ Embed Report in UI]
+### 🔄 **Seamless Integration**
+- **Universal file format support** for all major document and data formats
+- **API-first architecture** for integration with existing CRM and support systems
+- **Batch processing** for historical data analysis
+- **Real-time webhooks** for immediate notification of critical feedback
 
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style J fill:#bbf,stroke:#333,stroke-width:2px
-    style G fill:#bfb,stroke:#333,stroke-width:2px
-```
+### 🛡️ **Enterprise Ready**
+- **Azure AD integration** with role-based access control
+- **End-to-end encryption** of all customer data
+- **Compliance-friendly** audit logging and data governance
+- **Multi-tenant architecture** with complete data isolation
 
 ---
 
-## **🖥️ User Interface**  
-
-### 🔹 **Dashboard Overview**  
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/a17df28e-faea-4d74-a6ba-975f602d7526" width="90%" alt="Dashboard">
-  <p><i>Dashboard showing key insights and sentiment trends.</i></p>
+  <img src="https://github.com/user-attachments/assets/62643e49-55f7-487d-98cf-4c889a07e583" width="90%" alt="Power BI Dashboard">
+  <p><i>AnalytiQ's integrated Power BI dashboard showing sentiment trends and key metrics</i></p>
 </div>
 
-### 🔹 **Additional Screens**  
+---
+
+## 🔧 **System Architecture**
+
+AnalytiQ leverages Azure's serverless architecture to deliver a scalable, resilient platform for processing customer feedback at any volume.
+
+```mermaid
+graph TD
+    A[User Uploads Feedback File] --> B[API Gateway]
+    B --> C[Azure Blob Storage]
+    C --> D[Event Grid Trigger]
+    D --> E[Azure Functions: Document Processing]
+    E --> F[Text Extraction Service]
+    F --> G[Azure OpenAI GPT-4 Analysis]
+    G --> H[Azure SQL Database]
+    H --> I[Power BI Dataset]
+    I --> J[Embedded Analytics Dashboard]
+    
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+    style G fill:#bfb,stroke:#333,stroke-width:2px
+    style J fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+### **Tech Stack Highlights:**
+- **Frontend**: Blazor WebAssembly with responsive design
+- **Backend**: .NET 8 Web API with Azure Functions
+- **AI Processing**: Azure OpenAI Service (GPT-4)
+- **Storage**: Azure Blob Storage + Azure SQL
+- **Analytics**: Power BI Embedded with DirectQuery
+- **Security**: Azure AD B2C with custom policies
+
+---
+
+## 🖥️ **User Interface**
+
 <table>
   <tr>
     <td width="50%">
       <img src="https://github.com/user-attachments/assets/dfdace44-4c54-4209-bdcd-72443c6c5ebb" width="100%" alt="Analytics">
-      <p align="center"><i>Deep Analytics View</i></p>
+      <p align="center"><i>Advanced Analytics View with drill-down capabilities</i></p>
     </td>
     <td width="50%">
       <img src="https://github.com/user-attachments/assets/017366c1-a1ed-4f60-bfde-6878ae94d2db" width="100%" alt="File Upload">
-      <p align="center"><i>File Upload Interface</i></p>
+      <p align="center"><i>Intuitive file upload interface with batch processing</i></p>
     </td>
   </tr>
 </table>
 
 ---
 
-## **📊 Power BI Integration**  
+## 🚀 **Quick Start**
 
-AnalytiQ embeds **Power BI reports with real-time insights** and role-based security.  
+### **📥 Download Options**
 
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/62643e49-55f7-487d-98cf-4c889a07e583" width="90%" alt="Power BI Dashboard">
-  <p><i>Power BI embedded reports powered by AI analysis.</i></p>
-</div>
+<table>
+  <tr>
+    <td width="70%">
+      <h3>🚀 AnalytiQ v0.1.0-hackathon</h3>
+      <p>Ready-to-run executable with sample data and pre-configured dashboards.</p>
+      <a href="https://github.com/victorbash400/AnalitiqProject/releases/download/v0.1.0-hackathon/AnalitiQ.exe.zip"><b>⬇️ DOWNLOAD (12.4 MB)</b></a>
+    </td>
+    <td width="30%" align="center">
+      <h3>📂</h3>
+      <a href="https://github.com/victorbash400/AnalitiqProject/releases">View All Releases</a>
+    </td>
+  </tr>
+</table>
 
----
-
-## **🚀 Installation Guide**  
-
-### **🔧 Prerequisites**  
-✔ .NET 8 SDK  
-✔ Azure Subscription  
-✔ Power BI Pro Account  
-✔ Visual Studio 2022  
-
-### **🖥️ Installation Steps**  
+### **⚡ One-Minute Setup**
 
 ```bash
-# 1️⃣ Download & Extract the ZIP
-$ unzip AnalytiQ-v0.1.0-hackathon.zip
+# 1. Unzip the downloaded file
+$ unzip AnalitiQ.exe.zip
 
-# 2️⃣ Run the App
+# 2. Run the application
 $ ./AnalytiQ.exe
 
-# 3️⃣ Upload feedback data and analyze it!
+# 3. Upload your feedback data and start analyzing!
 ```
+
+### **🔐 Demo Credentials**
+- **Username**: `bob@acmecorp.com`
+- **Password**: `Pass123`
 
 ---
 
-## **☁️ Deploying to Azure**  
+## 🌐 **Deployment Guide**
 
-### **Azure CLI Setup**  
+### **Prerequisites**
+- Azure subscription
+- .NET 8 SDK
+- Power BI Pro/Premium account
+- Azure CLI (for automated deployment)
+
+### **Azure Deployment Script**
 
 ```bash
-# Create Resource Group
-az group create --name AnalytiQ-Resources --location eastus
+# Setup script for rapid Azure deployment
 
-# Deploy API
-az webapp up --name analytiq-api --resource-group AnalytiQ-Resources
+# 1. Create resource group
+az group create --name AnalytiQ-RG --location eastus
 
-# Set Up Storage
-az storage account create --name analytiqstorage290 --resource-group AnalytiQ-Resources --sku Standard_LRS
+# 2. Deploy core infrastructure
+az deployment group create \
+  --resource-group AnalytiQ-RG \
+  --template-file deploy/azuredeploy.json \
+  --parameters @deploy/parameters.json
 
-# Deploy SQL Database
-az sql db create --resource-group AnalytiQ-Resources --server analytiq-sql --name AnalytiQDB --service-objective S0
+# 3. Configure OpenAI service
+az cognitiveservices account deployment create \
+  --name analytiq-openai \
+  --resource-group AnalytiQ-RG \
+  --deployment-name gpt4 \
+  --model-format OpenAI \
+  --model-name gpt-4 \
+  --sku-capacity 1 \
+  --sku-name Standard
 
-# Publish Azure Functions
-cd ProcessUpload
-func azure functionapp publish analytiq-functions
+# 4. Deploy application
+az webapp up \
+  --name analytiq-app \
+  --resource-group AnalytiQ-RG \
+  --plan analytiq-plan \
+  --sku P1V2
+```
+
+Full deployment documentation available in the [Deployment Guide](https://github.com/victorbash400/AnalitiqProject/wiki/Deployment).
+
+---
+
+## 🔮 **Roadmap**
+
+<table>
+  <tr>
+    <td width="25%" align="center">
+      <h3>Q2 2025</h3>
+      <ul>
+        <li>Real-time analysis</li>
+        <li>Custom AI model training</li>
+        <li>Advanced filtering</li>
+      </ul>
+    </td>
+    <td width="25%" align="center">
+      <h3>Q3 2025</h3>
+      <ul>
+        <li>Multi-language support</li>
+        <li>Competitor analysis</li>
+        <li>Mobile app release</li>
+      </ul>
+    </td>
+    <td width="25%" align="center">
+      <h3>Q4 2025</h3>
+      <ul>
+        <li>AI chatbot integration</li>
+        <li>Predictive analytics</li>
+        <li>Voice feedback analysis</li>
+      </ul>
+    </td>
+    <td width="25%" align="center">
+      <h3>Q1 2026</h3>
+      <ul>
+        <li>Enterprise SSO</li>
+        <li>Executive summary generation</li>
+        <li>Custom report builder</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+---
+
+## 🤝 **Contributing**
+
+We welcome contributions from the community! Whether it's adding new features, fixing bugs, or improving documentation, your help makes AnalytiQ better for everyone.
+
+### **Getting Started**
+
+```bash
+# Clone the repository
+git clone https://github.com/victorbash400/AnalitiqProject.git
+
+# Install dependencies
+cd AnalitiqProject
+dotnet restore
+
+# Create a new branch
+git checkout -b feature/your-amazing-feature
+
+# Make your changes, commit them, and push
+git commit -m "Add an amazing feature"
+git push origin feature/your-amazing-feature
+
+# Create a pull request
+# Visit https://github.com/victorbash400/AnalitiqProject/pulls
+```
+
+See our [Contribution Guidelines](https://github.com/victorbash400/AnalitiqProject/wiki/Contributing) for more details.
+
+---
+
+## 📜 **License**
+
+```
+MIT License
+
+Copyright (c) 2025 Victor Bash
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
 
 ---
 
-## **🔮 Future Roadmap**  
-
-✔ **Real-Time AI Insights** – Instant analysis on new feedback  
-✔ **More Power BI Reports** – Deeper customer trend insights  
-✔ **Azure AD Authentication** – Enterprise security & login  
-✔ **AI Chatbot Integration** – Interactive query system for feedback  
-
----
-
-## **🤝 Contributing**  
-
-Got an idea? Found a bug? **Pull requests are welcome!** 🎉  
-
-1. Fork the repo  
-2. Create a feature branch (`git checkout -b feature-xyz`)  
-3. Commit changes (`git commit -m 'Add feature XYZ'`)  
-4. Push branch (`git push origin feature-xyz`)  
-5. Submit a PR! 🚀  
-
----
-
-## **📜 License**  
-
-MIT License © 2025 Victor Bash  
-
----
-
-## **👨‍💻 About the Author**  
-
-Built by **Victor Bash** for the **Microsoft Hackathon**. Special thanks to the **Azure & Power BI teams** for making this possible!  
-
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/0ab385eb-a2bc-498e-81eb-8a6b3cd8a375" width="60" alt="logo">
-  <p><b>AnalytiQ</b> — Making sense of customer voices</p>
-  <p><a href="https://github.com/victorbash400/AnalitiqProject/archive/refs/tags/v0.1.0-hackathon.zip"><strong>⬇️ DOWNLOAD NOW ⬇️</strong></a></p>
+  <img src="https://github.com/user-attachments/assets/0ab385eb-a2bc-498e-81eb-8a6b3cd8a375" width="70" alt="AnalytiQ Logo">
+  <h3>AnalytiQ — Where Customer Feedback Meets Intelligence</h3>
+  <p>Developed by <b>Victor Bash</b> for the <b>Microsoft Hackathon 2025</b></p>
+  <a href="https://github.com/victorbash400/AnalitiqProject/releases/download/v0.1.0-hackathon/AnalitiQ.exe.zip"><b>⬇️ DOWNLOAD NOW ⬇️</b></a>
 </div>
