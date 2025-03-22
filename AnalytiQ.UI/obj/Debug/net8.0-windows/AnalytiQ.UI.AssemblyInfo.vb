@@ -16,7 +16,7 @@ Imports System.Reflection
 <Assembly: System.Reflection.AssemblyCompanyAttribute("AnalytiQ.UI"),  _
  Assembly: System.Reflection.AssemblyConfigurationAttribute("Debug"),  _
  Assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0"),  _
- Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b197d4326673ebc9cb8ae2c87ff29c02bf16c64c"),  _
+ Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b9c33e5659ed3e417c0fb0205e1c69ef6009ffca"),  _
  Assembly: System.Reflection.AssemblyProductAttribute("AnalytiQ.UI"),  _
  Assembly: System.Reflection.AssemblyTitleAttribute("AnalytiQ.UI"),  _
  Assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0"),  _
