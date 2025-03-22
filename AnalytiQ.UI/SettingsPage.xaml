@@ -348,13 +348,9 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="Product Catalog" Style="{StaticResource SectionHeader}"/>
-                        <TextBlock Grid.Column="1" x:Name="txtProductCount" Text="0 products" 
-                                  Foreground="{StaticResource TextMuted}" VerticalAlignment="Center"
-                                  FontSize="12" Margin="0,0,0,12"/>
                     </Grid>
 
                     <Border Style="{StaticResource Card}">
@@ -367,31 +363,26 @@
 
                             <!-- Product List Header -->
                             <Border Grid.Row="0" Background="#32324A" 
-                                   BorderThickness="0" CornerRadius="6" 
-                                   Padding="16,8" Margin="0,0,0,8">
+               BorderThickness="0" CornerRadius="6" 
+               Padding="16,8" Margin="0,0,0,8">
                                 <Grid>
                                     <TextBlock Text="Available Products" 
-                                              Foreground="{StaticResource TextPrimary}" 
-                                              FontWeight="Medium" FontSize="13"/>
+                          Foreground="{StaticResource TextPrimary}" 
+                          FontWeight="Medium" FontSize="13"/>
                                 </Grid>
                             </Border>
 
                             <!-- Product List -->
                             <Grid Grid.Row="1">
                                 <ListBox x:Name="lstProducts" Style="{StaticResource ProductList}" 
-                                         ItemContainerStyle="{StaticResource ProductListItem}" 
-                                         MinHeight="150" MaxHeight="250"/>
-
-                                <!-- Empty state message -->
-                                <TextBlock x:Name="txtEmptyProducts" Style="{StaticResource EmptyStateMessage}"
-                                           Text="No products added yet. Add your first product below."
-                                           Visibility="{Binding ElementName=lstProducts, Path=HasItems, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=inverse}"/>
+                     ItemContainerStyle="{StaticResource ProductListItem}" 
+                     MinHeight="150" MaxHeight="250"/>
                             </Grid>
 
                             <!-- Add Product Section -->
                             <Border Grid.Row="2" BorderThickness="0,1,0,0" 
-                                   BorderBrush="{StaticResource Border}" 
-                                   Padding="0,16,0,0" Margin="0,16,0,0">
+               BorderBrush="{StaticResource Border}" 
+               Padding="0,16,0,0" Margin="0,16,0,0">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
@@ -399,8 +390,8 @@
                                     </Grid.RowDefinitions>
 
                                     <TextBlock Grid.Row="0" Text="Add New Product" 
-                                              Foreground="{StaticResource TextMuted}" 
-                                              FontWeight="Medium" Margin="0,0,0,8"/>
+                          Foreground="{StaticResource TextMuted}" 
+                          FontWeight="Medium" Margin="0,0,0,8"/>
 
                                     <Grid Grid.Row="1">
                                         <Grid.ColumnDefinitions>
@@ -409,7 +400,7 @@
                                         </Grid.ColumnDefinitions>
 
                                         <TextBox Grid.Column="0" x:Name="txtNewProduct" Style="{StaticResource TextInput}" 
-             Margin="0,0,12,0">
+Margin="0,0,12,0">
                                             <TextBox.Resources>
                                                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextInput}">
                                                     <Style.Triggers>
@@ -430,7 +421,7 @@
                                         </TextBox>
 
                                         <Button Grid.Column="1" Content="Add Product" Style="{StaticResource PrimaryButton}" 
-            x:Name="btnAddProduct" Width="120"/>
+x:Name="btnAddProduct" Width="120"/>
                                     </Grid>
                                 </Grid>
                             </Border>

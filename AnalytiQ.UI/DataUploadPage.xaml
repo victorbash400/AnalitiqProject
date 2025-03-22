@@ -7,20 +7,30 @@
       Background="Transparent">
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-        <!-- Existing Colors, Brushes, Gradients, Shadow Effects, and Styles remain unchanged -->
-        <!-- Including all styles from your original XAML here for completeness -->
-        <Color x:Key="PrimaryBackColorValue">#121212</Color>
-        <Color x:Key="SecondaryBackColorValue">#1E1E1E</Color>
-        <Color x:Key="ContentBackColorValue">#242424</Color>
-        <Color x:Key="CardBackgroundValue">#1A1A1A</Color>
-        <Color x:Key="BorderColorValue">#333333</Color>
+        <!-- Animation Storyboard -->
+        <Storyboard x:Key="ProgressPulseAnimation">
+            <DoubleAnimation
+            Storyboard.TargetName="GlowEffect"
+            Storyboard.TargetProperty="Opacity"
+            From="0.7" To="0.2" Duration="0:0:1.5"
+            AutoReverse="True" RepeatBehavior="Forever" />
+        </Storyboard>
+
+
+        <!-- Updated Color Palette from Previous Version -->
+        <Color x:Key="PrimaryBackColorValue">#1E1E2E</Color>
+        <Color x:Key="SecondaryBackColorValue">#282839</Color>
+        <Color x:Key="ContentBackColorValue">#2E2E42</Color>
+        <Color x:Key="CardBackgroundValue">#252536</Color>
+        <Color x:Key="BorderColorValue">#393950</Color>
         <Color x:Key="PrimaryTextColorValue">#FFFFFF</Color>
-        <Color x:Key="MutedTextColorValue">#9E9E9E</Color>
-        <Color x:Key="AccentColorValue">#2C9E4B</Color>
-        <Color x:Key="SecondaryAccentColorValue">#3ABF5E</Color>
-        <Color x:Key="NavHoverColorValue">#2A2A2A</Color>
-        <Color x:Key="NavActiveColorValue">#242424</Color>
-        <Color x:Key="WarningColorValue">#FF5252</Color>
+        <Color x:Key="MutedTextColorValue">#B4B4C8</Color>
+        <Color x:Key="AccentColorValue">#89B4FA</Color>
+        <Color x:Key="SecondaryAccentColorValue">#74C7EC</Color>
+        <Color x:Key="NavHoverColorValue">#34344A</Color>
+        <Color x:Key="NavActiveColorValue">#2E2E42</Color>
+        <Color x:Key="WarningColorValue">#F38BA8</Color>
+        <Color x:Key="SuccessColorValue">#A6E3A1</Color>
 
         <SolidColorBrush x:Key="PrimaryBackColor" Color="{StaticResource PrimaryBackColorValue}"/>
         <SolidColorBrush x:Key="SecondaryBackColor" Color="{StaticResource SecondaryBackColorValue}"/>
@@ -34,15 +44,31 @@
         <SolidColorBrush x:Key="NavHoverColor" Color="{StaticResource NavHoverColorValue}"/>
         <SolidColorBrush x:Key="NavActiveColor" Color="{StaticResource NavActiveColorValue}"/>
         <SolidColorBrush x:Key="WarningColor" Color="{StaticResource WarningColorValue}"/>
+        <SolidColorBrush x:Key="SuccessColor" Color="{StaticResource SuccessColorValue}"/>
 
         <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="{StaticResource AccentColorValue}" Offset="0.0"/>
             <GradientStop Color="{StaticResource SecondaryAccentColorValue}" Offset="1.0"/>
         </LinearGradientBrush>
+        <!-- Gradient Definitions -->
+        <LinearGradientBrush x:Key="ProgressGradient" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#4776E6" Offset="0"/>
+            <GradientStop Color="#8E54E9" Offset="1"/>
+        </LinearGradientBrush>
 
-        <DropShadowEffect x:Key="StandardShadow" ShadowDepth="2" Direction="315" Opacity="0.4" BlurRadius="10"/>
-        <DropShadowEffect x:Key="CardShadow" ShadowDepth="1" Direction="315" Opacity="0.3" BlurRadius="8"/>
+
+        <!-- Enhanced Shadow Effects -->
+        <DropShadowEffect x:Key="StandardShadow" ShadowDepth="3" Direction="315" Opacity="0.5" BlurRadius="12"/>
+        <DropShadowEffect x:Key="CardShadow" ShadowDepth="2" Direction="315" Opacity="0.4" BlurRadius="10"/>
         <DropShadowEffect x:Key="AccentShadow" ShadowDepth="0" Direction="0" Color="{StaticResource AccentColorValue}" Opacity="0.6" BlurRadius="15"/>
+
+        <!-- Text Styles -->
+        <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="28"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+        </Style>
 
         <Style x:Key="SubHeaderTextStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="16"/>
@@ -51,8 +77,9 @@
             <Setter Property="Margin" Value="0,0,0,12"/>
         </Style>
 
+        <!-- Button Styles with Animations -->
         <Style x:Key="PrimaryButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource AccentColor}"/>
+            <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -63,15 +90,27 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}" CornerRadius="10" Padding="{TemplateBinding Padding}">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="12" Padding="{TemplateBinding Padding}">
                             <Border.Effect>
-                                <DropShadowEffect ShadowDepth="0" BlurRadius="10" Color="{StaticResource AccentColorValue}" Opacity="0.3"/>
+                                <DropShadowEffect ShadowDepth="0" BlurRadius="12" Color="{StaticResource AccentColorValue}" Opacity="0.3"/>
                             </Border.Effect>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="Background" Value="{StaticResource SecondaryAccentColor}"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="15" Color="{StaticResource AccentColorValue}" Opacity="0.5"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.98" ScaleY="0.98"/>
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -80,7 +119,7 @@
         </Style>
 
         <Style x:Key="SecondaryButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#2A2A2A"/>
+            <Setter Property="Background" Value="{StaticResource NavHoverColor}"/>
             <Setter Property="Foreground" Value="{StaticResource MutedTextColor}"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="Medium"/>
@@ -93,13 +132,14 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="10" Padding="{TemplateBinding Padding}">
+                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="12" Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource NavHoverColor}"/>
+                                <Setter Property="Background" Value="{StaticResource NavActiveColor}"/>
                                 <Setter Property="Foreground" Value="{StaticResource PrimaryTextColor}"/>
+                                <Setter Property="BorderBrush" Value="{StaticResource AccentColor}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -107,6 +147,7 @@
             </Setter>
         </Style>
 
+        <!-- ComboBox Style -->
         <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
             <Setter Property="Height" Value="44"/>
             <Setter Property="FontSize" Value="14"/>
@@ -119,7 +160,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
                         <Grid>
-                            <Border x:Name="Border" CornerRadius="10" Background="{TemplateBinding Background}" 
+                            <Border x:Name="Border" CornerRadius="12" Background="{TemplateBinding Background}" 
                                     BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -129,13 +170,13 @@
                                     <ContentPresenter Grid.Column="0" Content="{TemplateBinding SelectionBoxItem}" 
                                                      Margin="{TemplateBinding Padding}" VerticalAlignment="Center"/>
                                     <Path Grid.Column="1" Margin="0,0,15,0" Data="M7 10l5 5 5-5z" 
-                                          Fill="{StaticResource MutedTextColor}" Width="10" Height="10" Stretch="Uniform"/>
+                                          Fill="{StaticResource MutedTextColor}" Width="12" Height="12" Stretch="Uniform"/>
                                 </Grid>
                             </Border>
                             <Popup x:Name="PART_Popup" AllowsTransparency="True" 
                                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" 
                                   Placement="Bottom">
-                                <Border CornerRadius="10" Background="{StaticResource SecondaryBackColor}" BorderBrush="{StaticResource BorderColor}" 
+                                <Border CornerRadius="12" Background="{StaticResource SecondaryBackColor}" BorderBrush="{StaticResource BorderColor}" 
                                        BorderThickness="1" Margin="0,4,0,0" Effect="{StaticResource CardShadow}">
                                     <ScrollViewer SnapsToDevicePixels="True">
                                         <ItemsPresenter/>
@@ -153,8 +194,9 @@
             </Setter>
         </Style>
 
+        <!-- ListViewItem Style -->
         <Style x:Key="ListViewItemStyle" TargetType="ListViewItem">
-            <Setter Property="Height" Value="56"/>
+            <Setter Property="Height" Value="60"/>
             <Setter Property="Padding" Value="12,8"/>
             <Setter Property="BorderThickness" Value="0,0,0,1"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
@@ -164,7 +206,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ListViewItem">
                         <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" CornerRadius="6">
+                                BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" CornerRadius="8">
                             <ContentPresenter/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -177,13 +219,15 @@
             </Setter>
         </Style>
 
+        <!-- StatusBadge Style -->
         <Style x:Key="StatusBadgeStyle" TargetType="Border">
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="Padding" Value="12,5"/>
+            <Setter Property="CornerRadius" Value="16"/>
+            <Setter Property="Padding" Value="12,6"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
         </Style>
 
+        <!-- Checkbox Style -->
         <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Foreground" Value="{StaticResource MutedTextColor}"/>
@@ -197,8 +241,8 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Border x:Name="CheckBoxBorder" Width="20" Height="20" BorderThickness="1" 
-                                   BorderBrush="{StaticResource BorderColor}" CornerRadius="4" Background="{StaticResource ContentBackColor}">
+                            <Border x:Name="CheckBoxBorder" Width="22" Height="22" BorderThickness="1" 
+                                   BorderBrush="{StaticResource BorderColor}" CornerRadius="6" Background="{StaticResource ContentBackColor}">
                                 <Path x:Name="CheckMark" Data="M4,10 L8,14 L14,5" Stroke="White" StrokeThickness="2" Visibility="Collapsed"/>
                             </Border>
                             <ContentPresenter Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left"/>
@@ -218,20 +262,22 @@
             </Setter>
         </Style>
 
+        <!-- CardBorder Style -->
         <Style x:Key="CardBorderStyle" TargetType="Border">
             <Setter Property="Background" Value="{StaticResource CardBackground}"/>
             <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="CornerRadius" Value="16"/>
             <Setter Property="Effect" Value="{StaticResource CardShadow}"/>
             <Setter Property="Padding" Value="24"/>
         </Style>
 
+        <!-- Expander Styles -->
         <Style x:Key="ExpanderHeaderStyle" TargetType="ToggleButton">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleButton">
-                        <Border Padding="4,8">
+                        <Border Padding="6,10">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -259,7 +305,7 @@
             <Setter Property="HeaderTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}" FontWeight="SemiBold" FontSize="14" Foreground="{StaticResource AccentColor}" />
+                        <TextBlock Text="{Binding}" FontWeight="SemiBold" FontSize="15" Foreground="{StaticResource AccentColor}" />
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
@@ -289,6 +335,76 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Progress Bar Style -->
+        <Style TargetType="ProgressBar">
+            <Setter Property="Height" Value="10"/>
+            <Setter Property="Background" Value="#1A1A1A"/>
+            <Setter Property="Foreground" Value="{StaticResource ProgressGradient}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ProgressBar">
+                        <Grid>
+                            <!-- Background with rounded corners -->
+                            <Border x:Name="PART_Track" Background="{TemplateBinding Background}" 
+                                CornerRadius="5"
+                                BorderBrush="#333333" 
+                                BorderThickness="1">
+                                <Border.Effect>
+                                    <DropShadowEffect ShadowDepth="1" Direction="270" 
+                                                 Color="Black" Opacity="0.3" BlurRadius="3"/>
+                                </Border.Effect>
+                            </Border>
+
+                            <!-- Progress indicator -->
+                            <Border x:Name="PART_Indicator" 
+                                Background="{TemplateBinding Foreground}" 
+                                CornerRadius="5" HorizontalAlignment="Left"
+                                Margin="1">
+
+                                <!-- Animated glow effect -->
+                                <Border x:Name="GlowEffect"
+                                    Background="White" Opacity="0.2" 
+                                    CornerRadius="5"/>
+                            </Border>
+
+                            <!-- Simplified tick marks -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Rectangle Grid.Column="0" Width="1" Height="{TemplateBinding Height}" 
+                                      HorizontalAlignment="Right" Fill="#333333" Opacity="0.4"/>
+                                <Rectangle Grid.Column="1" Width="1" Height="{TemplateBinding Height}" 
+                                      HorizontalAlignment="Right" Fill="#333333" Opacity="0.4"/>
+                                <Rectangle Grid.Column="2" Width="1" Height="{TemplateBinding Height}" 
+                                      HorizontalAlignment="Right" Fill="#333333" Opacity="0.4"/>
+                            </Grid>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <!-- Start animation when loaded -->
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <BeginStoryboard Storyboard="{StaticResource ProgressPulseAnimation}"/>
+                            </EventTrigger>
+
+                            <!-- Show completion effect when reaching 100% -->
+                            <Trigger Property="Value" Value="100">
+                                <Setter TargetName="PART_Indicator" Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect Color="#8E54E9" BlurRadius="10" ShadowDepth="0"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <Grid>
@@ -303,38 +419,45 @@
                     </Grid.RowDefinitions>
 
                     <!-- Header with Tenant Info -->
-                    <StackPanel Grid.Row="0" Margin="0,0,0,24">
-                        <TextBlock Text="Data Upload" FontSize="28" FontWeight="Bold" Foreground="{StaticResource AccentColor}"/>
+                    <StackPanel Grid.Row="0" Margin="0,0,0,28">
+                        <TextBlock Text="Data Upload" Style="{StaticResource HeaderTextStyle}">
+                            <TextBlock.Foreground>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="{StaticResource AccentColorValue}" Offset="0.0"/>
+                                    <GradientStop Color="{StaticResource SecondaryAccentColorValue}" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </TextBlock.Foreground>
+                        </TextBlock>
                         <TextBlock x:Name="txtTenantInfo" Text="Tenant: Loading..." Foreground="{StaticResource MutedTextColor}" FontSize="14" Margin="0,6,0,0"/>
                     </StackPanel>
 
                     <!-- Upload Area -->
-                    <Border x:Name="UploadArea" Grid.Row="1" Style="{StaticResource CardBorderStyle}" Margin="0,0,0,24" MinHeight="180" AllowDrop="True">
+                    <Border x:Name="UploadArea" Grid.Row="1" Style="{StaticResource CardBorderStyle}" Margin="0,0,0,28" MinHeight="200" AllowDrop="True">
                         <Grid>
                             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="24">
-                                <Border Width="64" Height="64" Background="{StaticResource ContentBackColor}" CornerRadius="32" Margin="0,0,0,12">
+                                <Border Width="80" Height="80" Background="{StaticResource ContentBackColor}" CornerRadius="40" Margin="0,0,0,20">
                                     <Border.Effect>
-                                        <DropShadowEffect ShadowDepth="0" BlurRadius="15" Color="{StaticResource AccentColorValue}" Opacity="0.3"/>
+                                        <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="{StaticResource AccentColorValue}" Opacity="0.4"/>
                                     </Border.Effect>
                                     <Path Data="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM19 18H6c-2.21 0-4-1.79-4-4 0-2.05 1.53-3.76 3.56-3.97l1.07-.11.5-.95C8.08 7.14 9.94 6 12 6c2.62 0 4.88 1.86 5.39 4.43l.3 1.5 1.53.11c1.56.1 2.78 1.41 2.78 2.96 0 1.65-1.35 3-3 3zm-9-3.82l-2.09-2.09L6.5 13.5 10 17l3.5-3.5-1.41-1.41L10 14.09z"
-                                          Fill="{StaticResource AccentColor}" Width="32" Height="32" Stretch="Uniform"/>
+                                          Fill="{StaticResource AccentColor}" Width="40" Height="40" Stretch="Uniform"/>
                                 </Border>
-                                <TextBlock Text="Drag and drop files here" FontSize="16" FontWeight="Medium" 
-                                          Foreground="{StaticResource PrimaryTextColor}" TextAlignment="Center" Margin="0,0,0,8"/>
-                                <TextBlock Text="or click to browse" FontSize="13" Foreground="{StaticResource MutedTextColor}" 
-                                          TextAlignment="Center" Margin="0,0,0,16"/>
+                                <TextBlock Text="Drag and drop files here" FontSize="18" FontWeight="SemiBold" 
+                                          Foreground="{StaticResource PrimaryTextColor}" TextAlignment="Center" Margin="0,0,0,10"/>
+                                <TextBlock Text="or click to browse" FontSize="14" Foreground="{StaticResource MutedTextColor}" 
+                                          TextAlignment="Center" Margin="0,0,0,24"/>
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <Button x:Name="SelectFilesButton" Content="Select Files" Style="{StaticResource PrimaryButtonStyle}" 
-                                           Width="140" Margin="0,0,8,0"/>
+                                           Width="150" Margin="0,0,12,0"/>
                                     <Button x:Name="UploadButton" Content="Upload Files" Style="{StaticResource PrimaryButtonStyle}" 
-                                           Width="140" Margin="8,0,0,0"/>
+                                           Width="150" Margin="12,0,0,0"/>
                                 </StackPanel>
                             </StackPanel>
                         </Grid>
                     </Border>
 
                     <!-- Document Type Section -->
-                    <Border Grid.Row="2" Style="{StaticResource CardBorderStyle}" Margin="0,0,0,24">
+                    <Border Grid.Row="2" Style="{StaticResource CardBorderStyle}" Margin="0,0,0,28">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -357,6 +480,8 @@
                                     <ComboBoxItem Content="Other" Foreground="{StaticResource PrimaryTextColor}"/>
                                 </ComboBox>
                             </Grid>
+
+                            <!-- REPLACE THIS ENTIRE GRID WITH THE UPDATED VERSION BELOW -->
                             <Grid Grid.Row="1" Margin="0,0,0,16">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -364,32 +489,59 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" Text="Product:" VerticalAlignment="Center" 
                       Style="{StaticResource SubHeaderTextStyle}" Margin="0,0,16,0"/>
-                                <Border Grid.Column="1" Background="{StaticResource ContentBackColor}" 
-                    BorderBrush="{StaticResource BorderColor}" BorderThickness="1" CornerRadius="10">
-                                    <ComboBox x:Name="ProductComboBox" Style="{StaticResource ComboBoxStyle}" 
-                         HorizontalAlignment="Stretch" BorderThickness="0">
-                                        <ComboBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid Margin="0,4">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Border Grid.Column="0" Width="24" Height="24" Background="Transparent" Margin="0,0,12,0">
-                                                        <Path Data="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" 
-                                         Fill="{StaticResource AccentColor}" Width="16" Height="16"/>
-                                                    </Border>
-                                                    <StackPanel Grid.Column="1">
-                                                        <TextBlock Text="{Binding Name}" FontWeight="Medium" Foreground="{StaticResource PrimaryTextColor}"/>
-                                                        <TextBlock Text="{Binding Category}" FontSize="12" Foreground="{StaticResource MutedTextColor}"
-                                              Visibility="{Binding HasCategory, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-                                                    </StackPanel>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ComboBox.ItemTemplate>
-                                    </ComboBox>
-                                </Border>
+                                <ComboBox Grid.Column="1" x:Name="ProductComboBox" Style="{StaticResource ComboBoxStyle}" 
+                     HorizontalAlignment="Stretch">
+                                    <ComboBoxItem>
+                                        <Grid Margin="0,4">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Column="0" Width="24" Height="24" Background="Transparent" Margin="0,0,12,0">
+                                                <Path Data="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" 
+                                  Fill="{StaticResource AccentColor}" Width="16" Height="16"/>
+                                            </Border>
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="AnalytiQ Pro" FontWeight="Medium" Foreground="{StaticResource PrimaryTextColor}"/>
+                                                <TextBlock Text="Analytics Platform" FontSize="12" Foreground="{StaticResource MutedTextColor}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </ComboBoxItem>
+                                    <ComboBoxItem>
+                                        <Grid Margin="0,4">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Column="0" Width="24" Height="24" Background="Transparent" Margin="0,0,12,0">
+                                                <Path Data="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" 
+                                  Fill="{StaticResource AccentColor}" Width="16" Height="16"/>
+                                            </Border>
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="DataSense" FontWeight="Medium" Foreground="{StaticResource PrimaryTextColor}"/>
+                                                <TextBlock Text="Business Intelligence" FontSize="12" Foreground="{StaticResource MutedTextColor}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </ComboBoxItem>
+                                    <ComboBoxItem>
+                                        <Grid Margin="0,4">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border Grid.Column="0" Width="24" Height="24" Background="Transparent" Margin="0,0,12,0">
+                                                <Path Data="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" 
+                                  Fill="{StaticResource AccentColor}" Width="16" Height="16"/>
+                                            </Border>
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="FeedbackHub" FontWeight="Medium" Foreground="{StaticResource PrimaryTextColor}"/>
+                                                <TextBlock Text="Customer Engagement" FontSize="12" Foreground="{StaticResource MutedTextColor}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </ComboBoxItem>
+                                </ComboBox>
                             </Grid>
+
                             <Expander Grid.Row="2" Header="Processing Options" IsExpanded="False" Margin="0,0,0,0">
                                 <Grid Margin="0,16,0,0">
                                     <Grid.RowDefinitions>
@@ -410,85 +562,89 @@
                         </Grid>
                     </Border>
 
-                    <!-- Action Buttons -->
-                    <UniformGrid Grid.Row="3" Columns="1" HorizontalAlignment="Left" Width="160" Margin="0,0,0,24">
-                        <Button x:Name="ClearButton" Content="Clear Selection" Style="{StaticResource SecondaryButtonStyle}"/>
-                    </UniformGrid>
-
-                    <!-- Processing Status -->
-                    <Border Grid.Row="3" Style="{StaticResource CardBorderStyle}" Padding="0" MinHeight="250">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0" Margin="24,24,24,16">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="Recent Uploads" Style="{StaticResource SubHeaderTextStyle}" 
-                                          Margin="0" VerticalAlignment="Center"/>
-                                <Button x:Name="ViewAllButton" Grid.Column="1" Content="View All" Background="Transparent" 
-                                       Foreground="{StaticResource AccentColor}" BorderThickness="0" FontWeight="Medium" 
-                                       Padding="12,8" VerticalAlignment="Center"/>
+                    <!-- Action Buttons and Recent Uploads -->
+                    <Grid Grid.Row="3">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <UniformGrid Grid.Row="0" Columns="1" HorizontalAlignment="Left" Width="160" Margin="0,0,0,28">
+                            <Button x:Name="ClearButton" Content="Clear Selection" Style="{StaticResource SecondaryButtonStyle}"/>
+                        </UniformGrid>
+                        <Border Grid.Row="1" Style="{StaticResource CardBorderStyle}" Padding="0" MinHeight="250">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0" Margin="24,24,24,16">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="Recent Uploads" Style="{StaticResource SubHeaderTextStyle}" 
+                                              Margin="0" VerticalAlignment="Center"/>
+                                    <Button x:Name="ViewAllButton" Grid.Column="1" Content="View All" Background="Transparent" 
+                                           Foreground="{StaticResource AccentColor}" BorderThickness="0" FontWeight="Medium" 
+                                           Padding="12,8" VerticalAlignment="Center"/>
+                                </Grid>
+                                <ListView x:Name="UploadsListView" Grid.Row="1" BorderThickness="0" Background="Transparent" 
+                                         ItemContainerStyle="{StaticResource ListViewItemStyle}" Padding="12,0,12,16" 
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="48"/>
+                                                    <ColumnDefinition Width="*" MinWidth="200"/>
+                                                    <ColumnDefinition Width="Auto" MinWidth="120"/>
+                                                    <ColumnDefinition Width="Auto" MinWidth="140"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border Grid.Column="0" Width="36" Height="36" Background="{StaticResource ContentBackColor}" CornerRadius="8">
+                                                    <Path Data="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" 
+                                                          Fill="{StaticResource AccentColor}" Width="20" Height="20" Stretch="Uniform"/>
+                                                </Border>
+                                                <TextBlock Grid.Column="1" Text="{Binding FileName}" VerticalAlignment="Center" FontWeight="Medium"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding UploadTime}" Foreground="{StaticResource MutedTextColor}" 
+                                                          VerticalAlignment="Center"/>
+                                                <Border Grid.Column="3" Background="{Binding StatusBackground}" Style="{StaticResource StatusBadgeStyle}" 
+                                                       VerticalAlignment="Center">
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Ellipse Width="8" Height="8" Fill="{Binding StatusColor}" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                                        <TextBlock Text="{Binding StatusText}" Foreground="{Binding StatusColor}" FontSize="12" FontWeight="Medium"/>
+                                                    </StackPanel>
+                                                </Border>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
                             </Grid>
-                            <ListView x:Name="UploadsListView" Grid.Row="1" BorderThickness="0" Background="Transparent" 
-                                     ItemContainerStyle="{StaticResource ListViewItemStyle}" Padding="12,0,12,16" 
-                                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="48"/>
-                                                <ColumnDefinition Width="*" MinWidth="200"/>
-                                                <ColumnDefinition Width="Auto" MinWidth="120"/>
-                                                <ColumnDefinition Width="Auto" MinWidth="140"/>
-                                            </Grid.ColumnDefinitions>
-                                            <Border Grid.Column="0" Width="36" Height="36" Background="{StaticResource ContentBackColor}" CornerRadius="8">
-                                                <Path Data="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11z" 
-                                                     Fill="{StaticResource AccentColor}" Width="20" Height="20" Stretch="Uniform"/>
-                                            </Border>
-                                            <TextBlock Grid.Column="1" Text="{Binding FileName}" VerticalAlignment="Center" FontWeight="Medium"/>
-                                            <TextBlock Grid.Column="2" Text="{Binding UploadTime}" Foreground="{StaticResource MutedTextColor}" 
-                                                      VerticalAlignment="Center"/>
-                                            <Border Grid.Column="3" Background="{Binding StatusBackground}" Style="{StaticResource StatusBadgeStyle}" 
-                                                   VerticalAlignment="Center">
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Ellipse Width="8" Height="8" Fill="{Binding StatusColor}" Margin="0,0,6,0" VerticalAlignment="Center"/>
-                                                    <TextBlock Text="{Binding StatusText}" Foreground="{Binding StatusColor}" FontSize="12" FontWeight="Medium"/>
-                                                </StackPanel>
-                                            </Border>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </Grid>
-                    </Border>
+                        </Border>
+                    </Grid>
                 </Grid>
             </DockPanel>
         </ScrollViewer>
 
-        <!-- Loading Overlay -->
-        <Grid x:Name="LoadingOverlay" Background="#80121212" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Border Background="{StaticResource CardBackground}" Width="300" Height="200" CornerRadius="12" BorderThickness="1" BorderBrush="{StaticResource BorderColor}">
+        <!-- Enhanced Loading Overlay -->
+        <Grid x:Name="LoadingOverlay" Background="#801E1E2E" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border Background="{StaticResource CardBackground}" Width="320" Height="220" CornerRadius="16" BorderThickness="1" BorderBrush="{StaticResource BorderColor}">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="20" Color="{StaticResource AccentColorValue}" Opacity="0.4"/>
                 </Border.Effect>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="24">
-                    <Border Width="48" Height="48" Background="Transparent" Margin="0,0,0,16">
+                    <Border Width="60" Height="60" Background="Transparent" Margin="0,0,0,20">
                         <Path Data="M12,4V2A10,10 0 0,0 2,12H4A8,8 0 0,1 12,4Z" Fill="{StaticResource AccentColor}">
                             <Path.RenderTransform>
-                                <RotateTransform x:Name="SpinnerRotation" CenterX="24" CenterY="24"/>
+                                <RotateTransform x:Name="SpinnerRotation" CenterX="30" CenterY="30"/>
                             </Path.RenderTransform>
                             <Path.Triggers>
                                 <EventTrigger RoutedEvent="Path.Loaded">
                                     <BeginStoryboard>
                                         <Storyboard>
                                             <DoubleAnimation Storyboard.TargetName="SpinnerRotation" 
-                                                    Storyboard.TargetProperty="Angle"
-                                                    From="0" To="360" Duration="0:0:1.5" 
-                                                    RepeatBehavior="Forever"/>
+                                                            Storyboard.TargetProperty="Angle"
+                                                            From="0" To="360" Duration="0:0:1.5" 
+                                                            RepeatBehavior="Forever"/>
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </EventTrigger>
@@ -496,13 +652,13 @@
                         </Path>
                     </Border>
                     <TextBlock Text="{Binding LoadingMessage}" Foreground="{StaticResource PrimaryTextColor}" 
-                      FontSize="16" FontWeight="SemiBold" TextAlignment="Center" Margin="0,0,0,12"/>
-                    <ProgressBar Value="{Binding UploadProgress}" Maximum="100" Height="6" Margin="0,0,0,8" 
-                        Background="{StaticResource ContentBackColor}" Foreground="{StaticResource AccentColor}"
-                        BorderThickness="0"/>
+                              FontSize="16" FontWeight="SemiBold" TextAlignment="Center" Margin="0,0,0,12"/>
+                    <ProgressBar Value="{Binding UploadProgress}" Maximum="100" Height="8" Margin="0,0,0,10" 
+                                Background="{StaticResource ContentBackColor}" Foreground="{StaticResource AccentGradient}"
+                                BorderThickness="0"/>
                     <TextBlock Text="{Binding UploadProgress, StringFormat={}{0:0}%}" 
-                      Foreground="{StaticResource MutedTextColor}" FontSize="14" 
-                      TextAlignment="Center"/>
+                              Foreground="{StaticResource MutedTextColor}" FontSize="14" 
+                              TextAlignment="Center"/>
                 </StackPanel>
             </Border>
         </Grid>

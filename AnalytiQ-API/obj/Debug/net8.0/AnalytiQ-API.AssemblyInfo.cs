@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AnalytiQ-API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b197d4326673ebc9cb8ae2c87ff29c02bf16c64c")]
 [assembly: System.Reflection.AssemblyProductAttribute("AnalytiQ-API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AnalytiQ-API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         Title="AnalytiQ - Feedback Analytics Platform" 
-        Height="800" Width="1200"
+        Height="750" Width="1400"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="CanResizeWithGrip"
@@ -744,24 +744,24 @@
                         <!-- Modern Loading Indicator -->
                         <Grid x:Name="LoadingContainer" Visibility="Visible">
                             <Border Background="#1A1A2A" 
-                    Opacity="0.7" 
-                    CornerRadius="16"/>
+            Opacity="0.7" 
+            CornerRadius="16"/>
 
                             <StackPanel VerticalAlignment="Center" 
-                        HorizontalAlignment="Center">
+                HorizontalAlignment="Center">
                                 <!-- Pulsing loading circle -->
                                 <Border Width="80" 
-                        Height="80" 
-                        CornerRadius="40" 
-                        HorizontalAlignment="Center" 
-                        Margin="0,0,0,20">
+                Height="80" 
+                CornerRadius="40" 
+                HorizontalAlignment="Center" 
+                Margin="0,0,0,20">
                                     <Border.Background>
                                         <SolidColorBrush Color="#232338" Opacity="0.8"/>
                                     </Border.Background>
 
                                     <Border Width="60" 
-                            Height="60" 
-                            CornerRadius="30">
+                    Height="60" 
+                    CornerRadius="30">
                                         <Border.Background>
                                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                                                 <GradientStop Color="#7C3AED" Offset="0.0"/>
@@ -774,19 +774,19 @@
                                                 <BeginStoryboard>
                                                     <Storyboard>
                                                         <DoubleAnimation 
-                                            Storyboard.TargetProperty="Opacity"
-                                            From="1.0" To="0.4" Duration="0:0:1"
-                                            AutoReverse="True" RepeatBehavior="Forever"/>
+                                    Storyboard.TargetProperty="Opacity"
+                                    From="1.0" To="0.4" Duration="0:0:1"
+                                    AutoReverse="True" RepeatBehavior="Forever"/>
                                                     </Storyboard>
                                                 </BeginStoryboard>
                                             </EventTrigger>
                                         </Border.Triggers>
 
                                         <Path Data="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12H20A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4V2Z" 
-                              Fill="White" 
-                              Width="30" 
-                              Height="30" 
-                              Stretch="Uniform">
+                      Fill="White" 
+                      Width="30" 
+                      Height="30" 
+                      Stretch="Uniform">
                                             <Path.RenderTransform>
                                                 <RotateTransform x:Name="SpinningTransform" CenterX="15" CenterY="15"/>
                                             </Path.RenderTransform>
@@ -795,10 +795,10 @@
                                                     <BeginStoryboard>
                                                         <Storyboard>
                                                             <DoubleAnimation 
-                                                Storyboard.TargetName="SpinningTransform"
-                                                Storyboard.TargetProperty="Angle"
-                                                From="0" To="360" Duration="0:0:1.5"
-                                                RepeatBehavior="Forever"/>
+                                        Storyboard.TargetName="SpinningTransform"
+                                        Storyboard.TargetProperty="Angle"
+                                        From="0" To="360" Duration="0:0:1.5"
+                                        RepeatBehavior="Forever"/>
                                                         </Storyboard>
                                                     </BeginStoryboard>
                                                 </EventTrigger>
@@ -807,39 +807,40 @@
                                     </Border>
                                 </Border>
 
-                                <!-- Loading text -->
-                                <TextBlock Text="Loading Dashboard" 
-                           FontSize="16" 
-                           Foreground="White" 
-                           FontWeight="Medium" 
-                           HorizontalAlignment="Center"/>
+                                <!-- Loading text with Name -->
+                                <TextBlock x:Name="LoadingText"
+                   Text="Loading Dashboard" 
+                   FontSize="16" 
+                   Foreground="White" 
+                   FontWeight="Medium" 
+                   HorizontalAlignment="Center"/>
 
                                 <TextBlock Text="Please wait while we prepare your data" 
-                           FontSize="14" 
-                           Foreground="#94A3B8" 
-                           Margin="0,8,0,0" 
-                           HorizontalAlignment="Center"/>
+                   FontSize="14" 
+                   Foreground="#94A3B8" 
+                   Margin="0,8,0,0" 
+                   HorizontalAlignment="Center"/>
 
-                                <!-- Progress bar replacement -->
+                                <!-- Progress bar -->
                                 <Border Width="240" 
-                        Height="4" 
-                        Background="#2D2D3F" 
-                        CornerRadius="2" 
-                        Margin="0,24,0,0">
+                Height="4" 
+                Background="#2D2D3F" 
+                CornerRadius="2" 
+                Margin="0,24,0,0">
                                     <Border x:Name="ProgressIndicator" 
-                            Width="80" 
-                            Height="4" 
-                            Background="#7C3AED" 
-                            CornerRadius="2" 
-                            HorizontalAlignment="Left">
+                    Width="80" 
+                    Height="4" 
+                    Background="#7C3AED" 
+                    CornerRadius="2" 
+                    HorizontalAlignment="Left">
                                         <Border.Triggers>
                                             <EventTrigger RoutedEvent="Border.Loaded">
                                                 <BeginStoryboard>
                                                     <Storyboard>
                                                         <ThicknessAnimation 
-                                            Storyboard.TargetProperty="Margin"
-                                            From="0,0,0,0" To="160,0,0,0" Duration="0:0:1.5"
-                                            AutoReverse="True" RepeatBehavior="Forever"/>
+                                    Storyboard.TargetProperty="Margin"
+                                    From="0,0,0,0" To="160,0,0,0" Duration="0:0:1.5"
+                                    AutoReverse="True" RepeatBehavior="Forever"/>
                                                     </Storyboard>
                                                 </BeginStoryboard>
                                             </EventTrigger>

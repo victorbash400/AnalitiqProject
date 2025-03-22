@@ -11,7 +11,8 @@
 Option Strict Off
 Option Explicit On
 
-<Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("webview2loader.dll"),  _
+<Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("logo_vbr_icon.ico"),  _
+ Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("webview2loader.dll"),  _
  Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("webview2loader.dll"),  _
  Assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("webview2loader.dll")> 
 

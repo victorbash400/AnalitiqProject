@@ -11,14 +11,14 @@
       Background="#121212">
 
     <Page.Resources>
-        <!-- Modern TextBox Style -->
+        <!-- Modern TextBox Style with Subtle Glow -->
         <Style x:Key="ModernTextBox" TargetType="TextBox">
-            <Setter Property="Background" Value="#1A1A1A"/>
+            <Setter Property="Background" Value="#1E1E1E"/>
             <Setter Property="Foreground" Value="#E0E0E0"/>
-            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Padding" Value="14,12"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#2D2D2D"/>
+            <Setter Property="BorderBrush" Value="#333333"/>
             <Setter Property="CaretBrush" Value="White"/>
             <Setter Property="IsTabStop" Value="True"/>
             <Setter Property="TabIndex" Value="0"/>
@@ -29,28 +29,35 @@
                         <Border x:Name="border" Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4">
-                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"
-                                          VerticalAlignment="Center"/>
+                                CornerRadius="6">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="Center"/>
+                            </Grid>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#7C3AED"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0" Color="#7C3AED" BlurRadius="8" Opacity="0.4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="BorderBrush" Value="#A2B29F"/>
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
-        <!-- Modern PasswordBox Style -->
+        <!-- Modern PasswordBox Style with Subtle Glow -->
         <Style x:Key="ModernPasswordBox" TargetType="PasswordBox">
-            <Setter Property="Background" Value="#1A1A1A"/>
+            <Setter Property="Background" Value="#1E1E1E"/>
             <Setter Property="Foreground" Value="#E0E0E0"/>
-            <Setter Property="Padding" Value="12,10"/>
+            <Setter Property="Padding" Value="14,12"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#2D2D2D"/>
+            <Setter Property="BorderBrush" Value="#333333"/>
             <Setter Property="CaretBrush" Value="White"/>
             <Setter Property="IsTabStop" Value="True"/>
             <Setter Property="TabIndex" Value="0"/>
@@ -61,23 +68,30 @@
                         <Border x:Name="border" Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4">
-                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"
-                                          VerticalAlignment="Center"/>
+                                CornerRadius="6">
+                            <Grid>
+                                <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"
+                                              VerticalAlignment="Center"/>
+                            </Grid>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#7C3AED"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0" Color="#7C3AED" BlurRadius="8" Opacity="0.4"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsFocused" Value="True">
-                    <Setter Property="BorderBrush" Value="#A2B29F"/>
-                </Trigger>
-            </Style.Triggers>
         </Style>
 
         <!-- Label Style -->
         <Style x:Key="FieldLabel" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#A0A0A0"/>
+            <Setter Property="Foreground" Value="#ACACAC"/>
             <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Margin" Value="0,0,0,6"/>
@@ -85,8 +99,8 @@
 
         <!-- Primary Button Style -->
         <Style x:Key="PrimaryButton" TargetType="Button">
-            <Setter Property="Background" Value="#A2B29F"/>
-            <Setter Property="Foreground" Value="#121212"/>
+            <Setter Property="Background" Value="#7C3AED"/>
+            <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Padding" Value="10,12"/>
@@ -95,43 +109,22 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
-                                CornerRadius="4"
+                        <Border x:Name="border" Background="{TemplateBinding Background}"
+                                CornerRadius="6"
                                 Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="#B2C2AF"/>
-                </Trigger>
-                <Trigger Property="IsPressed" Value="True">
-                    <Setter Property="Background" Value="#92A28F"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-
-        <!-- Secondary Button Style -->
-        <Style x:Key="SecondaryButton" TargetType="Button">
-            <Setter Property="Background" Value="#EEEEEE"/>
-            <Setter Property="Foreground" Value="#757575"/>
-            <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Height" Value="45"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="22">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#DDDDDD" TargetName="border"/>
+                                <Setter Property="Background" Value="#9361FB"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0" Color="#7C3AED" BlurRadius="10" Opacity="0.5"/>
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#CCCCCC" TargetName="border"/>
+                                <Setter Property="Background" Value="#6B30CE"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -141,91 +134,248 @@
 
         <!-- Link Button Style -->
         <Style x:Key="LinkButton" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#A2B29F"/>
+            <Setter Property="Foreground" Value="#7C3AED"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="TextDecorations" Value="None"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="TextDecorations" Value="Underline"/>
-                    <Setter Property="Foreground" Value="#B2C2AF"/>
+                    <Setter Property="Foreground" Value="#9361FB"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <!-- Skip Login Link Style -->
+        <Style x:Key="SkipLoginLink" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#666666"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="TextDecorations" Value="None"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="TextDecorations" Value="Underline"/>
+                    <Setter Property="Foreground" Value="#999999"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!-- Alert Popup Style -->
+        <Style x:Key="InfoPopup" TargetType="Border">
+            <Setter Property="Background" Value="#222136"/>
+            <Setter Property="BorderBrush" Value="#7C3AED"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="15,12"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" Color="#000000" BlurRadius="15" Opacity="0.5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
+    <!-- Main Grid -->
     <Grid Background="#121212">
-        <Border CornerRadius="12" Background="#121212" Margin="20">
+        <!-- Subtle Background Pattern - Dotted Grid -->
+        <Canvas>
+            <Rectangle Width="1000" Height="650">
+                <Rectangle.Fill>
+                    <DrawingBrush TileMode="Tile" Viewport="0,0,40,40" ViewportUnits="Absolute">
+                        <DrawingBrush.Drawing>
+                            <DrawingGroup>
+                                <GeometryDrawing Brush="#1A1A1A">
+                                    <GeometryDrawing.Geometry>
+                                        <RectangleGeometry Rect="0,0,40,40"/>
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                                <GeometryDrawing Brush="#1E1E1E">
+                                    <GeometryDrawing.Geometry>
+                                        <EllipseGeometry RadiusX="1" RadiusY="1" Center="0,0"/>
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                            </DrawingGroup>
+                        </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+        </Canvas>
+
+        <!-- Main Content Container with Blur Effect Background -->
+        <Border CornerRadius="16" Margin="20">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" Color="Black" BlurRadius="25" Opacity="0.5"/>
+            </Border.Effect>
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="450"/>
                 </Grid.ColumnDefinitions>
 
-                <!-- Left Side - Decorative with Image Placeholder -->
-                <Border Grid.Column="0" CornerRadius="12,0,0,12">
+                <!-- Left Side - Stylish Image with Overlay -->
+                <Border Grid.Column="0" CornerRadius="16,0,0,16" ClipToBounds="True">
                     <Grid>
-                        <Image Source="assets/image_bloc.jpeg" Stretch="UniformToFill">
+                        <!-- Main Background Image -->
+                        <Image Source="assets/why_not.jpg" Stretch="UniformToFill">
                             <Image.Effect>
                                 <BlurEffect Radius="0.5"/>
                             </Image.Effect>
                         </Image>
+
+                        <!-- Gradient Overlay with Dark + Purple Accents -->
                         <Rectangle>
                             <Rectangle.Fill>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                    <GradientStop Color="#AA000000" Offset="0.0"/>
-                                    <GradientStop Color="#CC000000" Offset="1.0"/>
+                                    <GradientStop Color="#CC0D0D0D" Offset="0.0"/>
+                                    <GradientStop Color="#CC1A0A2E" Offset="1.0"/>
                                 </LinearGradientBrush>
                             </Rectangle.Fill>
                         </Rectangle>
-                        <StackPanel VerticalAlignment="Bottom" Margin="30,0,20,40">
-                            <TextBlock Text="Welcome to" Foreground="White" FontSize="24" FontWeight="Light" Margin="0,0,0,5"/>
-                            <TextBlock Text="AnalytiQ" Foreground="White" FontSize="24" FontWeight="SemiBold" Margin="0,0,0,15"/>
-                            <TextBlock Text="Business Intelligence Platform" Foreground="#E0E0E0" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,15" LineHeight="20"/>
-                            <TextBlock Text="Powerful analytics at your fingertips." Foreground="#A2B29F" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+                        <!-- Decorative Grid Lines - Data Visualization Theme -->
+                        <Canvas>
+                            <Path Stroke="#253341" StrokeThickness="1" Opacity="0.3" StrokeDashArray="1,4">
+                                <Path.Data>
+                                    <GeometryGroup>
+                                        <!-- Horizontal Lines -->
+                                        <LineGeometry StartPoint="0,100" EndPoint="600,100"/>
+                                        <LineGeometry StartPoint="0,200" EndPoint="600,200"/>
+                                        <LineGeometry StartPoint="0,300" EndPoint="600,300"/>
+                                        <LineGeometry StartPoint="0,400" EndPoint="600,400"/>
+                                        <LineGeometry StartPoint="0,500" EndPoint="600,500"/>
+                                        <!-- Vertical Lines -->
+                                        <LineGeometry StartPoint="100,0" EndPoint="100,600"/>
+                                        <LineGeometry StartPoint="200,0" EndPoint="200,600"/>
+                                        <LineGeometry StartPoint="300,0" EndPoint="300,600"/>
+                                        <LineGeometry StartPoint="400,0" EndPoint="400,600"/>
+                                    </GeometryGroup>
+                                </Path.Data>
+                            </Path>
+                        </Canvas>
+
+                        <!-- Neon Accent Element -->
+                        <Border Width="200" Height="200" CornerRadius="100" Margin="-50,-50,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Border.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#447C3AED" Offset="0"/>
+                                    <GradientStop Color="#007C3AED" Offset="1"/>
+                                </RadialGradientBrush>
+                            </Border.Background>
+                        </Border>
+
+                        <!-- Brand and Messaging Content -->
+                        <StackPanel VerticalAlignment="Bottom" Margin="40,0,20,60">
+                            <TextBlock FontFamily="Segoe UI" Text="ANALYTIQ" Foreground="White" FontSize="36" FontWeight="Bold" Margin="0,0,0,5">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Color="#7C3AED" BlurRadius="10" Opacity="0.7"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+
+                            <TextBlock Text="HACKATHON EDITION" Foreground="#D0D0D0" FontSize="12" FontWeight="SemiBold" Margin="2,0,0,20" Opacity="0.9">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Color="Black" BlurRadius="5" Opacity="0.5"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+
+                            <TextBlock Text="Advanced Business Intelligence Platform" Foreground="#E0E0E0" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,15" LineHeight="20"/>
+
+                            <TextBlock Text="Transform your data into actionable insights with our powerful analytics dashboard. Visualize trends, identify opportunities, and make data-driven decisions with confidence." 
+                                     Foreground="#CCCCCC" FontSize="14" TextWrapping="Wrap" Margin="0,0,0,20" LineHeight="24" MaxWidth="450"/>
+
+                            <!-- Feature Pills -->
+                            <WrapPanel>
+                                <Border Background="#22FFFFFF" CornerRadius="15" Padding="12,6" Margin="0,0,8,8">
+                                    <TextBlock Text="Real-time Analytics" Foreground="#E0E0E0" FontSize="11"/>
+                                </Border>
+                                <Border Background="#22FFFFFF" CornerRadius="15" Padding="12,6" Margin="0,0,8,8">
+                                    <TextBlock Text="Interactive Dashboards" Foreground="#E0E0E0" FontSize="11"/>
+                                </Border>
+                                <Border Background="#22FFFFFF" CornerRadius="15" Padding="12,6" Margin="0,0,8,8">
+                                    <TextBlock Text="Predictive Insights" Foreground="#E0E0E0" FontSize="11"/>
+                                </Border>
+                                <Border Background="#227C3AED" CornerRadius="15" Padding="12,6" Margin="0,0,8,8">
+                                    <TextBlock Text="AI-Powered" Foreground="#FFFFFF" FontSize="11"/>
+                                </Border>
+                            </WrapPanel>
                         </StackPanel>
                     </Grid>
                 </Border>
 
                 <!-- Right Side - Login Form -->
-                <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30,20" Width="350">
-                    <TextBlock Text="Welcome Back" FontSize="24" FontWeight="SemiBold" Foreground="#E0E0E0" HorizontalAlignment="Left" Margin="0,0,0,8"/>
-                    <TextBlock Text="Sign in to your account" FontSize="14" Foreground="#A0A0A0" Margin="0,0,0,40" TextWrapping="Wrap"/>
+                <Border Grid.Column="1" Background="#141414" CornerRadius="0,16,16,0">
+                    <Grid>
+                        <!-- Background Accent - Top Corner Glow -->
+                        <Border Width="200" Height="200" CornerRadius="100" Margin="0,-100,-100,0" HorizontalAlignment="Right" VerticalAlignment="Top">
+                            <Border.Background>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#227C3AED" Offset="0"/>
+                                    <GradientStop Color="#001A1A1A" Offset="1"/>
+                                </RadialGradientBrush>
+                            </Border.Background>
+                        </Border>
 
-                    <!-- Email field -->
-                    <TextBlock Text="Email Address" Style="{StaticResource FieldLabel}"/>
-                    <TextBox x:Name="txtEmail" Style="{StaticResource ModernTextBox}" Margin="0,0,0,25" TabIndex="1" AutomationProperties.Name="Email Address"/>
+                        <!-- Login Form Content -->
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30,20" Width="350">
+                            <TextBlock Text="Sign In" FontSize="30" FontWeight="Bold" Foreground="#FFFFFF" HorizontalAlignment="Left" Margin="0,0,0,8">
+                                <TextBlock.Effect>
+                                    <DropShadowEffect ShadowDepth="0" Color="#7C3AED" BlurRadius="15" Opacity="0.2"/>
+                                </TextBlock.Effect>
+                            </TextBlock>
+                            <TextBlock Text="Access your analytics dashboard" FontSize="14" Foreground="#B0B0B0" Margin="0,0,0,40" TextWrapping="Wrap"/>
 
-                    <!-- Password field -->
-                    <TextBlock Text="Password" Style="{StaticResource FieldLabel}"/>
-                    <PasswordBox x:Name="txtPassword" Style="{StaticResource ModernPasswordBox}" Margin="0,0,0,15" TabIndex="2" AutomationProperties.Name="Password"/>
+                            <!-- Email field -->
+                            <TextBlock Text="EMAIL ADDRESS" Style="{StaticResource FieldLabel}"/>
+                            <TextBox x:Name="txtEmail" Style="{StaticResource ModernTextBox}" Margin="0,0,0,25" TabIndex="1" AutomationProperties.Name="Email Address"/>
 
-                    <!-- Forgot Password Link -->
-                    <TextBlock x:Name="txtForgotPassword" Text="Forgot your password?" Style="{StaticResource LinkButton}" HorizontalAlignment="Right" Margin="0,0,0,30" MouseLeftButtonUp="ForgotPassword_Click"/>
+                            <!-- Password field -->
+                            <TextBlock Text="PASSWORD" Style="{StaticResource FieldLabel}"/>
+                            <PasswordBox x:Name="txtPassword" Style="{StaticResource ModernPasswordBox}" Margin="0,0,0,15" TabIndex="2" AutomationProperties.Name="Password"/>
 
-                    <!-- Loading indicator -->
-                    <ProgressBar x:Name="loadingIndicator" IsIndeterminate="True" Height="4" Foreground="#A2B29F" Visibility="Collapsed" Margin="0,0,0,20"/>
+                            <!-- Forgot Password Link -->
+                            <TextBlock x:Name="txtForgotPassword" Text="Forgot your password?" Style="{StaticResource LinkButton}" HorizontalAlignment="Right" Margin="0,0,0,30" MouseLeftButtonUp="ForgotPassword_Click"/>
 
-                    <!-- Error message -->
-                    <Border x:Name="errorContainer" Background="#FFEBEE" CornerRadius="6" Padding="15,10" Margin="0,0,0,25" Visibility="Collapsed">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="⚠️" FontSize="16" Margin="0,0,10,0"/>
-                            <TextBlock x:Name="txtErrorMessage" Foreground="#D32F2F" FontSize="13" TextWrapping="Wrap"/>
+                            <!-- Hackathon Info Popup -->
+                            <Border x:Name="infoPopup" Style="{StaticResource InfoPopup}" Margin="0,0,0,20">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="ℹ️" FontSize="16" Margin="0,0,10,0" VerticalAlignment="Top"/>
+                                    <TextBlock Foreground="#CCCCCC" FontSize="12" TextWrapping="Wrap" LineHeight="18">
+                                        <Run Text="For hackathon testing, use these credentials:"/>
+                                        <LineBreak/>
+                                        <Run Text="• bob@acmecorp.com / Pass123 = direct login"/>
+                                        <LineBreak/>
+                                        <Run Text="• alice@newco.com / New456 = test company setup"/>
+                                        <LineBreak/>
+                                        <Run Text="• ethan@techhub.io / Ethan456 = direct login"/>
+                                    </TextBlock>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Loading indicator -->
+                            <ProgressBar x:Name="loadingIndicator" IsIndeterminate="True" Height="4" Foreground="#7C3AED" Visibility="Collapsed" Margin="0,0,0,20"/>
+
+                            <!-- Error message -->
+                            <Border x:Name="errorContainer" Background="#2E1619" BorderBrush="#C62828" BorderThickness="1" CornerRadius="6" Padding="15,10" Margin="0,0,0,25" Visibility="Collapsed">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="⚠️" FontSize="16" Margin="0,0,10,0"/>
+                                    <TextBlock x:Name="txtErrorMessage" Foreground="#FF5252" FontSize="13" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Login Button -->
+                            <Button x:Name="btnSignIn" Content="Sign In" Width="350" Style="{StaticResource PrimaryButton}" Margin="0,0,0,20" Click="SignIn_Click" IsEnabled="True" IsDefault="True" TabIndex="3" AutomationProperties.Name="Sign In"/>
+
+                            <!-- Skip Login Link (Development Only) -->
+                            <TextBlock x:Name="btnSkipLogin" Text="Skip Login (Dev Mode)" Style="{StaticResource SkipLoginLink}" HorizontalAlignment="Center" Margin="0,5,0,0" MouseLeftButtonUp="SkipLogin_Click" Visibility="Collapsed" AutomationProperties.Name="Skip Login"/>
+
+                            <!-- No account text and link -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,25,0,0">
+                                <TextBlock Text="Don't have access? " FontSize="13" Foreground="#A0A0A0"/>
+                                <TextBlock x:Name="txtContactSupport" Text="Contact support" Style="{StaticResource LinkButton}" MouseLeftButtonUp="ContactSupport_Click"/>
+                            </StackPanel>
                         </StackPanel>
-                    </Border>
-
-                    <!-- Login Buttons -->
-                    <Button x:Name="btnSignIn" Content="Sign In" Width="350" Style="{StaticResource PrimaryButton}" Margin="0,0,0,20" Click="SignIn_Click" IsEnabled="True" IsDefault="True" TabIndex="3" AutomationProperties.Name="Sign In"/>
-
-                    <!-- Skip Login Button (Development Only) -->
-                    <Button x:Name="btnSkipLogin" Content="Skip Login" Width="200" Style="{StaticResource SecondaryButton}" Margin="0,0,0,0" Click="SkipLogin_Click" Visibility="Collapsed" TabIndex="4" AutomationProperties.Name="Skip Login"/>
-
-                    <!-- No account text and link -->
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,25,0,0">
-                        <TextBlock Text="Don't have an account? " FontSize="12" Foreground="#A0A0A0"/>
-                        <TextBlock x:Name="txtContactSupport" Text="Contact support" Style="{StaticResource LinkButton}" MouseLeftButtonUp="ContactSupport_Click"/>
-                    </StackPanel>
-                </StackPanel>
+                    </Grid>
+                </Border>
             </Grid>
         </Border>
     </Grid>

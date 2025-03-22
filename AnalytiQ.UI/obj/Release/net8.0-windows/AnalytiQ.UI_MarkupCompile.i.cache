@@ -1,0 +1,20 @@
+﻿AnalytiQ.UI
+1.0.0.0
+
+winexe
+VB
+.vb
+C:\Users\Victo\Documents\Analitiq project\AnalytiQ.UI\obj\Release\net8.0-windows\
+AnalytiQ.UI
+none
+false
+;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
+C:\Users\Victo\Documents\Analitiq project\AnalytiQ.UI\Application.xaml
+9980709009
+4-438788420
+142109513862
+233-762641617
+AdminPage.xaml;AnalyticsPage.xaml;CompanySetupWindow.xaml;DashboardPage.xaml;DataUploadPage.xaml;LoginPage.xaml;LoginWindow.xaml;MainWindow.xaml;SettingsPage.xaml;
+
+False
+

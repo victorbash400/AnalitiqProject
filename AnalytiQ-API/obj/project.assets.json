@@ -1034,11 +1034,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Victo\\Documents\\AnalytiQ-API\\AnalytiQ-API.csproj",
+      "projectUniqueName": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ-API\\AnalytiQ-API.csproj",
       "projectName": "AnalytiQ-API",
-      "projectPath": "C:\\Users\\Victo\\Documents\\AnalytiQ-API\\AnalytiQ-API.csproj",
+      "projectPath": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ-API\\AnalytiQ-API.csproj",
       "packagesPath": "C:\\Users\\Victo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Victo\\Documents\\AnalytiQ-API\\obj\\",
+      "outputPath": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ-API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "nbe5YG4AgF4=",
+  "dgSpecHash": "sZx/dwD8+3k=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Victo\\Documents\\AnalytiQ-API\\AnalytiQ-API.csproj",
+  "projectFilePath": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ-API\\AnalytiQ-API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Victo\\.nuget\\packages\\azure.core\\1.44.1\\azure.core.1.44.1.nupkg.sha512",
     "C:\\Users\\Victo\\.nuget\\packages\\azure.storage.blobs\\12.23.0\\azure.storage.blobs.12.23.0.nupkg.sha512",

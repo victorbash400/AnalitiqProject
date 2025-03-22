@@ -1,0 +1,14 @@
+C:\Users\Victo\Desktop\beta\AnalytiQ.UI.pdb
+C:\Users\Victo\Desktop\beta\assets\orange.jpeg
+C:\Users\Victo\Desktop\beta\runtimes\win-x64\native\WebView2Loader.dll
+C:\Users\Victo\Desktop\beta\D3DCompiler_47_cor3.dll
+C:\Users\Victo\Desktop\beta\PenImc_cor3.dll
+C:\Users\Victo\Desktop\beta\PresentationNative_cor3.dll
+C:\Users\Victo\Desktop\beta\vcruntime140_cor3.dll
+C:\Users\Victo\Desktop\beta\wpfgfx_cor3.dll
+C:\Users\Victo\Desktop\beta\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Victo\Desktop\beta\WebView2Loader.dll
+C:\Users\Victo\Desktop\beta\Microsoft.Web.WebView2.Core.xml
+C:\Users\Victo\Desktop\beta\Microsoft.Web.WebView2.WinForms.xml
+C:\Users\Victo\Desktop\beta\Microsoft.Web.WebView2.Wpf.xml
+C:\Users\Victo\Desktop\beta\AnalytiQ.UI.exe

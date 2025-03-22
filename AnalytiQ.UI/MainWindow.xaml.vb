@@ -54,6 +54,7 @@ Public Class MainWindow
         If Not Await CheckWebView2Runtime() Then Return
 
         ' Fetch embed token and initialize report
+        LoadingContainer.Visibility = Visibility.Visible
         Await FetchEmbedTokenAsync()
         LoadReport() ' Default to Overview page on startup
 
@@ -63,8 +64,6 @@ Public Class MainWindow
             Title = $"AnalytiQ - Tenant: {_tenantId}"
         End If
         SyncButtonStates()
-        LoadingContainer.Visibility = Visibility.Visible
-        LoadingContainer.Visibility = Visibility.Collapsed
 
         ' Handle window state changes for maximize/restore icon
         AddHandler Me.StateChanged, AddressOf WindowStateChanged
@@ -121,8 +120,13 @@ Public Class MainWindow
         End If
 
         Try
+            ' Show loading state
             LoadingContainer.Visibility = Visibility.Visible
-            LoadingContainer.Visibility = Visibility.Collapsed
+            Dim loadingText As TextBlock = LoadingContainer.FindName("LoadingText")
+            If loadingText IsNot Nothing Then
+                loadingText.Text = "Please wait while we establish a connection"
+            End If
+
             MainFrame.Visibility = Visibility.Collapsed
             PowerBIWebView.Visibility = Visibility.Visible
 
@@ -140,98 +144,101 @@ Public Class MainWindow
                 Return
             End If
 
+            ' Reset the report loaded flag before loading
+            _isReportLoaded = False
+
             ' Enable console logging for debugging
             PowerBIWebView.CoreWebView2.Settings.AreDevToolsEnabled = True
 
             ' Construct HTML with embedded report using Power BI JavaScript API
             Dim htmlContent As String = $"
-            <html>
-            <head>
-                <title>Power BI Report</title>
-                <script src='https://cdn.jsdelivr.net/npm/powerbi-client@2.18.6/dist/powerbi.min.js'></script>
-                <style>
-                    body {{ margin:0; padding:0; overflow:hidden; height:100vh; width:100vw; }}
-                    #reportContainer {{ height:100%; width:100%; }}
-                </style>
-            </head>
-            <body>
-                <div id='reportContainer'></div>
-                <script>
-                    // Get Power BI models
-                    const models = window['powerbi-client'].models;
-                    
-                    // Embed configuration
-                    const config = {{
-                        type: 'report',
-                        tokenType: models.TokenType.Embed,
-                        accessToken: '{_embedToken}',
-                        embedUrl: '{_embedUrl}',
-                        id: '{_reportId}',
-                        permissions: models.Permissions.Read,
-                        settings: {{
-                            navContentPaneEnabled: true,
-                            filterPaneEnabled: true
-                        }}
-                    }};
-                    
-                    // Embed the report
-                    const reportContainer = document.getElementById('reportContainer');
-                    const report = powerbi.embed(reportContainer, config);
-                    
-                    // Handle events
-                    report.on('loaded', function() {{
-                        console.log('Report loaded');
-                        window.chrome.webview.postMessage('ReportLoaded');
-                        
-                        // Get all pages first to confirm the page exists
-                        report.getPages()
-                            .then(function(pages) {{
-                                console.log('Available pages:', pages.map(p => p.name));
-                                
-                                // Find the page by name (case insensitive)
-                                const targetPage = pages.find(p => 
-                                    p.name.toLowerCase() === '{pageName.ToLower()}' || 
-                                    p.displayName.toLowerCase() === '{pageName.ToLower()}'
-                                );
-                                
-                                if (targetPage) {{
-                                    return report.setPage(targetPage.name);
-                                }} else {{
-                                    console.error('Page not found: {pageName}');
-                                    window.chrome.webview.postMessage('ReportError: Page not found - {pageName}');
-                                    return Promise.reject('Page not found');
-                                }}
-                            }})
-                            .then(function() {{
-                                console.log('Successfully navigated to page: {pageName}');
-                            }})
-                            .catch(function(error) {{
-                                console.error('Error navigating to page:', error);
-                                window.chrome.webview.postMessage('ReportError: ' + error);
-                            }});
-                    }});
-                    
-                    report.on('error', function(event) {{
-                        console.error('Error embedding report:', event.detail);
-                        window.chrome.webview.postMessage('ReportError: ' + JSON.stringify(event.detail));
-                    }});
-                </script>
-            </body>
-            </html>"
+        <html>
+        <head>
+            <title>Power BI Report</title>
+            <script src='https://cdn.jsdelivr.net/npm/powerbi-client@2.18.6/dist/powerbi.min.js'></script>
+            <style>
+                body {{ margin:0; padding:0; overflow:hidden; height:100vh; width:100vw; }}
+                #reportContainer {{ height:100%; width:100%; }}
+            </style>
+        </head>
+        <body>
+            <div id='reportContainer'></div>
+            <script>
+                const models = window['powerbi-client'].models;
+                const config = {{
+                    type: 'report',
+                    tokenType: models.TokenType.Embed,
+                    accessToken: '{_embedToken}',
+                    embedUrl: '{_embedUrl}',
+                    id: '{_reportId}',
+                    permissions: models.Permissions.Read,
+                    settings: {{
+                        navContentPaneEnabled: true,
+                        filterPaneEnabled: true
+                    }}
+                }};
+                
+                const reportContainer = document.getElementById('reportContainer');
+                const report = powerbi.embed(reportContainer, config);
+                
+                report.on('loaded', function() {{
+                    console.log('Report loaded');
+                    window.chrome.webview.postMessage('ReportLoaded');
+                    report.getPages()
+                        .then(function(pages) {{
+                            console.log('Available pages:', pages.map(p => p.name));
+                            const targetPage = pages.find(p => 
+                                p.name.toLowerCase() === '{pageName.ToLower()}' || 
+                                p.displayName.toLowerCase() === '{pageName.ToLower()}'
+                            );
+                            if (targetPage) {{
+                                return report.setPage(targetPage.name);
+                            }} else {{
+                                console.error('Page not found: {pageName}');
+                                window.chrome.webview.postMessage('ReportError: Page not found - {pageName}');
+                            }}
+                        }})
+                        .catch(function(error) {{
+                            console.error('Error navigating to page:', error);
+                            window.chrome.webview.postMessage('ReportError: ' + error);
+                        }});
+                }});
+                
+                report.on('error', function(event) {{
+                    console.error('Error embedding report:', event.detail);
+                    window.chrome.webview.postMessage('ReportError: ' + JSON.stringify(event.detail));
+                }});
+            </script>
+        </body>
+        </html>"
 
             Console.WriteLine($"Navigating WebView2 to embed report on page: {pageName}...")
             PowerBIWebView.NavigateToString(htmlContent)
 
-            ' Set a timeout to check if report loaded
-            Await Task.Delay(10000) ' 10 seconds timeout
+            ' Wait for the report to load with a single timeout
+            Dim timeoutTask = Task.Delay(15000) ' 15 seconds timeout
+            Await Task.WhenAny(
+                Task.Run(Async Function()
+                             While Not _isReportLoaded
+                                 Await Task.Delay(500)
+                             End While
+                         End Function),
+                timeoutTask
+            )
+
             If Not _isReportLoaded Then
-                Console.WriteLine("Report loading timeout - trying to refresh")
-                Await FetchEmbedTokenAsync()
-                PowerBIWebView.Reload()
+                Console.WriteLine("Report loading timed out after 15 seconds")
+                Throw New Exception("Failed to load report within timeout period")
             End If
+
         Catch ex As Exception
             ShowErrorPage($"Error loading report: {ex.Message}")
             Console.WriteLine($"Error in LoadReport: {ex.Message}")
+        Finally
+            ' Hide loading only if report is loaded successfully or an error page is shown
+            If _isReportLoaded OrElse MainFrame.Visibility = Visibility.Visible Then
+                LoadingContainer.Visibility = Visibility.Collapsed
+            End If
         End Try
     End Sub
 
@@ -243,7 +250,6 @@ Public Class MainWindow
         End If
 
         Try
-            ' Use JavaScript to navigate to the specific page with better error handling
             Dim script As String = $"
                 const report = powerbi.get(document.getElementById('reportContainer'));
                 if (!report) {{
@@ -321,14 +327,9 @@ Public Class MainWindow
             _isReportLoaded = True
             Dispatcher.Invoke(Async Sub()
                                   PowerBIWebView.Visibility = Visibility.Visible
-                                  LoadingContainer.Visibility = Visibility.Visible
                                   LoadingContainer.Visibility = Visibility.Collapsed
                                   Console.WriteLine("Report loaded event received")
-
-                                  ' List available pages to help with debugging
                                   Await ListReportPages()
-
-                                  ' Now try to navigate to the desired page
                                   Await NavigateToReportPage(If(_currentView = "Dashboard", "Overview", "Deep Analytics"))
                               End Sub)
         ElseIf message.StartsWith("ReportError") OrElse message.StartsWith("ScriptError") Then
@@ -383,7 +384,14 @@ Public Class MainWindow
 
     Private Sub WebView_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs)
         If Not e.IsSuccess Then
-            ShowErrorPage($"Failed to load report: {e.WebErrorStatus}")
+            Dim errorMessage As String = $"Failed to load report: {e.WebErrorStatus}"
+            If e.WebErrorStatus = CoreWebView2WebErrorStatus.ConnectionAborted Then
+                errorMessage = "Connection aborted while loading report. Attempting to reconnect..."
+                Console.WriteLine("Connection aborted detected - keeping loading state visible")
+            Else
+                ShowErrorPage(errorMessage)
+                LoadingContainer.Visibility = Visibility.Collapsed
+            End If
             Console.WriteLine($"Navigation failed: {e.WebErrorStatus}")
             Return
         End If
@@ -396,7 +404,6 @@ Public Class MainWindow
         Dim newView As String = String.Empty
         Dim pageName As String = Nothing
 
-        ' Return if clicking the already selected button
         If (buttonName.Contains("Dashboard") AndAlso _currentView = "Dashboard") OrElse
            (buttonName.Contains("Analytics") AndAlso _currentView = "Analytics") OrElse
            (buttonName.Contains("DataUpload") AndAlso _currentView = "DataUpload") OrElse
@@ -433,7 +440,6 @@ Public Class MainWindow
 
         _currentView = newView
 
-        ' Load the report with the specific page if Dashboard or Analytics
         If newView = "Dashboard" OrElse newView = "Analytics" Then
             LoadReport(pageName)
         End If
@@ -483,16 +489,29 @@ Public Class MainWindow
         LoadingContainer.Visibility = Visibility.Collapsed
         MainFrame.Visibility = Visibility.Visible
         PowerBIWebView.Visibility = Visibility.Collapsed
-        MainFrame.Navigate(New ErrorPage(errorMessage))
+
+        Dim fullErrorMessage As String = errorMessage
+        If errorMessage.Contains("Navigation") OrElse errorMessage.Contains("aborted") OrElse
+           errorMessage.Contains("interrupted") OrElse errorMessage.Contains("connection") Then
+            fullErrorMessage &= vbCrLf & vbCrLf &
+                              "Warning: Please avoid interrupting page loading by switching between " &
+                              "sections rapidly. This can cause connection issues that require reloading."
+        End If
+
+        MainFrame.Navigate(New ErrorPage(fullErrorMessage))
     End Sub
 
     Public Class ErrorPage
         Inherits Page
 
+        Private _errorPanel As StackPanel
+        Private _loadingPanel As StackPanel
+        Private _retryButton As Button
+
         Public Sub New(errorMessage As String)
-            Dim errorPanel As New StackPanel()
-            errorPanel.VerticalAlignment = VerticalAlignment.Center
-            errorPanel.HorizontalAlignment = HorizontalAlignment.Center
+            _errorPanel = New StackPanel()
+            _errorPanel.VerticalAlignment = VerticalAlignment.Center
+            _errorPanel.HorizontalAlignment = HorizontalAlignment.Center
 
             Dim errorIcon As New TextBlock()
             errorIcon.Text = "⚠️"
@@ -513,42 +532,103 @@ Public Class MainWindow
             errorText.HorizontalAlignment = HorizontalAlignment.Center
             errorText.Margin = New Thickness(0, 0, 0, 20)
 
-            Dim retryButton As New Button()
-            retryButton.Content = "Retry"
-            retryButton.Padding = New Thickness(15, 8, 15, 8)
-            retryButton.HorizontalAlignment = HorizontalAlignment.Center
-            AddHandler retryButton.Click, AddressOf Retry_Click
+            _retryButton = New Button()
+            _retryButton.Content = "Retry"
+            _retryButton.Padding = New Thickness(15, 8, 15, 8)
+            _retryButton.HorizontalAlignment = HorizontalAlignment.Center
+            AddHandler _retryButton.Click, AddressOf Retry_Click
 
-            errorPanel.Children.Add(errorIcon)
-            errorPanel.Children.Add(errorTitle)
-            errorPanel.Children.Add(errorText)
-            errorPanel.Children.Add(retryButton)
+            _errorPanel.Children.Add(errorIcon)
+            _errorPanel.Children.Add(errorTitle)
+            _errorPanel.Children.Add(errorText)
+            _errorPanel.Children.Add(_retryButton)
 
-            Me.Content = errorPanel
+            _loadingPanel = New StackPanel()
+            _loadingPanel.VerticalAlignment = VerticalAlignment.Center
+            _loadingPanel.HorizontalAlignment = HorizontalAlignment.Center
+            _loadingPanel.Visibility = Visibility.Collapsed
+
+            Dim loadingIcon As New TextBlock()
+            loadingIcon.Text = "🔄"
+            loadingIcon.FontSize = 48
+            loadingIcon.HorizontalAlignment = HorizontalAlignment.Center
+            loadingIcon.Margin = New Thickness(0, 0, 0, 20)
+
+            Dim loadingText As New TextBlock()
+            loadingText.Text = "Please wait while we establish a connection"
+            loadingText.FontSize = 16
+            loadingText.FontWeight = FontWeights.Medium
+            loadingText.HorizontalAlignment = HorizontalAlignment.Center
+            loadingText.Foreground = New SolidColorBrush(Colors.White)
+
+            _loadingPanel.Children.Add(loadingIcon)
+            _loadingPanel.Children.Add(loadingText)
+
+            Dim container As New Grid()
+            container.Children.Add(_errorPanel)
+            container.Children.Add(_loadingPanel)
+
+            Me.Content = container
         End Sub
 
-        Private Sub Retry_Click(sender As Object, e As RoutedEventArgs)
-            If MainWindow.Instance._currentView = "Dashboard" Then
-                MainWindow.Instance.LoadReport("Overview")
-            ElseIf MainWindow.Instance._currentView = "Analytics" Then
-                MainWindow.Instance.LoadReport("Deep Analytics")
-            ElseIf MainWindow.Instance._currentView = "DataUpload" Then
-                MainWindow.Instance.LoadFramePage(New DataUploadPage(), "Data Upload")
-            ElseIf MainWindow.Instance._currentView = "Settings" Then
-                MainWindow.Instance.LoadFramePage(New SettingsPage(), "Settings")
-            ElseIf MainWindow.Instance._currentView = "Admin" Then
-                MainWindow.Instance.LoadFramePage(New AdminPage(), "Admin")
+        Private Async Sub Retry_Click(sender As Object, e As RoutedEventArgs)
+            Dim mainWindow As MainWindow = MainWindow.Instance
+            If mainWindow Is Nothing Then
+                Return
             End If
+
+            Try
+                _retryButton.IsEnabled = False
+                _errorPanel.Visibility = Visibility.Collapsed
+                _loadingPanel.Visibility = Visibility.Visible
+
+                mainWindow._isReportLoaded = False
+                Await mainWindow.FetchEmbedTokenAsync()
+
+                If mainWindow._currentView = "Dashboard" Then
+                    mainWindow.LoadReport("Overview")
+                ElseIf mainWindow._currentView = "Analytics" Then
+                    mainWindow.LoadReport("Deep Analytics")
+                ElseIf mainWindow._currentView = "DataUpload" Then
+                    mainWindow.LoadFramePage(New DataUploadPage(), "Data Upload")
+                ElseIf mainWindow._currentView = "Settings" Then
+                    mainWindow.LoadFramePage(New SettingsPage(), "Settings")
+                ElseIf mainWindow._currentView = "Admin" Then
+                    mainWindow.LoadFramePage(New AdminPage(), "Admin")
+                End If
+
+                If (mainWindow._currentView = "Dashboard" OrElse mainWindow._currentView = "Analytics") AndAlso
+                   mainWindow.PowerBIWebView.CoreWebView2 IsNot Nothing Then
+                    mainWindow.PowerBIWebView.CoreWebView2.Navigate("about:blank")
+                    mainWindow.PowerBIWebView.Reload()
+                End If
+            Catch ex As Exception
+                _errorPanel.Visibility = Visibility.Visible
+                _loadingPanel.Visibility = Visibility.Collapsed
+                _retryButton.IsEnabled = True
+
+                Dim errorText As New TextBlock()
+                errorText.Text = "Retry failed: " & ex.Message
+                errorText.Foreground = New SolidColorBrush(Colors.Red)
+                errorText.TextWrapping = TextWrapping.Wrap
+                errorText.HorizontalAlignment = HorizontalAlignment.Center
+                errorText.Margin = New Thickness(0, 10, 0, 0)
+
+                _errorPanel.Children.Add(errorText)
+            End Try
         End Sub
     End Class
 
     Public Shared ReadOnly Property Instance As MainWindow
         Get
-            Return DirectCast(Application.Current.MainWindow, MainWindow)
+            Dim window = TryCast(Application.Current.MainWindow, MainWindow)
+            If window Is Nothing Then
+                Console.WriteLine("Warning: MainWindow instance not available")
+            End If
+            Return window
         End Get
     End Property
 
-    ' Class to deserialize embed token response
     Private Class EmbedTokenResponse
         Public Property EmbedUrl As String
         Public Property EmbedToken As String

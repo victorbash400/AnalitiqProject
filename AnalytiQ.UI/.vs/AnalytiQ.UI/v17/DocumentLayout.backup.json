@@ -3,6 +3,62 @@
   "WorkspaceRootPath": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\companysetupwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:companysetupwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\mainwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:mainwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\datauploadpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:datauploadpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\dashboardpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:dashboardpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\companysetupwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:companysetupwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\loginpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:loginpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\analytiq.ui.vbproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:analytiq.ui.vbproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\loginwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:loginwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\settingspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:settingspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\settingspage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:settingspage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\datauploadpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:datauploadpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\adminpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:adminpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
@@ -11,74 +67,12 @@
       "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:adminpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\settingspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:settingspage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\mainwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:mainwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\analytiq.ui.vbproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:analytiq.ui.vbproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Victo\\AppData\\Local\\Temp\\.vsdbgsrc\\bf181cacff03ee9afb8aeba00dc7c836930532be0d5d44476e601f59af11bfe8\\NavigationService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\loginpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:loginpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:loginpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\datauploadpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:datauploadpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\datauploadpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:datauploadpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\dashboardpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:dashboardpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\settingspage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:settingspage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\companysetupwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:companysetupwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\companysetupwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:companysetupwindow.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:loginwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\dashboardpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:dashboardpage.xaml.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\application.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:application.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|c:\\users\\victo\\documents\\analitiq project\\analytiq.ui\\analytiq.ui.vbproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{DEC45952-AA40-42D3-A6D2-648C77B54973}|AnalytiQ.UI.vbproj|solutionrelative:analytiq.ui.vbproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -88,213 +82,134 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AdminPage.xaml.vb",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AdminPage.xaml.vb",
-              "RelativeDocumentMoniker": "AdminPage.xaml.vb",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AdminPage.xaml.vb",
-              "RelativeToolTip": "AdminPage.xaml.vb",
-              "ViewState": "AgIAAMkAAAAAAAAAAAA7wOUAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-03-19T23:33:11.542Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AdminPage.xaml",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AdminPage.xaml",
-              "RelativeDocumentMoniker": "AdminPage.xaml",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AdminPage.xaml*",
-              "RelativeToolTip": "AdminPage.xaml*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-19T23:25:45.346Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "LoginPage.xaml.vb",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\LoginPage.xaml.vb",
-              "RelativeDocumentMoniker": "LoginPage.xaml.vb",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\LoginPage.xaml.vb",
-              "RelativeToolTip": "LoginPage.xaml.vb",
-              "ViewState": "AgIAAE4AAAAAAAAAAAA8wGMAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-03-16T12:07:14.734Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Microsoft.Common.CurrentVersion.targets",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Community\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ViewState": "AgIAAGUJAAAAAAAAAAAvwHcJAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2025-03-19T22:05:31.595Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "DataUploadPage.xaml",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DataUploadPage.xaml",
-              "RelativeDocumentMoniker": "DataUploadPage.xaml",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DataUploadPage.xaml",
-              "RelativeToolTip": "DataUploadPage.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-14T07:31:50.418Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "SettingsPage.xaml",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\SettingsPage.xaml",
-              "RelativeDocumentMoniker": "SettingsPage.xaml",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\SettingsPage.xaml",
-              "RelativeToolTip": "SettingsPage.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-16T06:41:19.227Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "NavigationService.cs",
-              "DocumentMoniker": "C:\\Users\\Victo\\AppData\\Local\\Temp\\.vsdbgsrc\\bf181cacff03ee9afb8aeba00dc7c836930532be0d5d44476e601f59af11bfe8\\NavigationService.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\bf181cacff03ee9afb8aeba00dc7c836930532be0d5d44476e601f59af11bfe8\\NavigationService.cs",
-              "ToolTip": "C:\\Users\\Victo\\AppData\\Local\\Temp\\.vsdbgsrc\\bf181cacff03ee9afb8aeba00dc7c836930532be0d5d44476e601f59af11bfe8\\NavigationService.cs",
-              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\bf181cacff03ee9afb8aeba00dc7c836930532be0d5d44476e601f59af11bfe8\\NavigationService.cs",
-              "ViewState": "AgIAABMEAAAAAAAAAAAwwB4EAAADAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T21:43:47.944Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "MainWindow.xaml",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\MainWindow.xaml",
-              "RelativeToolTip": "MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-08T18:21:56.517Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "MainWindow.xaml.vb",
               "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\MainWindow.xaml.vb",
               "RelativeDocumentMoniker": "MainWindow.xaml.vb",
               "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\MainWindow.xaml.vb",
               "RelativeToolTip": "MainWindow.xaml.vb",
-              "ViewState": "AgIAANUBAAAAAAAAAAAEwN8BAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIYCAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2025-03-13T23:26:09.921Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AnalytiQ.UI.vbproj",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AnalytiQ.UI.vbproj",
-              "RelativeDocumentMoniker": "AnalytiQ.UI.vbproj",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AnalytiQ.UI.vbproj",
-              "RelativeToolTip": "AnalytiQ.UI.vbproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003380|",
-              "WhenOpened": "2025-03-18T22:05:24.045Z",
+              "DocumentIndex": 2,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "MainWindow.xaml",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\MainWindow.xaml",
+              "RelativeToolTip": "MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-08T18:21:56.517Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CompanySetupWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\CompanySetupWindow.xaml",
+              "RelativeDocumentMoniker": "CompanySetupWindow.xaml",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\CompanySetupWindow.xaml*",
+              "RelativeToolTip": "CompanySetupWindow.xaml*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-18T13:35:43.013Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
+              "Title": "DashboardPage.xaml.vb",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DashboardPage.xaml.vb",
+              "RelativeDocumentMoniker": "DashboardPage.xaml.vb",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DashboardPage.xaml.vb",
+              "RelativeToolTip": "DashboardPage.xaml.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-03-15T22:13:39.581Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DataUploadPage.xaml.vb",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DataUploadPage.xaml.vb",
+              "RelativeDocumentMoniker": "DataUploadPage.xaml.vb",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DataUploadPage.xaml.vb",
+              "RelativeToolTip": "DataUploadPage.xaml.vb",
+              "ViewState": "AgIAALMBAAAAAAAAAAAAwOQBAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-03-19T10:31:09.819Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CompanySetupWindow.xaml.vb",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\CompanySetupWindow.xaml.vb",
+              "RelativeDocumentMoniker": "CompanySetupWindow.xaml.vb",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\CompanySetupWindow.xaml.vb",
+              "RelativeToolTip": "CompanySetupWindow.xaml.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-03-18T13:58:54.149Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "LoginPage.xaml",
               "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\LoginPage.xaml",
               "RelativeDocumentMoniker": "LoginPage.xaml",
               "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\LoginPage.xaml",
               "RelativeToolTip": "LoginPage.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-16T12:07:10.715Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-16T12:07:10.715Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "DataUploadPage.xaml.vb",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DataUploadPage.xaml.vb",
-              "RelativeDocumentMoniker": "DataUploadPage.xaml.vb",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DataUploadPage.xaml.vb",
-              "RelativeToolTip": "DataUploadPage.xaml.vb",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAowHwAAABJAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "LoginPage.xaml.vb",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\LoginPage.xaml.vb",
+              "RelativeDocumentMoniker": "LoginPage.xaml.vb",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\LoginPage.xaml.vb",
+              "RelativeToolTip": "LoginPage.xaml.vb",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAiwLUAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-03-19T10:31:09.819Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-16T12:07:14.734Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "CompanySetupWindow.xaml.vb",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\CompanySetupWindow.xaml.vb",
-              "RelativeDocumentMoniker": "CompanySetupWindow.xaml.vb",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\CompanySetupWindow.xaml.vb",
-              "RelativeToolTip": "CompanySetupWindow.xaml.vb",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAcwGYAAAANAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "LoginWindow.xaml.vb",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\LoginWindow.xaml.vb",
+              "RelativeDocumentMoniker": "LoginWindow.xaml.vb",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\LoginWindow.xaml.vb",
+              "RelativeToolTip": "LoginWindow.xaml.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-03-18T13:58:54.149Z"
+              "WhenOpened": "2025-03-20T21:40:26.798Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "DashboardPage.xaml",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DashboardPage.xaml",
-              "RelativeDocumentMoniker": "DashboardPage.xaml",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DashboardPage.xaml",
-              "RelativeToolTip": "DashboardPage.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-14T09:29:01.759Z",
-              "EditorCaption": ""
+              "DocumentIndex": 8,
+              "Title": "AnalytiQ.UI.vbproj",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AnalytiQ.UI.vbproj",
+              "RelativeDocumentMoniker": "AnalytiQ.UI.vbproj",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AnalytiQ.UI.vbproj",
+              "RelativeToolTip": "AnalytiQ.UI.vbproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003380|",
+              "WhenOpened": "2025-03-18T22:05:24.045Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "SettingsPage.xaml.vb",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\SettingsPage.xaml.vb",
-              "RelativeDocumentMoniker": "SettingsPage.xaml.vb",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\SettingsPage.xaml.vb",
-              "RelativeToolTip": "SettingsPage.xaml.vb",
-              "ViewState": "AgIAAFQBAAAAAAAAAAAiwF0BAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-03-14T07:30:24.291Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "CompanySetupWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\CompanySetupWindow.xaml",
-              "RelativeDocumentMoniker": "CompanySetupWindow.xaml",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\CompanySetupWindow.xaml",
-              "RelativeToolTip": "CompanySetupWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-18T13:35:43.013Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 10,
               "Title": "LoginWindow.xaml",
               "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\LoginWindow.xaml",
               "RelativeDocumentMoniker": "LoginWindow.xaml",
@@ -305,19 +220,75 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "DashboardPage.xaml.vb",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DashboardPage.xaml.vb",
-              "RelativeDocumentMoniker": "DashboardPage.xaml.vb",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DashboardPage.xaml.vb",
-              "RelativeToolTip": "DashboardPage.xaml.vb",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAIwCEAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-03-15T22:13:39.581Z"
+              "DocumentIndex": 11,
+              "Title": "SettingsPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\SettingsPage.xaml",
+              "RelativeDocumentMoniker": "SettingsPage.xaml",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\SettingsPage.xaml",
+              "RelativeToolTip": "SettingsPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-16T06:41:19.227Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 13,
+              "Title": "DataUploadPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DataUploadPage.xaml",
+              "RelativeDocumentMoniker": "DataUploadPage.xaml",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DataUploadPage.xaml",
+              "RelativeToolTip": "DataUploadPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-14T07:31:50.418Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SettingsPage.xaml.vb",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\SettingsPage.xaml.vb",
+              "RelativeDocumentMoniker": "SettingsPage.xaml.vb",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\SettingsPage.xaml.vb",
+              "RelativeToolTip": "SettingsPage.xaml.vb",
+              "ViewState": "AgIAAD8BAAAAAAAAAAAiwF0BAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-03-14T07:30:24.291Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "AdminPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AdminPage.xaml",
+              "RelativeDocumentMoniker": "AdminPage.xaml",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AdminPage.xaml",
+              "RelativeToolTip": "AdminPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-19T23:25:45.346Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "AdminPage.xaml.vb",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AdminPage.xaml.vb",
+              "RelativeDocumentMoniker": "AdminPage.xaml.vb",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AdminPage.xaml.vb",
+              "RelativeToolTip": "AdminPage.xaml.vb",
+              "ViewState": "AgIAAMkAAAAAAAAAAAA7wOUAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-03-19T23:33:11.542Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "DashboardPage.xaml",
+              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DashboardPage.xaml",
+              "RelativeDocumentMoniker": "DashboardPage.xaml",
+              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\DashboardPage.xaml",
+              "RelativeToolTip": "DashboardPage.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-14T09:29:01.759Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
               "Title": "Application.xaml",
               "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\Application.xaml",
               "RelativeDocumentMoniker": "Application.xaml",
@@ -325,18 +296,6 @@
               "RelativeToolTip": "Application.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2025-03-15T22:15:38.402Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "AnalytiQ.UI",
-              "DocumentMoniker": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AnalytiQ.UI.vbproj",
-              "RelativeDocumentMoniker": "AnalytiQ.UI.vbproj",
-              "ToolTip": "C:\\Users\\Victo\\Documents\\Analitiq project\\AnalytiQ.UI\\AnalytiQ.UI.vbproj",
-              "RelativeToolTip": "AnalytiQ.UI.vbproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003380|",
-              "WhenOpened": "2025-03-14T08:51:40.449Z",
               "EditorCaption": ""
             }
           ]
