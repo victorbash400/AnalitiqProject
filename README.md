@@ -129,9 +129,9 @@ graph TD
 <table>
   <tr>
     <td width="70%">
-      <h3>🚀 AnalytiQ v0.1.0-hackathon</h3>
+      <h3>🚀 AnalytiQ v0.1.1-hackathon</h3>
       <p>Ready-to-run executable with sample data and pre-configured dashboards.</p>
-      <a href="https://github.com/victorbash400/AnalitiqProject/releases/download/v0.1.0-hackathon/AnalitiQ.exe.zip"><b>⬇️ DOWNLOAD (12.4 MB)</b></a>
+      <a href="https://github.com/victorbash400/AnalitiqProject/releases/download/v0.1.1-hackathon/AnalytiQ.UI.zip"><b>⬇️ DOWNLOAD (86.8 MB)</b></a>
     </td>
     <td width="30%" align="center">
       <h3>📂</h3>
