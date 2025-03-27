@@ -304,5 +304,5 @@ SOFTWARE.
   <img src="https://github.com/user-attachments/assets/0ab385eb-a2bc-498e-81eb-8a6b3cd8a375" width="70" alt="AnalytiQ Logo">
   <h3>AnalytiQ — Where Customer Feedback Meets Intelligence</h3>
   <p>Developed by <b>Victor Bash</b> for the <b>Microsoft Hackathon 2025</b></p>
-  <a href="https://github.com/victorbash400/AnalitiqProject/releases/download/v0.1.0-hackathon/AnalitiQ.exe.zip"><b>⬇️ DOWNLOAD NOW ⬇️</b></a>
+  <a href="https://github.com/victorbash400/AnalitiqProject/releases/download/v0.1.1-hackathon/AnalytiQ.UI.zip"><b>⬇️ DOWNLOAD NOW ⬇️</b></a>
 </div>
