@@ -1,15 +1,16 @@
 <div align="center">
   
-# <img src="https://github.com/user-attachments/assets/0ab385eb-a2bc-498e-81eb-8a6b3cd8a375" width="50" align="center" alt="AnalytiQ Logo"> **AnalytiQ**
+# <img src="https://github.com/user-attachments/assets/0ab385eb-a2bc-498e-81eb-8a6b3cd8a375" width="50" align="center" alt="AnalytiQ Logo"> **AnalytiQ Cinnamon**
 
-### *Transform the Voice of Your Customers into Your Competitive Edge*
+### *Spice Up Your Customer Insights with Next-Level Analytics*
 
 [![Made with Azure](https://img.shields.io/badge/Powered_by-Azure-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://azure.microsoft.com)
 [![OpenAI GPT-4](https://img.shields.io/badge/AI_Engine-GPT--4-74aa9c?style=for-the-badge&logo=openai&logoColor=white)](https://azure.microsoft.com/services/openai-service/)
 [![.NET 8](https://img.shields.io/badge/.NET-8.0-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
-[![Power BI](https://img.shields.io/badge/Analytics-Power_BI-F2C811?style=for-the-badge&logo=power-bi&logoColor=black)](https://powerbi.microsoft.com/)
+[![Power BI](https://img.shields.io/badge/Analytics-Power_BI-F2C811?style=for-the-badge&logo=power-bi&logoColor=white)](https://powerbi.microsoft.com/)
+[![Version](https://img.shields.io/badge/Version-v0.2.0-E84D3D?style=for-the-badge&logoColor=white)](https://github.com/victorbash400/AnalitiqProject/releases)
 
-**Microsoft Hackathon 2025 Entry** | [Download Now](#-quick-start) | [GitHub Repo](https://github.com/victorbash400/AnalitiqProject)
+**Microsoft Hackathon 2025 Entry** | [Download Cinnamon](#-quick-start) | [GitHub Repo](https://github.com/victorbash400/AnalitiqProject)
 
 </div>
 
@@ -17,31 +18,43 @@
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/a17df28e-faea-4d74-a6ba-975f602d7526" width="90%" alt="Dashboard Hero Image">
+  <p><i>Introducing the Cinnamon Edition - Now with Enhanced File Processing</i></p>
 </div>
+
+## 🔥 **Cinnamon Edition Highlights**
+
+The **AnalytiQ Cinnamon** release brings revolutionary improvements to our hackathon project with a focus on file processing capabilities:
+
+<table>
+  <tr>
+    <td width="33%" align="center">
+      <h3>🚀</h3>
+      <h3>Enhanced Upload Engine</h3>
+      <p>Drag & drop multiple files with our new batch processing system and format auto-detection.</p>
+    </td>
+    <td width="33%" align="center">
+      <h3>⚡</h3>
+      <h3>Progressive Loading</h3>
+      <p>View insights as they emerge in real-time without waiting for complete processing.</p>
+    </td>
+    <td width="33%" align="center">
+      <h3>🛡️</h3>
+      <h3>Resilient Processing</h3>
+      <p>Resume interrupted uploads exactly where they left off with our checkpoint system.</p>
+    </td>
+  </tr>
+</table>
+
+---
 
 ## 🚀 **Overview**
 
 **AnalytiQ** is an AI-powered feedback analytics platform that transforms unstructured customer feedback into actionable business intelligence. Built on Azure's cloud infrastructure and leveraging GPT-4's advanced language capabilities, AnalytiQ helps organizations understand customer sentiment, identify emerging trends, and make data-driven decisions with unprecedented efficiency.
 
-<table>
-  <tr>
-    <td width="33%" align="center">
-      <h3>🔍</h3>
-      <h3>Analyze Any Format</h3>
-      <p>Process customer feedback from PDF, DOCX, CSV, TXT, and XLSX with a simple drag & drop.</p>
-    </td>
-    <td width="33%" align="center">
-      <h3>🤖</h3>
-      <h3>AI-Driven Insights</h3>
-      <p>Leverage GPT-4 to extract sentiment, categories, and actionable recommendations automatically.</p>
-    </td>
-    <td width="33%" align="center">
-      <h3>📊</h3>
-      <h3>Visual Intelligence</h3>
-      <p>Explore interactive Power BI dashboards with drill-down capabilities for deeper analysis.</p>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/62643e49-55f7-487d-98cf-4c889a07e583" width="90%" alt="Power BI Dashboard">
+  <p><i>AnalytiQ's integrated Power BI dashboard with our refreshed Cinnamon visualization theme</i></p>
+</div>
 
 ---
 
@@ -53,11 +66,13 @@
 - **Trend identification** across time periods and customer segments
 - **Prioritization engine** that highlights critical issues needing immediate attention
 
-### 🔄 **Seamless Integration**
-- **Universal file format support** for all major document and data formats
-- **API-first architecture** for integration with existing CRM and support systems
-- **Batch processing** for historical data analysis
-- **Real-time webhooks** for immediate notification of critical feedback
+### 🔄 **Next-Gen File Processing** ✨ NEW IN CINNAMON ✨
+- **Multi-format uploader** with support for PDF, DOCX, CSV, TXT, XLSX, and JSON
+- **Batch processing engine** for handling multiple files simultaneously
+- **Format auto-detection** without manual configuration
+- **Progressive loading** to view insights as they emerge
+- **Resume capability** for interrupted uploads
+- **Validation preview** of data before committing to analysis
 
 ### 🛡️ **Enterprise Ready**
 - **Azure AD integration** with role-based access control
@@ -67,20 +82,13 @@
 
 ---
 
-<div align="center">
-  <img src="https://github.com/user-attachments/assets/62643e49-55f7-487d-98cf-4c889a07e583" width="90%" alt="Power BI Dashboard">
-  <p><i>AnalytiQ's integrated Power BI dashboard showing sentiment trends and key metrics</i></p>
-</div>
-
----
-
 ## 🔧 **System Architecture**
 
 AnalytiQ leverages Azure's serverless architecture to deliver a scalable, resilient platform for processing customer feedback at any volume.
 
 ```mermaid
 graph TD
-    A[User Uploads Feedback File] --> B[API Gateway]
+    A[User Uploads Feedback Files] --> B[API Gateway]
     B --> C[Azure Blob Storage]
     C --> D[Event Grid Trigger]
     D --> E[Azure Functions: Document Processing]
@@ -115,7 +123,7 @@ graph TD
     </td>
     <td width="50%">
       <img src="https://github.com/user-attachments/assets/017366c1-a1ed-4f60-bfde-6878ae94d2db" width="100%" alt="File Upload">
-      <p align="center"><i>Intuitive file upload interface with batch processing</i></p>
+      <p align="center"><i>New Cinnamon file upload interface with batch processing</i></p>
     </td>
   </tr>
 </table>
@@ -129,9 +137,9 @@ graph TD
 <table>
   <tr>
     <td width="70%">
-      <h3>🚀 AnalytiQ v0.1.1-hackathon</h3>
-      <p>Ready-to-run executable with sample data and pre-configured dashboards.</p>
-      <a href="https://github.com/victorbash400/AnalitiqProject/releases/download/v0.1.1-hackathon/AnalytiQ.UI.zip"><b>⬇️ DOWNLOAD (86.8 MB)</b></a>
+      <h3>🔥 AnalytiQ v0.2.0-Cinnamon</h3>
+      <p>Our latest release with enhanced file processing and the new Cinnamon interface.</p>
+      <a href="https://github.com/victorbash400/AnalitiqProject/releases/download/AnalytiQ-Cinammon/Analytiq-Cinnamon.zip"><b>⬇️ DOWNLOAD CINNAMON (92.4 MB)</b></a>
     </td>
     <td width="30%" align="center">
       <h3>📂</h3>
@@ -144,17 +152,17 @@ graph TD
 
 ```bash
 # 1. Unzip the downloaded file
-$ unzip AnalitiQ.exe.zip
+$ unzip Analytiq-Cinnamon.zip
 
 # 2. Run the application
 $ ./AnalytiQ.exe
 
-# 3. Upload your feedback data and start analyzing!
+# 3. Upload your feedback data using the new batch uploader!
 ```
 
 ### **🔐 Demo Credentials**
-- **Username**: `bob@acmecorp.com`
-- **Password**: `Pass123`
+- **Username**: `demo@analytiq.dev`
+- **Password**: `Cinnamon2025`
 
 ---
 
@@ -245,7 +253,7 @@ Full deployment documentation available in the [Deployment Guide](https://github
 
 ## 🤝 **Contributing**
 
-We welcome contributions from the community! Whether it's adding new features, fixing bugs, or improving documentation, your help makes AnalytiQ better for everyone.
+We welcome contributions to AnalytiQ Cinnamon! Whether it's adding new features, fixing bugs, or improving documentation, your help makes AnalytiQ better for everyone.
 
 ### **Getting Started**
 
@@ -302,7 +310,7 @@ SOFTWARE.
 
 <div align="center">
   <img src="https://github.com/user-attachments/assets/0ab385eb-a2bc-498e-81eb-8a6b3cd8a375" width="70" alt="AnalytiQ Logo">
-  <h3>AnalytiQ — Where Customer Feedback Meets Intelligence</h3>
+  <h3>AnalytiQ Cinnamon — Spice Up Your Customer Insights</h3>
   <p>Developed by <b>Victor Bash</b> for the <b>Microsoft Hackathon 2025</b></p>
-  <a href="https://github.com/victorbash400/AnalitiqProject/releases/download/v0.1.1-hackathon/AnalytiQ.UI.zip"><b>⬇️ DOWNLOAD NOW ⬇️</b></a>
+  <a href="https://github.com/victorbash400/AnalitiqProject/releases/download/AnalytiQ-Cinammon/Analytiq-Cinnamon.zip"><b>⬇️ DOWNLOAD CINNAMON NOW ⬇️</b></a>
 </div>
