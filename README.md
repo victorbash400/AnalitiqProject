@@ -161,8 +161,8 @@ $ ./AnalytiQ.exe
 ```
 
 ### **🔐 Demo Credentials**
-- **Username**: `demo@analytiq.dev`
-- **Password**: `Cinnamon2025`
+- **Username**: `Bob@acmecorp.com`
+- **Password**: `Pass123`
 
 ---
 
