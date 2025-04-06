@@ -14,32 +14,28 @@
         Loaded="Window_Loaded">
 
     <Window.Resources>
-        <!-- Improved Modern TextBox Style with better visibility -->
+        <!-- Modern TextBox Style with Height Removed -->
         <Style x:Key="ModernTextBox" TargetType="TextBox">
-            <Setter Property="Background" Value="#2D2D2D"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Padding" Value="10,8"/>
-            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Background" Value="#1E1E1E"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="Padding" Value="14,12"/>
+            <Setter Property="FontSize" Value="14"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="BorderBrush" Value="#444444"/>
+            <Setter Property="BorderBrush" Value="#333333"/>
             <Setter Property="CaretBrush" Value="White"/>
-            <Setter Property="SelectionBrush" Value="#7C3AED"/>
-            <Setter Property="Height" Value="36"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
                         <Border x:Name="border" Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="4">
+                                CornerRadius="6">
                             <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"
-                                          VerticalAlignment="Center" 
-                                          Foreground="{TemplateBinding Foreground}"/>
+                                          VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="BorderBrush" Value="#9361FB"/>
-                                <Setter Property="Background" Value="#333333"/>
+                                <Setter Property="BorderBrush" Value="#7C3AED"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Opacity" Value="0.6"/>
@@ -50,14 +46,14 @@
             </Setter>
         </Style>
 
-        <!-- Improved ReadOnly TextBox Style -->
+        <!-- ReadOnly TextBox Style -->
         <Style x:Key="ReadOnlyTextBox" TargetType="TextBox" BasedOn="{StaticResource ModernTextBox}">
             <Setter Property="Background" Value="#252525"/>
             <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="BorderBrush" Value="#333333"/>
         </Style>
 
-        <!-- Improved ComboBox Style -->
+        <!-- Modern ComboBox Style with Corrected Triggers -->
         <Style x:Key="ModernComboBox" TargetType="ComboBox">
             <Setter Property="Background" Value="#2D2D2D"/>
             <Setter Property="Foreground" Value="White"/>
@@ -70,39 +66,39 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
                         <Grid>
-                            <ToggleButton x:Name="toggleButton" 
-                                      BorderBrush="{TemplateBinding BorderBrush}"
-                                      Background="{TemplateBinding Background}"
-                                      IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                      Focusable="false">
+                            <ToggleButton x:Name="toggleButton"
+                                          BorderBrush="{TemplateBinding BorderBrush}"
+                                          Background="{TemplateBinding Background}"
+                                          IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          Focusable="false">
                                 <ToggleButton.Template>
                                     <ControlTemplate TargetType="ToggleButton">
-                                        <Border x:Name="templateRoot" 
-                                            Background="{TemplateBinding Background}"
-                                            BorderBrush="{TemplateBinding BorderBrush}" 
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            CornerRadius="4">
+                                        <Border x:Name="templateRoot"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                CornerRadius="4">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="*"/>
                                                     <ColumnDefinition Width="Auto"/>
                                                 </Grid.ColumnDefinitions>
                                                 <ContentPresenter Margin="{TemplateBinding Padding}"
-                                                              HorizontalAlignment="Left"
-                                                              VerticalAlignment="Center"/>
+                                                                  HorizontalAlignment="Left"
+                                                                  VerticalAlignment="Center"/>
                                                 <Path x:Name="arrow" Grid.Column="1" Margin="0,0,10,0"
-                                                  Fill="White" HorizontalAlignment="Right"
-                                                  VerticalAlignment="Center" Stretch="Uniform"
-                                                  Width="10" Height="6"
-                                                  Data="M0,0 L4,4 L8,0 Z"/>
+                                                      Fill="White" HorizontalAlignment="Right"
+                                                      VerticalAlignment="Center" Stretch="Uniform"
+                                                      Width="10" Height="6"
+                                                      Data="M0,0 L4,4 L8,0 Z"/>
                                             </Grid>
                                         </Border>
                                         <ControlTemplate.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="true">
+                                            <Trigger Property="IsMouseOver" Value="True">
                                                 <Setter Property="Background" Value="#333333"/>
                                                 <Setter Property="BorderBrush" Value="#9361FB"/>
                                             </Trigger>
-                                            <Trigger Property="IsChecked" Value="true">
+                                            <Trigger Property="IsChecked" Value="True">
                                                 <Setter Property="BorderBrush" Value="#9361FB"/>
                                             </Trigger>
                                         </ControlTemplate.Triggers>
@@ -110,25 +106,25 @@
                                 </ToggleButton.Template>
                             </ToggleButton>
                             <ContentPresenter Name="contentPresenter"
-                                          Content="{TemplateBinding SelectionBoxItem}"
-                                          ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                          ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                          Margin="{TemplateBinding Padding}"
-                                          HorizontalAlignment="Left"
-                                          VerticalAlignment="Center"/>
-                            <Popup x:Name="PART_Popup" 
-                               AllowsTransparency="true" 
-                               Focusable="false"
-                               IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                               PopupAnimation="Slide"
-                               Placement="Bottom">
+                                              Content="{TemplateBinding SelectionBoxItem}"
+                                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Center"/>
+                            <Popup x:Name="PART_Popup"
+                                   AllowsTransparency="True"
+                                   Focusable="False"
+                                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                   PopupAnimation="Slide"
+                                   Placement="Bottom">
                                 <Border x:Name="dropDownBorder"
-                                    Background="#2D2D2D"
-                                    BorderBrush="#444444"
-                                    BorderThickness="1"
-                                    CornerRadius="0,0,4,4"
-                                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                                    MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
+                                        Background="#2D2D2D"
+                                        BorderBrush="#444444"
+                                        BorderThickness="1"
+                                        CornerRadius="0,0,4,4"
+                                        MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                                        MinWidth="{Binding ActualWidth, ElementName=templateRoot}">
                                     <ScrollViewer MaxHeight="{TemplateBinding MaxDropDownHeight}">
                                         <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained"/>
                                     </ScrollViewer>
@@ -140,7 +136,7 @@
             </Setter>
         </Style>
 
-        <!-- Improved Label Style -->
+        <!-- Field Label Style -->
         <Style x:Key="FieldLabel" TargetType="TextBlock">
             <Setter Property="Foreground" Value="#CCCCCC"/>
             <Setter Property="FontSize" Value="11"/>
@@ -149,7 +145,7 @@
             <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
         </Style>
 
-        <!-- Improved ComboBoxItem Style -->
+        <!-- ComboBoxItem Style -->
         <Style TargetType="ComboBoxItem">
             <Setter Property="Padding" Value="10,8"/>
             <Setter Property="Foreground" Value="White"/>
@@ -164,7 +160,7 @@
             </Style.Triggers>
         </Style>
 
-        <!-- Improved Button Style -->
+        <!-- Primary Button Style -->
         <Style x:Key="PrimaryButton" TargetType="Button">
             <Setter Property="Background" Value="#7C3AED"/>
             <Setter Property="Foreground" Value="White"/>
@@ -198,7 +194,7 @@
             </Setter>
         </Style>
 
-        <!-- Improved Link Style -->
+        <!-- Link Button Style -->
         <Style x:Key="LinkButton" TargetType="Button">
             <Setter Property="Foreground" Value="#CDCDCD"/>
             <Setter Property="FontSize" Value="13"/>
@@ -222,7 +218,7 @@
             </Setter>
         </Style>
 
-        <!-- Improved Checkbox Style -->
+        <!-- Modern Checkbox Style -->
         <Style x:Key="ModernCheckbox" TargetType="CheckBox">
             <Setter Property="Foreground" Value="#E0E0E0"/>
             <Setter Property="FontSize" Value="13"/>
@@ -235,35 +231,35 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Border x:Name="checkBoxBorder" 
-                                  BorderBrush="#444444" 
-                                  Background="#2D2D2D"
-                                  BorderThickness="1" 
-                                  CornerRadius="3"
-                                  Width="18" Height="18" 
-                                  VerticalAlignment="Center">
-                                <Path x:Name="checkMark" 
-                                    Width="12" Height="12" 
-                                    Data="M3,7 L6,10 L12,4" 
-                                    Stroke="White" 
-                                    StrokeThickness="2" 
-                                    Visibility="Collapsed"/>
+                            <Border x:Name="checkBoxBorder"
+                                    BorderBrush="#444444"
+                                    Background="#2D2D2D"
+                                    BorderThickness="1"
+                                    CornerRadius="3"
+                                    Width="18" Height="18"
+                                    VerticalAlignment="Center">
+                                <Path x:Name="checkMark"
+                                      Width="12" Height="12"
+                                      Data="M3,7 L6,10 L12,4"
+                                      Stroke="White"
+                                      StrokeThickness="2"
+                                      Visibility="Collapsed"/>
                             </Border>
-                            <ContentPresenter x:Name="contentPresenter" Grid.Column="1" 
-                                           Focusable="False" 
-                                           HorizontalAlignment="Left" 
-                                           Margin="8,0,0,0" 
-                                           RecognizesAccessKey="True" 
-                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                           VerticalAlignment="Center"/>
+                            <ContentPresenter x:Name="contentPresenter" Grid.Column="1"
+                                              Focusable="False"
+                                              HorizontalAlignment="Left"
+                                              Margin="8,0,0,0"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              VerticalAlignment="Center"/>
                         </Grid>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="true">
+                            <Trigger Property="IsChecked" Value="True">
                                 <Setter Property="Visibility" TargetName="checkMark" Value="Visible"/>
                                 <Setter Property="Background" TargetName="checkBoxBorder" Value="#7C3AED"/>
                                 <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#7C3AED"/>
                             </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
+                            <Trigger Property="IsMouseOver" Value="True">
                                 <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="#9361FB"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -284,10 +280,7 @@
                 <!-- Left Side - Image with Overlay -->
                 <Border Grid.Column="0" CornerRadius="8,0,0,8" ClipToBounds="True">
                     <Grid>
-                        <!-- Background Image -->
                         <Image Source="/assets/why_not.jpg" Stretch="UniformToFill"/>
-
-                        <!-- Gradient Overlay -->
                         <Rectangle>
                             <Rectangle.Fill>
                                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -296,18 +289,15 @@
                                 </LinearGradientBrush>
                             </Rectangle.Fill>
                         </Rectangle>
-
-                        <!-- Logo and Text -->
                         <StackPanel VerticalAlignment="Center" Margin="40,0,20,0">
-                            <TextBlock Text="ANALYTIQ" Foreground="White" FontSize="36" 
+                            <TextBlock Text="ANALYTIQ" Foreground="White" FontSize="36"
                                        FontWeight="Bold" Margin="0,0,0,8"
                                        TextOptions.TextFormattingMode="Ideal"/>
-                            <TextBlock Text="Set Up Your Organization" Foreground="#E0E0E0" 
+                            <TextBlock Text="Set Up Your Organization" Foreground="#E0E0E0"
                                        FontSize="18" FontWeight="Medium" Margin="0,0,0,12"/>
-                            <TextBlock Text="Register your company to access AI-powered analytics and dashboards" 
-                                       Foreground="#DDDDDD" FontSize="14" TextWrapping="Wrap" 
+                            <TextBlock Text="Register your company to access AI-powered analytics and dashboards"
+                                       Foreground="#DDDDDD" FontSize="14" TextWrapping="Wrap"
                                        Margin="0,0,0,20" LineHeight="20" MaxWidth="340"/>
-
                             <WrapPanel Margin="0,10,0,0">
                                 <Border Background="#227C3AED" CornerRadius="12" Padding="12,6" Margin="0,0,10,0">
                                     <TextBlock Text="Real-time Analytics" Foreground="#E0E0E0" FontSize="12"/>
@@ -323,27 +313,22 @@
                 <!-- Right Side - Form -->
                 <Border Grid.Column="1" Background="#141414" CornerRadius="0,8,8,0">
                     <Grid Margin="30">
-                        <!-- Error Container -->
-                        <Border x:Name="errorContainer" Background="#331E0A0A" BorderBrush="#FF5252" 
+                        <Border x:Name="errorContainer" Background="#331E0A0A" BorderBrush="#FF5252"
                                 BorderThickness="1" CornerRadius="4" Padding="12" Margin="0,0,0,16"
                                 Visibility="Collapsed" VerticalAlignment="Top">
                             <TextBlock x:Name="txtErrorMessage" Foreground="#FF5252" TextWrapping="Wrap" FontSize="12"/>
                         </Border>
-
-                        <!-- Form Content -->
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Organization Setup" FontSize="22" FontWeight="Bold" 
+                            <TextBlock Text="Organization Setup" FontSize="22" FontWeight="Bold"
                                        Foreground="#FFFFFF" Margin="0,0,0,4"
                                        TextOptions.TextFormattingMode="Ideal"/>
-                            <TextBlock Text="Complete your profile" FontSize="14" 
+                            <TextBlock Text="Complete your profile" FontSize="14"
                                        Foreground="#B0B0B0" Margin="0,0,0,24"/>
-
                             <TextBlock Text="ORGANIZATION NAME" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtCompanyName" Style="{StaticResource ModernTextBox}" 
+                            <TextBox x:Name="txtCompanyName" Style="{StaticResource ModernTextBox}"
                                      Margin="0,0,0,16" TextChanged="ValidateForm" TabIndex="1"/>
-
                             <TextBlock Text="INDUSTRY" Style="{StaticResource FieldLabel}"/>
-                            <ComboBox x:Name="cboIndustry" Style="{StaticResource ModernComboBox}" 
+                            <ComboBox x:Name="cboIndustry" Style="{StaticResource ModernComboBox}"
                                       Margin="0,0,0,16" SelectionChanged="ValidateForm" TabIndex="2">
                                 <ComboBoxItem Content="Finance"/>
                                 <ComboBoxItem Content="Retail"/>
@@ -352,30 +337,25 @@
                                 <ComboBoxItem Content="Healthcare"/>
                                 <ComboBoxItem Content="Other"/>
                             </ComboBox>
-
                             <TextBlock Text="TENANT ID" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtTenantId" Style="{StaticResource ReadOnlyTextBox}" 
+                            <TextBox x:Name="txtTenantId" Style="{StaticResource ReadOnlyTextBox}"
                                      Margin="0,0,0,16" TabIndex="3"/>
-
                             <TextBlock Text="ADMIN EMAIL" Style="{StaticResource FieldLabel}"/>
-                            <TextBox x:Name="txtAdminEmail" Style="{StaticResource ReadOnlyTextBox}" 
+                            <TextBox x:Name="txtAdminEmail" Style="{StaticResource ReadOnlyTextBox}"
                                      Margin="0,0,0,20" TabIndex="4"/>
-
                             <Border BorderBrush="#333333" BorderThickness="0,1,0,0" Margin="0,0,0,20"/>
-
-                            <CheckBox x:Name="chkConfirm" Style="{StaticResource ModernCheckbox}" Margin="0,0,0,20" 
+                            <CheckBox x:Name="chkConfirm" Style="{StaticResource ModernCheckbox}" Margin="0,0,0,20"
                                       Checked="ValidateForm" Unchecked="ValidateForm" TabIndex="5">
-                                <TextBlock Text="I confirm I am authorized to register this organization" 
+                                <TextBlock Text="I confirm I am authorized to register this organization"
                                            FontSize="13" TextWrapping="Wrap" Foreground="#E0E0E0"/>
                             </CheckBox>
-
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Button x:Name="btnRegister" Content="Register" Grid.Column="0"
-                                        Style="{StaticResource PrimaryButton}" Margin="0,0,8,0" 
+                                        Style="{StaticResource PrimaryButton}" Margin="0,0,8,0"
                                         Click="Register_Click" IsEnabled="False" IsDefault="True" TabIndex="6"/>
                                 <Button x:Name="btnSkipRegistration" Content="Skip" Grid.Column="1"
                                         Style="{StaticResource LinkButton}" Click="SkipRegistration_Click" TabIndex="7"/>

@@ -25,7 +25,6 @@ namespace AnalytiQFunctions
         private static readonly HttpClient client = new HttpClient();
         private readonly string blobStorageConnection;
 
-        // Constructor: Initialize logger and connection string with null check
         public ProcessUploadedFile(ILogger<ProcessUploadedFile> logger)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -36,7 +35,6 @@ namespace AnalytiQFunctions
             }
         }
 
-        // Main function entry point: Triggered by Event Grid
         [Function("ProcessUploadedFile")]
         public async Task Run([EventGridTrigger] EventGridEvent eventGridEvent)
         {
@@ -44,7 +42,6 @@ namespace AnalytiQFunctions
             {
                 _logger.LogInformation("📩 Received Event: {EventType}", eventGridEvent.EventType);
 
-                // Parse event data safely
                 using var jsonDoc = JsonDocument.Parse(eventGridEvent.Data?.ToString() ?? "{}");
                 var root = jsonDoc.RootElement;
 
@@ -74,11 +71,10 @@ namespace AnalytiQFunctions
                 {
                     _logger.LogError("❌ Inner Exception: {InnerMessage}", ex.InnerException.Message);
                 }
-                throw; // Re-throw to ensure function failure is recorded
+                throw;
             }
         }
 
-        // Core method to process blob and extract text
         private async Task<string> ReadAndExtractTextFromBlobUrl(string blobUrl)
         {
             try
@@ -91,17 +87,7 @@ namespace AnalytiQFunctions
                     return "⚠️ Error: Azure Blob Storage connection string is missing.";
                 }
 
-                Uri uri;
-                try
-                {
-                    uri = new Uri(blobUrl);
-                }
-                catch (UriFormatException ex)
-                {
-                    _logger.LogError("❌ Invalid blob URL format: {Message}", ex.Message);
-                    return "⚠️ Error: Invalid blob URL format.";
-                }
-
+                Uri uri = new Uri(blobUrl);
                 string containerName = uri.Segments.Length > 1 ? uri.Segments[1].TrimEnd('/') : string.Empty;
                 string blobPath = uri.Segments.Length > 2
                     ? Uri.UnescapeDataString(string.Join("", uri.Segments.Skip(2)))
@@ -126,7 +112,6 @@ namespace AnalytiQFunctions
                 BlobClient blobClient = containerClient.GetBlobClient(blobPath);
                 _logger.LogInformation("🔍 Created authenticated BlobClient for: {BlobUri}", blobClient.Uri);
 
-                // Retry logic for blob existence check
                 const int maxBlobRetries = 5;
                 int retryDelayMs = 3000;
                 for (int retry = 0; retry < maxBlobRetries; retry++)
@@ -143,7 +128,7 @@ namespace AnalytiQFunctions
 
                     _logger.LogWarning("⏳ Blob not found, retrying... (Attempt {Attempt}/{MaxRetries})", retry + 1, maxBlobRetries);
                     await Task.Delay(retryDelayMs);
-                    retryDelayMs *= 2; // Exponential backoff
+                    retryDelayMs *= 2;
                 }
 
                 BlobDownloadInfo download = await blobClient.DownloadAsync();
@@ -159,7 +144,6 @@ namespace AnalytiQFunctions
                 string fileExtension = Path.GetExtension(fileName).ToLowerInvariant();
                 _logger.LogInformation("📂 File Type Detected: {FileExtension}", fileExtension);
 
-                // Handle various file types
                 string extractedText = fileExtension switch
                 {
                     ".pdf" => await ExtractTextFromPDF(fileBytes),
@@ -185,10 +169,10 @@ namespace AnalytiQFunctions
 
                 string tenantId = pathSegments[0];
                 string batchId = pathSegments[1];
-                _logger.LogInformation("📤 Preparing to save to database: TenantID={TenantId}, FileName={FileName}, FileType={FileExtension}, ProductName={ProductName}",
+                _logger.LogInformation("📤 Preparing to save: TenantID={TenantId}, FileName={FileName}, FileType={FileExtension}, ProductName={ProductName}",
                     tenantId, fileName, fileExtension, productName);
 
-                AnalyzedTextResult aiResult = await AnalyzeTextWithGPT4(extractedText);
+                AnalyzedTextResult aiResult = await AnalyzeTextWithGPT4(extractedText, tenantId, productName);
                 if (string.IsNullOrEmpty(aiResult.Error))
                 {
                     await SaveToDatabase(tenantId, fileName, fileExtension, extractedText, aiResult, productName);
@@ -196,7 +180,7 @@ namespace AnalytiQFunctions
                 }
                 else
                 {
-                    _logger.LogError("❌ Skipping database save and CSV generation due to GPT-4 error: {Error}", aiResult.Error);
+                    _logger.LogError("❌ Skipping save due to GPT-4 error: {Error}", aiResult.Error);
                 }
 
                 _logger.LogInformation("📊 Processed {FileExtension} file, extracted {Length} characters.", fileExtension, extractedText.Length);
@@ -209,7 +193,147 @@ namespace AnalytiQFunctions
             }
         }
 
-        // Extract text from PDF using Document AI with improved polling
+        private async Task<string> RetrieveContextFromDatabase(string tenantId, string productName, string extractedText)
+        {
+            string connectionString = Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING");
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                _logger.LogWarning("⚠️ SQL Connection String missing for context retrieval.");
+                return "No prior context available.";
+            }
+
+            try
+            {
+                // Extract top 3 keywords from extractedText, fallback to recency if empty
+                var keywords = string.IsNullOrWhiteSpace(extractedText)
+                    ? new List<string>()
+                    : extractedText.Split(new[] { ' ', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+                        .Where(w => w.Length > 3) // Skip short words
+                        .GroupBy(w => w.ToLowerInvariant())
+                        .OrderByDescending(g => g.Count())
+                        .Take(3)
+                        .Select(g => g.Key)
+                        .ToList();
+
+                using SqlConnection conn = new SqlConnection(connectionString);
+                await conn.OpenAsync();
+
+                string query = @"
+                    SELECT TOP 5 OriginalText, SentimentCategory, RelatedIssue, ProductName
+                    FROM dbo.ProcessedData
+                    WHERE TenantID = @TenantID
+                    AND (ProductName = @ProductName OR @ProductName IS NULL)
+                    AND (@Keyword1 = '' OR OriginalText LIKE '%' + @Keyword1 + '%')
+                    AND (@Keyword2 = '' OR OriginalText LIKE '%' + @Keyword2 + '%')
+                    AND (@Keyword3 = '' OR OriginalText LIKE '%' + @Keyword3 + '%')
+                    ORDER BY ProcessingTime DESC";
+
+                using SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@TenantID", tenantId);
+                cmd.Parameters.AddWithValue("@ProductName", productName ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Keyword1", keywords.Count > 0 ? keywords[0] : "");
+                cmd.Parameters.AddWithValue("@Keyword2", keywords.Count > 1 ? keywords[1] : "");
+                cmd.Parameters.AddWithValue("@Keyword3", keywords.Count > 2 ? keywords[2] : "");
+
+                StringBuilder context = new StringBuilder();
+                using SqlDataReader reader = await cmd.ExecuteReaderAsync();
+                if (!reader.HasRows)
+                {
+                    _logger.LogInformation("ℹ️ No matching feedback for TenantID: {TenantId}, ProductName: {ProductName}, Keywords: {Keywords}",
+                        tenantId, productName, string.Join(", ", keywords));
+                    return "No prior context available.";
+                }
+
+                while (await reader.ReadAsync())
+                {
+                    context.AppendLine($"Past Feedback: {reader["OriginalText"]}");
+                    context.AppendLine($"Sentiment: {reader["SentimentCategory"]}, Issue: {reader["RelatedIssue"]}, Product: {reader["ProductName"]}");
+                    context.AppendLine("---");
+                }
+
+                string contextString = context.ToString();
+                if (contextString.Length > 2000)
+                {
+                    contextString = contextString.Substring(0, 2000) + "...";
+                    _logger.LogWarning("⚠️ Truncated context to 2000 chars from {OriginalLength}", context.Length);
+                }
+                _logger.LogInformation("📚 Retrieved context: {Length} chars, Keywords: {Keywords}", contextString.Length, string.Join(", ", keywords));
+                return contextString;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("❌ Context retrieval failed: {Message}", ex.Message);
+                return "No prior context available.";
+            }
+        }
+
+        private async Task<AnalyzedTextResult> AnalyzeTextWithGPT4(string text, string tenantId, string productName)
+        {
+            try
+            {
+                var openAiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? "AsrRDxpNJI9vB6lUWEa15ZfvQl1LMOxaAoeeSFxHMqdFzsOO2RigJQQJ99BCACfhMk5XJ3w3AAAAACOGrScJ";
+                var endpoint = Environment.GetEnvironmentVariable("OPENAI_API_ENDPOINT") ?? "https://victo-m8ad3gdl-swedencentral.cognitiveservices.azure.com/";
+                var deploymentName = Environment.GetEnvironmentVariable("OPENAI_DEPLOYMENT_NAME") ?? "gpt-4o-analytiq";
+
+                string apiUrl = $"{endpoint}openai/deployments/{deploymentName}/chat/completions?api-version=2024-02-01";
+
+                string context = await RetrieveContextFromDatabase(tenantId, productName, text);
+
+                var systemMessage = $@"You are an expert analyst processing customer feedback. Use this prior context to ground your analysis:
+{context}
+For each input text, analyze it and return a JSON object with:
+    - SentimentScore (float, -1 to 1): -1 very negative, 1 very positive.
+    - SentimentCategory (string): 'Positive', 'Negative', or 'Neutral'.
+    - UrgencyLevel (string): 'Low', 'Medium', 'High', or 'Critical'.
+    - KeyPhrases (string): Comma-separated important phrases.
+    - RecommendationText (string): One actionable suggestion.
+    - RelatedIssue (string): Main problem (e.g., 'Shipping Delay').
+    - ImpactScore (float, 0-1): Severity, 0 minor, 1 major.
+    - CustomerSegmentGuess (string): 'Premium User', 'New Customer', or 'Regular User'.
+Use the context for consistency with past feedback. Be precise, avoid wild guesses, and keep scores conservative if unsure.
+Return only the JSON object.";
+
+                var messages = new[] {
+                    new { role = "system", content = systemMessage },
+                    new { role = "user", content = $"Analyze this text: '{text}'" }
+                };
+                var requestBody = new { messages, max_tokens = 500 };
+                string jsonBody = JsonSerializer.Serialize(requestBody);
+                using var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Add("api-key", openAiKey);
+
+                _logger.LogInformation("🚀 Sending context-enhanced GPT request: {ApiUrl}", apiUrl);
+                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
+                string responseText = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError("❌ GPT API Error: {StatusCode} - {ResponseText}", response.StatusCode, responseText);
+                    return new AnalyzedTextResult { Error = $"GPT API failed: {response.StatusCode} - {responseText}" };
+                }
+
+                using JsonDocument jsonDoc = JsonDocument.Parse(responseText);
+                JsonElement root = jsonDoc.RootElement;
+                if (root.TryGetProperty("choices", out JsonElement choices) && choices.EnumerateArray().Any())
+                {
+                    string jsonContent = choices[0].GetProperty("message").GetProperty("content").GetString();
+                    var result = JsonSerializer.Deserialize<AnalyzedTextResult>(jsonContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+                    _logger.LogInformation("🔍 Analyzed: SentimentScore={Score}, Urgency={Urgency}", result.SentimentScore, result.UrgencyLevel);
+                    return result;
+                }
+
+                _logger.LogError("❌ No valid GPT response choices.");
+                return new AnalyzedTextResult { Error = "No valid analysis from GPT." };
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("❌ GPT API Error: {Message}", ex.Message);
+                return new AnalyzedTextResult { Error = $"GPT failed: {ex.Message}" };
+            }
+        }
+
         private async Task<string> ExtractTextFromPDF(byte[] pdfBytes)
         {
             string documentAiEndpoint = Environment.GetEnvironmentVariable("DOCUMENT_AI_ENDPOINT");
@@ -237,14 +361,14 @@ namespace AnalytiQFunctions
                 _logger.LogInformation("🔍 Calling Document AI API at: {ApiUrl}", apiUrl);
 
                 HttpResponseMessage response = await client.PostAsync(apiUrl, content);
-                _logger.LogInformation("📡 API Status: {StatusCode}, Headers: {Headers}", response.StatusCode, response.Headers);
+                _logger.LogInformation("📡 API Status: {StatusCode}", response.StatusCode);
 
                 if (response.StatusCode == System.Net.HttpStatusCode.Accepted)
                 {
                     string operationLocation = response.Headers.GetValues("Operation-Location").FirstOrDefault();
                     if (string.IsNullOrEmpty(operationLocation))
                     {
-                        _logger.LogError("❌ Operation-Location header missing in response.");
+                        _logger.LogError("❌ Operation-Location header missing.");
                         return "⚠️ Error: Operation-Location header missing.";
                     }
 
@@ -263,13 +387,12 @@ namespace AnalytiQFunctions
             }
         }
 
-        // Enhanced polling with dynamic retries based on file size
         private async Task<string> PollForResult(string operationLocation, long base64Size)
         {
-            const int baseRetries = 30; // Base number of retries
-            int maxRetries = baseRetries + (int)(base64Size / 5_000_000); // Increase retries for larger files (1 extra retry per 5MB)
-            int delayMs = 3000; // Starting delay
-            const int maxDelayMs = 15000; // Cap delay at 15 seconds
+            const int baseRetries = 30;
+            int maxRetries = Math.Min(baseRetries + (int)(base64Size / 5_000_000), 60); // Cap at 60 retries
+            int delayMs = 3000;
+            const int maxDelayMs = 15000;
 
             for (int i = 0; i < maxRetries; i++)
             {
@@ -288,21 +411,20 @@ namespace AnalytiQFunctions
 
                         if (status == "succeeded")
                         {
-                            _logger.LogInformation("✅ Analysis succeeded!");
+                            _logger.LogInformation("✅ PDF analysis succeeded!");
                             return ParseDocumentAIResponse(resultContent);
                         }
                         else if (status == "failed")
                         {
-                            string error = root.TryGetProperty("error", out JsonElement errorElement)
-                                ? errorElement.ToString() : "Unknown error";
-                            _logger.LogError("❌ Analysis failed: {Error}", error);
+                            string error = root.TryGetProperty("error", out JsonElement errorElement) ? errorElement.ToString() : "Unknown error";
+                            _logger.LogError("❌ PDF analysis failed: {Error}", error);
                             return $"⚠️ Error: Analysis failed - {error}";
                         }
                     }
                     else
                     {
-                        _logger.LogError("❌ Polling failed with status code: {StatusCode}", resultResponse.StatusCode);
-                        return $"⚠️ Error: Polling failed with status code {resultResponse.StatusCode}";
+                        _logger.LogError("❌ Polling failed: {StatusCode}", resultResponse.StatusCode);
+                        return $"⚠️ Error: Polling failed with {resultResponse.StatusCode}";
                     }
                 }
                 catch (HttpRequestException ex)
@@ -311,17 +433,14 @@ namespace AnalytiQFunctions
                         i + 1, maxRetries, ex.Message);
                 }
 
-                _logger.LogInformation("⏳ Waiting for analysis to complete... (Attempt {Attempt}/{MaxRetries}, Next delay: {Delay}ms)",
-                    i + 1, maxRetries, delayMs);
                 await Task.Delay(delayMs);
-                delayMs = Math.Min(delayMs + 1000, maxDelayMs); // Incremental backoff with cap
+                delayMs = Math.Min(delayMs + 1000, maxDelayMs);
             }
 
-            _logger.LogError("❌ Polling timed out after {MaxRetries} attempts!", maxRetries);
-            return "⚠️ Error: Analysis timed out.";
+            _logger.LogError("❌ PDF polling timed out after {MaxRetries} attempts!", maxRetries);
+            return "⚠️ Error: PDF analysis timed out.";
         }
 
-        // Parse Document AI response
         private static string ParseDocumentAIResponse(string jsonResponse)
         {
             using JsonDocument doc = JsonDocument.Parse(jsonResponse);
@@ -349,69 +468,6 @@ namespace AnalytiQFunctions
             return extractedText.Length > 0 ? extractedText.ToString() : "⚠️ No text extracted from PDF.";
         }
 
-        // GPT-4 analysis (unchanged for brevity, assumed robust)
-        private async Task<AnalyzedTextResult> AnalyzeTextWithGPT4(string text)
-        {
-            try
-            {
-                var openAiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY") ?? "AsrRDxpNJI9vB6lUWEa15ZfvQl1LMOxaAoeeSFxHMqdFzsOO2RigJQQJ99BCACfhMk5XJ3w3AAAAACOGrScJ";
-                var endpoint = Environment.GetEnvironmentVariable("OPENAI_API_ENDPOINT") ?? "https://victo-m8ad3gdl-swedencentral.cognitiveservices.azure.com/";
-                var deploymentName = Environment.GetEnvironmentVariable("OPENAI_DEPLOYMENT_NAME") ?? "gpt-4o-analytiq";
-
-                string apiUrl = $"{endpoint}openai/deployments/{deploymentName}/chat/completions?api-version=2024-02-01";
-
-                var systemMessage = @"You are an expert analyst processing customer feedback. For each input text, analyze it and return a JSON object with these fields:
-    - SentimentScore (float, -1 to 1): Overall sentiment, where -1 is very negative and 1 is very positive.
-    - SentimentCategory (string): 'Positive', 'Negative', or 'Neutral'.
-    - UrgencyLevel (string): 'Low', 'Medium', 'High', or 'Critical' based on how urgent the feedback sounds.
-    - KeyPhrases (string): Comma-separated list of important phrases.
-    - RecommendationText (string): One actionable suggestion to improve based on the feedback.
-    - RelatedIssue (string): The main problem mentioned (e.g., 'Shipping Delay').
-    - ImpactScore (float, 0-1): How severe the issue seems, 0 being minor and 1 being major.
-    - CustomerSegmentGuess (string): Guess the customer type: 'Premium User', 'New Customer', or 'Regular User'.
-    Be precise and avoid wild guesses. If unsure, keep scores conservative.
-    Return only the JSON object without any markdown formatting or backticks.";
-
-                var messages = new[] { new { role = "system", content = systemMessage }, new { role = "user", content = $"Analyze this text: '{text}'" } };
-                var requestBody = new { messages, max_tokens = 500 };
-                string jsonBody = JsonSerializer.Serialize(requestBody);
-                using var content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
-
-                client.DefaultRequestHeaders.Clear();
-                client.DefaultRequestHeaders.Add("api-key", openAiKey);
-
-                _logger.LogInformation("🚀 Sending request to GPT API: {ApiUrl}", apiUrl);
-                HttpResponseMessage response = await client.PostAsync(apiUrl, content);
-                string responseText = await response.Content.ReadAsStringAsync();
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    _logger.LogError("❌ GPT API Error: {StatusCode} - {ResponseText}", response.StatusCode, responseText);
-                    return new AnalyzedTextResult { Error = $"GPT API failed: {response.StatusCode} - {responseText}" };
-                }
-
-                using JsonDocument jsonDocument = JsonDocument.Parse(responseText);
-                JsonElement root = jsonDocument.RootElement;
-                if (root.TryGetProperty("choices", out JsonElement choices) && choices.EnumerateArray().Any())
-                {
-                    string jsonContent = choices[0].GetProperty("message").GetProperty("content").GetString();
-                    var result = JsonSerializer.Deserialize<AnalyzedTextResult>(jsonContent, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                    _logger.LogInformation("🔍 Analyzed Result: SentimentScore={Score}, Category={Category}, Urgency={Urgency}",
-                        result.SentimentScore, result.SentimentCategory, result.UrgencyLevel);
-                    return result;
-                }
-
-                _logger.LogError("❌ No valid choices in GPT response.");
-                return new AnalyzedTextResult { Error = "No valid analysis result from GPT." };
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError("❌ Error calling GPT API: {Message}", ex.Message);
-                return new AnalyzedTextResult { Error = $"GPT API failed: {ex.Message}" };
-            }
-        }
-
-        // Save to database with retry logic
         private async Task SaveToDatabase(string tenantId, string fileName, string fileType, string extractedText, AnalyzedTextResult aiResult, string productName)
         {
             string connectionString = Environment.GetEnvironmentVariable("SQL_CONNECTION_STRING");
@@ -425,8 +481,7 @@ namespace AnalytiQFunctions
             string truncatedText = extractedText.Length > maxTextLength ? extractedText.Substring(0, maxTextLength) : extractedText;
             if (extractedText.Length > maxTextLength)
             {
-                _logger.LogWarning("⚠️ Truncating text for database storage from {OriginalLength} to {MaxLength} characters.",
-                    extractedText.Length, maxTextLength);
+                _logger.LogWarning("⚠️ Truncating text for DB from {OriginalLength} to {MaxLength} chars.", extractedText.Length, maxTextLength);
             }
 
             const int maxRetries = 3;
@@ -436,7 +491,7 @@ namespace AnalytiQFunctions
             {
                 try
                 {
-                    _logger.LogInformation("💾 Attempting database save (Attempt {Attempt}/{MaxRetries})...", retry + 1, maxRetries + 1);
+                    _logger.LogInformation("💾 Attempting DB save (Attempt {Attempt}/{MaxRetries})...", retry + 1, maxRetries + 1);
                     using SqlConnection conn = new SqlConnection(connectionString);
                     await conn.OpenAsync();
 
@@ -470,29 +525,26 @@ namespace AnalytiQFunctions
                     cmd.Parameters.AddWithValue("@ProcessingTime", DateTime.UtcNow);
 
                     int rowsAffected = await cmd.ExecuteNonQueryAsync();
-                    _logger.LogInformation("✅ Saved {FileName} with ProductName={ProductName} to database. Rows affected: {Rows}",
-                        fileName, productName, rowsAffected);
+                    _logger.LogInformation("✅ Saved {FileName} to DB. Rows affected: {Rows}", fileName, rowsAffected);
                     return;
                 }
                 catch (SqlException ex) when (retry < maxRetries && IsTransientSqlError(ex))
                 {
-                    _logger.LogWarning("⚠️ Database save failed: {Message}, SqlError: {Number}. Retrying in {Delay}ms...",
-                        ex.Message, ex.Number, retryDelayMs);
+                    _logger.LogWarning("⚠️ DB save failed: {Message}, SqlError: {Number}. Retrying in {Delay}ms...", ex.Message, ex.Number, retryDelayMs);
                     await Task.Delay(retryDelayMs);
                     retryDelayMs *= 2;
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError("❌ Error saving to database: {Message}", ex.Message);
+                    _logger.LogError("❌ Error saving to DB: {Message}", ex.Message);
                     throw;
                 }
             }
 
-            _logger.LogError("❌ Failed to save to database after {MaxRetries} attempts.", maxRetries + 1);
-            throw new Exception($"Database save failed after {maxRetries + 1} attempts.");
+            _logger.LogError("❌ Failed to save to DB after {MaxRetries} attempts.", maxRetries + 1);
+            throw new Exception($"DB save failed after {maxRetries + 1} attempts.");
         }
 
-        // Helper to detect transient SQL errors
         private static bool IsTransientSqlError(SqlException ex)
         {
             int[] transientErrors = { -2, 53, 258, 4060 };
@@ -501,7 +553,6 @@ namespace AnalytiQFunctions
                    ex.Message.Contains("not currently available", StringComparison.OrdinalIgnoreCase);
         }
 
-        // Generate and upload CSV with proper escaping
         private async Task GenerateAndUploadBatchCsv(string tenantId, string batchId, string fileName, string fileType,
             string extractedText, AnalyzedTextResult aiResult, string productName)
         {
@@ -565,7 +616,6 @@ namespace AnalytiQFunctions
             }
         }
 
-        // Other extraction methods (unchanged for brevity, with minor robustness tweaks)
         private async Task<string> ExtractTextFromDOCX(byte[] docxBytes)
         {
             try
@@ -624,7 +674,7 @@ namespace AnalytiQFunctions
                         {
                             text.Append(reader.GetValue(i)?.ToString() + ",");
                         }
-                        if (text.Length > 0) text.Length--; // Remove trailing comma
+                        if (text.Length > 0) text.Length--;
                         text.AppendLine();
                     }
                 } while (reader.NextResult());
@@ -637,7 +687,6 @@ namespace AnalytiQFunctions
             }
         }
 
-        // Data model for GPT-4 results
         private class AnalyzedTextResult
         {
             public float SentimentScore { get; set; }

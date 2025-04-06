@@ -1,1 +1,26 @@
+# Build output
+bin/
+obj/
+
+# Visual Studio files
+.vs/
+*.user
+*.suo
+*.sln.docstates
+
+# WebView2 and browser-related cache files
+*.WebView2/
+GrShaderCache/
+Code Cache/
+BrowserMetrics/
+component_crx_cache/
+TrustTokenKeyCommitments/
+Domain Actions/
+AutoLaunchProtocolsComponent/
+
+# Temporary files
+*.cache
+*.tmp
+*.bak
+
 AnalytiQ.UI/obj/Release/net8.0-windows/win-x64/R2R/*.dll

@@ -17,24 +17,17 @@
         <Color x:Key="PrimaryBackColorValue">#141414</Color>
         <Color x:Key="SecondaryBackColorValue">#1C1C1C</Color>
         <Color x:Key="ContentBackColorValue">#292929</Color>
-        <!-- Lightened for better contrast -->
         <Color x:Key="PrimaryTextColorValue">#FFFFFF</Color>
         <Color x:Key="SecondaryTextColorValue">#F0F0F0</Color>
         <Color x:Key="MutedTextColorValue">#AAAAAA</Color>
         <Color x:Key="AccentColorValue">#34C759</Color>
         <Color x:Key="SecondaryAccentColorValue">#4CD964</Color>
         <Color x:Key="CardBackgroundValue">#222222</Color>
-        <!-- Lightened for better contrast -->
         <Color x:Key="BorderColorValue">#333333</Color>
-        <!-- Lightened for better contrast -->
         <Color x:Key="NavHoverColorValue">#323232</Color>
-        <!-- Lightened for better contrast -->
         <Color x:Key="NavActiveColorValue">#2D2D2D</Color>
-        <!-- Lightened slightly -->
         <Color x:Key="SidebarBackColorValue">#080808</Color>
-        <!-- Darkened for contrast against content -->
         <Color x:Key="HeaderBackColorValue">#0A0A0A</Color>
-        <!-- Darkened slightly for contrast -->
         <Color x:Key="WarningColorValue">#FF3B30</Color>
         <Color x:Key="DarkShadowColorValue">#000000</Color>
 
@@ -67,9 +60,7 @@
 
         <LinearGradientBrush x:Key="ContentGradient" StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#242424" Offset="0.0"/>
-            <!-- Lightened for better contrast -->
             <GradientStop Color="#282828" Offset="1.0"/>
-            <!-- Lightened for better contrast -->
         </LinearGradientBrush>
 
         <!-- Shadows remain the same -->
@@ -91,20 +82,20 @@
                     <ControlTemplate TargetType="Button">
                         <Grid>
                             <Border x:Name="IndicatorBar" 
-                                    Width="4" 
-                                    HorizontalAlignment="Left" 
-                                    Background="{StaticResource AccentGradient}" 
-                                    CornerRadius="0,2,2,0" 
-                                    Opacity="0">
+                                Width="4" 
+                                HorizontalAlignment="Left" 
+                                Background="{StaticResource AccentGradient}" 
+                                CornerRadius="0,2,2,0" 
+                                Opacity="0">
                                 <Border.Effect>
                                     <DropShadowEffect ShadowDepth="0" BlurRadius="8" Opacity="0.7" Color="{StaticResource AccentColorValue}"/>
                                 </Border.Effect>
                             </Border>
                             <Border x:Name="MainBorder" 
-                                    Background="{TemplateBinding Background}" 
-                                    BorderThickness="0" 
-                                    CornerRadius="8"
-                                    Margin="4,0,4,0">
+                                Background="{TemplateBinding Background}" 
+                                BorderThickness="0" 
+                                CornerRadius="8"
+                                Margin="4,0,4,0">
                                 <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"/>
                             </Border>
                         </Grid>
@@ -140,6 +131,27 @@
             </Setter>
         </Style>
 
+        <!-- Updated LogoStyle with neutral background -->
+        <Style x:Key="LogoStyle" TargetType="Border">
+            <Setter Property="Width" Value="48"/>
+            <!-- Slightly larger for visibility -->
+            <Setter Property="Height" Value="48"/>
+            <Setter Property="CornerRadius" Value="14"/>
+            <!-- Slightly larger radius -->
+            <Setter Property="Background" Value="#2D2D3F"/>
+            <!-- Lighter dark shade for contrast -->
+            <Setter Property="Padding" Value="4"/>
+            <!-- Add padding to frame the logo -->
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="22,0,0,0"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="12" Opacity="0.6" Color="#FFFFFF"/>
+                    <!-- White shadow for subtle glow -->
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <!-- Other styles remain the same -->
         <Style x:Key="WindowControlButton" TargetType="Button">
             <Setter Property="Width" Value="30"/>
@@ -153,10 +165,10 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" 
-                                CornerRadius="15" 
-                                Padding="5">
+                            CornerRadius="15" 
+                            Padding="5">
                             <ContentPresenter HorizontalAlignment="Center" 
-                                              VerticalAlignment="Center"/>
+                                          VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -182,20 +194,6 @@
             </Setter>
         </Style>
 
-        <Style x:Key="LogoStyle" TargetType="Border">
-            <Setter Property="Width" Value="40"/>
-            <Setter Property="Height" Value="40"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="Background" Value="{StaticResource AccentGradient}"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Margin" Value="22,0,0,0"/>
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect ShadowDepth="0" Direction="0" Opacity="0.5" BlurRadius="10" Color="{StaticResource AccentColorValue}"/>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
         <Style x:Key="ModernProgressBarStyle" TargetType="ProgressBar">
             <Setter Property="Height" Value="4"/>
             <Setter Property="Foreground" Value="{StaticResource AccentColor}"/>
@@ -206,9 +204,9 @@
                     <ControlTemplate TargetType="ProgressBar">
                         <Grid x:Name="TemplateRoot" SnapsToDevicePixels="true">
                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" 
-                                    BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
+                                BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>
                             <Border x:Name="PART_Indicator" HorizontalAlignment="Left" 
-                                    Background="{TemplateBinding Foreground}" CornerRadius="2" Margin="0">
+                                Background="{TemplateBinding Foreground}" CornerRadius="2" Margin="0">
                                 <Border.Effect>
                                     <DropShadowEffect ShadowDepth="0" BlurRadius="4" Color="{StaticResource AccentColorValue}" Opacity="0.5"/>
                                 </Border.Effect>
@@ -231,7 +229,6 @@
             </Setter>
         </Style>
     </Window.Resources>
-
     <!-- Main Window Border with Enhanced Drop Shadow -->
     <Border CornerRadius="16" Background="{StaticResource PrimaryBackColor}" Margin="10">
         <Border.Effect>
@@ -260,24 +257,22 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Logo and App Name -->
-                <StackPanel Grid.Column="0" 
-                            Orientation="Horizontal" 
-                            VerticalAlignment="Center">
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                     <Border Style="{StaticResource LogoStyle}">
-                        <TextBlock Text="A" 
-                                   Foreground="White" 
-                                   FontWeight="Bold" 
-                                   FontSize="20"
-                                   VerticalAlignment="Center" 
-                                   HorizontalAlignment="Center"/>
+                        <Image Source="/assets/logo.png" 
+               Width="36" 
+               Height="36" 
+               Stretch="Uniform" 
+               RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <!-- Ensure crisp rendering -->
                     </Border>
                     <TextBlock Text="AnalytiQ" 
-                               Foreground="{StaticResource PrimaryTextColor}" 
-                               FontWeight="Bold" 
-                               FontSize="18" 
-                               FontFamily="Segoe UI" 
-                               VerticalAlignment="Center"
-                               Margin="14,0,0,0"/>
+               Foreground="{StaticResource PrimaryTextColor}" 
+               FontWeight="Bold" 
+               FontSize="18" 
+               FontFamily="Segoe UI" 
+               VerticalAlignment="Center"
+               Margin="14,0,0,0"/>
                 </StackPanel>
 
                 <!-- App Title - Centered -->

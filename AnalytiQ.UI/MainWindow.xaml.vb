@@ -55,6 +55,7 @@ Public Class MainWindow
 
         ' Fetch embed token and initialize report
         LoadingContainer.Visibility = Visibility.Visible
+        UpdateLoadingText("Fetching authentication token...")
         Await FetchEmbedTokenAsync()
         LoadReport() ' Default to Overview page on startup
 
@@ -112,6 +113,14 @@ Public Class MainWindow
         End Try
     End Function
 
+    ' Update loading text in a simple way
+    Private Sub UpdateLoadingText(message As String)
+        Dim loadingText As TextBlock = TryCast(LoadingContainer.FindName("LoadingText"), TextBlock)
+        If loadingText IsNot Nothing Then
+            loadingText.Text = message
+        End If
+    End Sub
+
     ' Load the Power BI report with specific page
     Private Async Sub LoadReport(Optional pageName As String = Nothing)
         ' If pageName is not provided, determine based on current view
@@ -122,10 +131,7 @@ Public Class MainWindow
         Try
             ' Show loading state
             LoadingContainer.Visibility = Visibility.Visible
-            Dim loadingText As TextBlock = LoadingContainer.FindName("LoadingText")
-            If loadingText IsNot Nothing Then
-                loadingText.Text = "Please wait while we establish a connection"
-            End If
+            UpdateLoadingText($"Loading {pageName} report...")
 
             MainFrame.Visibility = Visibility.Collapsed
             PowerBIWebView.Visibility = Visibility.Visible
@@ -133,10 +139,12 @@ Public Class MainWindow
             ' Check if token is expired or not fetched
             If String.IsNullOrEmpty(_embedToken) OrElse _tokenExpiration < DateTime.UtcNow Then
                 Console.WriteLine("Token expired or not fetched. Refreshing...")
+                UpdateLoadingText("Refreshing authentication token...")
                 Await FetchEmbedTokenAsync()
             End If
 
             ' Ensure WebView2 is initialized
+            UpdateLoadingText("Initializing report viewer...")
             Await PowerBIWebView.EnsureCoreWebView2Async(Nothing)
             If PowerBIWebView.CoreWebView2 Is Nothing Then
                 ShowErrorPage("WebView2 Core initialization failed.")
@@ -174,7 +182,8 @@ Public Class MainWindow
                     permissions: models.Permissions.Read,
                     settings: {{
                         navContentPaneEnabled: true,
-                        filterPaneEnabled: true
+                        filterPaneEnabled: true,
+                        useCustomSaveAsDialog: true
                     }}
                 }};
                 
@@ -204,6 +213,11 @@ Public Class MainWindow
                         }});
                 }});
                 
+                report.on('rendered', function() {{
+                    console.log('Report rendered');
+                    window.chrome.webview.postMessage('ReportRendered');
+                }});
+                
                 report.on('error', function(event) {{
                     console.error('Error embedding report:', event.detail);
                     window.chrome.webview.postMessage('ReportError: ' + JSON.stringify(event.detail));
@@ -215,8 +229,8 @@ Public Class MainWindow
             Console.WriteLine($"Navigating WebView2 to embed report on page: {pageName}...")
             PowerBIWebView.NavigateToString(htmlContent)
 
-            ' Wait for the report to load with a single timeout
-            Dim timeoutTask = Task.Delay(15000) ' 15 seconds timeout
+            ' Wait for the report to load with an extended 30-second timeout
+            Dim timeoutTask = Task.Delay(30000) ' 30 seconds timeout
             Await Task.WhenAny(
                 Task.Run(Async Function()
                              While Not _isReportLoaded
@@ -227,7 +241,7 @@ Public Class MainWindow
             )
 
             If Not _isReportLoaded Then
-                Console.WriteLine("Report loading timed out after 15 seconds")
+                Console.WriteLine("Report loading timed out after 30 seconds")
                 Throw New Exception("Failed to load report within timeout period")
             End If
 
@@ -242,82 +256,6 @@ Public Class MainWindow
         End Try
     End Sub
 
-    ' Navigate to a specific report page after loading
-    Private Async Function NavigateToReportPage(pageName As String) As Task
-        If PowerBIWebView.CoreWebView2 Is Nothing OrElse Not _isReportLoaded Then
-            Console.WriteLine("Cannot navigate: WebView not initialized or report not loaded")
-            Return
-        End If
-
-        Try
-            Dim script As String = $"
-                const report = powerbi.get(document.getElementById('reportContainer'));
-                if (!report) {{
-                    console.error('Report not found in container');
-                    window.chrome.webview.postMessage('ReportError: Report not found in container');
-                    return;
-                }}
-                
-                report.getPages()
-                    .then(pages => {{
-                        console.log('Available pages:', pages.map(p => p.name));
-                        const targetPage = pages.find(p => 
-                            p.name.toLowerCase() === '{pageName.ToLower()}' || 
-                            p.displayName.toLowerCase() === '{pageName.ToLower()}'
-                        );
-                        
-                        if (targetPage) {{
-                            return report.setPage(targetPage.name);
-                        }} else {{
-                            throw new Error('Page not found: {pageName}');
-                        }}
-                    }})
-                    .then(() => console.log('Page changed to: {pageName}'))
-                    .catch(err => {{
-                        console.error('Error changing page:', err);
-                        window.chrome.webview.postMessage('ReportError: ' + err.message);
-                    }});
-            "
-
-            Await PowerBIWebView.CoreWebView2.ExecuteScriptAsync(script)
-            Console.WriteLine($"Executed script to navigate to page: {pageName}")
-        Catch ex As Exception
-            Console.WriteLine($"Error navigating to report page: {ex.Message}")
-        End Try
-    End Function
-
-    ' List all available pages in the report for debugging
-    Private Async Function ListReportPages() As Task
-        If PowerBIWebView.CoreWebView2 Is Nothing OrElse Not _isReportLoaded Then
-            Console.WriteLine("Cannot list pages: WebView not initialized or report not loaded")
-            Return
-        End If
-
-        Try
-            Dim script As String = "
-                const report = powerbi.get(document.getElementById('reportContainer'));
-                if (!report) {
-                    console.error('Report not found');
-                    return 'Report not found';
-                }
-                
-                return report.getPages()
-                    .then(pages => {
-                        return JSON.stringify(pages.map(p => ({name: p.name, displayName: p.displayName})));
-                    })
-                    .catch(err => {
-                        console.error('Error getting pages:', err);
-                        return 'Error: ' + err.message;
-                    });
-            "
-
-            Dim result = Await PowerBIWebView.CoreWebView2.ExecuteScriptAsync(script)
-            Console.WriteLine($"Available report pages: {result}")
-        Catch ex As Exception
-            Console.WriteLine($"Error listing report pages: {ex.Message}")
-        End Try
-    End Function
-
     ' Handle messages from WebView2
     Private Sub WebView_WebMessageReceived(sender As Object, e As CoreWebView2WebMessageReceivedEventArgs)
         Dim message As String = e.TryGetWebMessageAsString()
@@ -325,13 +263,13 @@ Public Class MainWindow
 
         If message = "ReportLoaded" Then
             _isReportLoaded = True
-            Dispatcher.Invoke(Async Sub()
+            Dispatcher.Invoke(Sub()
                                   PowerBIWebView.Visibility = Visibility.Visible
                                   LoadingContainer.Visibility = Visibility.Collapsed
                                   Console.WriteLine("Report loaded event received")
-                                  Await ListReportPages()
-                                  Await NavigateToReportPage(If(_currentView = "Dashboard", "Overview", "Deep Analytics"))
                               End Sub)
+        ElseIf message = "ReportRendered" Then
+            Console.WriteLine("Report fully rendered")
         ElseIf message.StartsWith("ReportError") OrElse message.StartsWith("ScriptError") Then
             Dispatcher.Invoke(Sub()
                                   ShowErrorPage(message)
@@ -449,6 +387,7 @@ Public Class MainWindow
 
     Private Sub LoadFramePage(page As Page, title As String)
         LoadingContainer.Visibility = Visibility.Visible
+        UpdateLoadingText($"Loading {title}...")
         LoadingContainer.Visibility = Visibility.Collapsed
         PageTitle.Text = title
         MainFrame.Navigate(page)
@@ -486,6 +425,7 @@ Public Class MainWindow
 
     Private Sub ShowErrorPage(errorMessage As String)
         LoadingContainer.Visibility = Visibility.Visible
+        UpdateLoadingText("An error occurred...")
         LoadingContainer.Visibility = Visibility.Collapsed
         MainFrame.Visibility = Visibility.Visible
         PowerBIWebView.Visibility = Visibility.Collapsed

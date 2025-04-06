@@ -10,10 +10,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="assets\888116.jpg" />
 		<None Remove="assets\blue_lake.jpeg" />
 		<None Remove="assets\green_logo_test.png" />
 		<None Remove="assets\image_bloc.jpeg" />
 		<None Remove="assets\image_bloc2.jpeg" />
+		<None Remove="assets\logo.png" />
 		<None Remove="assets\orange.jpeg" />
 		<None Remove="assets\why_not.jpg" />
 	</ItemGroup>
@@ -23,9 +25,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="assets\orange.jpeg">
+	  <Resource Include="assets\logo.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </EmbeddedResource>
+	  </Resource>
+	  <Resource Include="assets\orange.jpeg">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -55,6 +60,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<Resource Include="assets\888116.jpg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="assets\blue_lake.jpeg">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
@@ -63,6 +71,9 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="assets\image_bloc2.jpeg">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="assets\logo_plain.png">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
 		<Resource Include="assets\why_not.jpg">
